@@ -1,0 +1,1377 @@
+[
+    {
+        "id": "85e21fcb925ef32f",
+        "type": "tab",
+        "label": "gateGen125 Tray",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "6ad7c930.1a06b8",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-dark",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#097479",
+                    "value": "#097479",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#097479",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#000000",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#0eb8c0",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#555555",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#eeeeee",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#097479",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            }
+        },
+        "site": {
+            "name": "Blinky-Lite-Tutorial",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "79250bf3.365cc4",
+        "type": "mqtt-broker",
+        "name": "MQTT Broker",
+        "broker": "$(MQTTSERVERIP)",
+        "port": "1883",
+        "clientid": "$(MQTTCLIENTID)",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "30f384ea.cf21fc",
+        "type": "function",
+        "z": "85e21fcb925ef32f",
+        "name": "Save tray config in Memory",
+        "func": "msg.payload.watchdog.value = 0;\nglobal.set('settingInProgress', true);\nglobal.set('tray', msg.payload);\nreturn {topic:'overlay',payload:{\"command\":\"init\",\"overlay\":global.get('overlay')}};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 60,
+        "wires": [
+            [
+                "ebb5481bd4277b24"
+            ]
+        ]
+    },
+    {
+        "id": "5023092b.a0fe38",
+        "type": "mqtt in",
+        "z": "85e21fcb925ef32f",
+        "name": "Subscribe Settings",
+        "topic": "$(MQTTSUBSCRIBE)",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "79250bf3.365cc4",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 130,
+        "y": 200,
+        "wires": [
+            [
+                "f812bb6a.1aec68"
+            ]
+        ]
+    },
+    {
+        "id": "49c7b59e.00e86c",
+        "type": "inject",
+        "z": "85e21fcb925ef32f",
+        "name": "read Tray",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "2",
+        "topic": "readTraydesc",
+        "payload": "MQTTSUBSCRIBE",
+        "payloadType": "env",
+        "x": 120,
+        "y": 60,
+        "wires": [
+            [
+                "f7b2b73c.569598"
+            ]
+        ]
+    },
+    {
+        "id": "4a8d91e8.fcb68",
+        "type": "file in",
+        "z": "85e21fcb925ef32f",
+        "name": "Read tray config",
+        "filename": "tray.json",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 480,
+        "y": 60,
+        "wires": [
+            [
+                "4b0be623.7f7b88"
+            ]
+        ]
+    },
+    {
+        "id": "4b0be623.7f7b88",
+        "type": "json",
+        "z": "85e21fcb925ef32f",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 650,
+        "y": 60,
+        "wires": [
+            [
+                "30f384ea.cf21fc"
+            ]
+        ]
+    },
+    {
+        "id": "f7b2b73c.569598",
+        "type": "function",
+        "z": "85e21fcb925ef32f",
+        "name": "Init flow Variables",
+        "func": "var mqttSplit = msg.payload.split('/');\nvar trayProps = {\n    box         :   mqttSplit[0],\n    type        :   mqttSplit[1],\n    name        :   mqttSplit[2],\n};\nglobal.set('trayProps',trayProps);\nglobal.set('settingInProgress', false);\n\nreturn {topic: 'readFile', payload:true};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 60,
+        "wires": [
+            [
+                "4a8d91e8.fcb68"
+            ]
+        ]
+    },
+    {
+        "id": "168ce872.83d788",
+        "type": "file",
+        "z": "85e21fcb925ef32f",
+        "name": "Init Settings",
+        "filename": "tray.json",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 1290,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "89892a30.598e28",
+        "type": "function",
+        "z": "85e21fcb925ef32f",
+        "name": "Save Settings to File",
+        "func": "var jsonPretty = JSON.stringify(global.get('tray'),null,2);\nreturn {topic: msg.payload, payload:jsonPretty};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1100,
+        "y": 420,
+        "wires": [
+            [
+                "168ce872.83d788"
+            ]
+        ]
+    },
+    {
+        "id": "f812bb6a.1aec68",
+        "type": "json",
+        "z": "85e21fcb925ef32f",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 310,
+        "y": 200,
+        "wires": [
+            [
+                "e0d2b8e49c2e469b"
+            ]
+        ]
+    },
+    {
+        "id": "c0939e4a.6386f",
+        "type": "exec",
+        "z": "85e21fcb925ef32f",
+        "command": "pm2 restart ",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Restart",
+        "x": 700,
+        "y": 1240,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "9e290594.69c548",
+        "type": "switch",
+        "z": "85e21fcb925ef32f",
+        "name": "Reset Tray",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "2",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 310,
+        "y": 1260,
+        "wires": [
+            [
+                "985cd59b3e414efe"
+            ],
+            [
+                "236a8168.66f7fe"
+            ]
+        ]
+    },
+    {
+        "id": "236a8168.66f7fe",
+        "type": "exec",
+        "z": "85e21fcb925ef32f",
+        "command": "sudo reboot",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "Reboot",
+        "x": 500,
+        "y": 1300,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "557e4f40.b904e",
+        "type": "delay",
+        "z": "85e21fcb925ef32f",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 160,
+        "y": 1260,
+        "wires": [
+            [
+                "9e290594.69c548"
+            ]
+        ]
+    },
+    {
+        "id": "5152879001ec63ea",
+        "type": "mqtt out",
+        "z": "85e21fcb925ef32f",
+        "name": "Publish Readings",
+        "topic": "",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "79250bf3.365cc4",
+        "x": 1250,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "4493527757138cdc",
+        "type": "link out",
+        "z": "85e21fcb925ef32f",
+        "name": "New Setting In",
+        "links": [
+            "4bddb9a0e424ebf4"
+        ],
+        "x": 755,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "4bddb9a0e424ebf4",
+        "type": "link in",
+        "z": "85e21fcb925ef32f",
+        "name": "blinkybus setting in",
+        "links": [
+            "4493527757138cdc"
+        ],
+        "x": 55,
+        "y": 380,
+        "wires": [
+            [
+                "fcc98447c16c3949"
+            ]
+        ]
+    },
+    {
+        "id": "f9be9054ce456982",
+        "type": "switch",
+        "z": "85e21fcb925ef32f",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "setting",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ping",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "config",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "reset",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 650,
+        "y": 200,
+        "wires": [
+            [
+                "4493527757138cdc"
+            ],
+            [
+                "91cded1b31446957"
+            ],
+            [
+                "c81b72b9290d1c36"
+            ],
+            [
+                "72b5ca0e2043aba0"
+            ]
+        ]
+    },
+    {
+        "id": "e0d2b8e49c2e469b",
+        "type": "function",
+        "z": "85e21fcb925ef32f",
+        "name": "Filter MQTT",
+        "func": "return {topic:msg.topic.split('/')[4], payload:msg.payload};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 200,
+        "wires": [
+            [
+                "f9be9054ce456982"
+            ]
+        ]
+    },
+    {
+        "id": "f75b9887786b11c4",
+        "type": "function",
+        "z": "85e21fcb925ef32f",
+        "name": "Publish tray",
+        "func": "if (!msg.payload) return null;\nvar tray = global.get('tray');\nvar newMsg = \n{\n    topic: global.get('trayProps').box + '/' + global.get('trayProps').type + '/' + global.get('trayProps').name + '/reading',\n    payload: JSON.stringify(tray)\n};\nreturn  newMsg;  \n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1070,
+        "y": 340,
+        "wires": [
+            [
+                "5152879001ec63ea"
+            ]
+        ]
+    },
+    {
+        "id": "45a97566b65c65cc",
+        "type": "link in",
+        "z": "85e21fcb925ef32f",
+        "name": "Publish Tray In",
+        "links": [
+            "0bf699584a2609d5",
+            "1e34df4b19ff22cc",
+            "6af21e76e0c4ad80",
+            "86aff585d6d97f09",
+            "91cded1b31446957",
+            "a66ef2e5b482662a",
+            "df03212a7e41deb1",
+            "f0c1e263384a520f",
+            "f5d0568e288098ed",
+            "3fc0261f194a7067",
+            "396e4a58f43bbdef",
+            "dc7936fb55cf6c52"
+        ],
+        "x": 955,
+        "y": 340,
+        "wires": [
+            [
+                "f75b9887786b11c4"
+            ]
+        ]
+    },
+    {
+        "id": "91cded1b31446957",
+        "type": "link out",
+        "z": "85e21fcb925ef32f",
+        "name": "Ping Out",
+        "links": [
+            "45a97566b65c65cc",
+            "05c0c7b4f59ca88d"
+        ],
+        "x": 755,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "c81b72b9290d1c36",
+        "type": "link out",
+        "z": "85e21fcb925ef32f",
+        "name": "Config Out",
+        "links": [
+            "720ccfb4b4949146"
+        ],
+        "x": 755,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "720ccfb4b4949146",
+        "type": "link in",
+        "z": "85e21fcb925ef32f",
+        "name": "Pause Tray Readings in",
+        "links": [
+            "c81b72b9290d1c36"
+        ],
+        "x": 55,
+        "y": 520,
+        "wires": [
+            [
+                "b82f13a5e04e195a"
+            ]
+        ]
+    },
+    {
+        "id": "47de6287cc26419f",
+        "type": "function",
+        "z": "85e21fcb925ef32f",
+        "name": "Save config file",
+        "func": "let cubeAlarm = global.get('tray')[msg.payload.cube].alarm;\ncubeAlarm.limits.lolo = msg.payload.limits.lolo;\ncubeAlarm.limits.low  = msg.payload.limits.low;\ncubeAlarm.limits.high = msg.payload.limits.high;\ncubeAlarm.limits.hihi = msg.payload.limits.hihi;\ncubeAlarm.notify.name = msg.payload.notify.name;\ncubeAlarm.notify.number = msg.payload.notify.number;\nreturn {topic:'trayConfigCompleted', payload:true};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 520,
+        "wires": [
+            [
+                "eec56d72bdbd1430",
+                "501090a1fd5f88f5"
+            ]
+        ]
+    },
+    {
+        "id": "2cd296fd87868cea",
+        "type": "function",
+        "z": "85e21fcb925ef32f",
+        "name": "Continue Tray readings",
+        "func": "global.set('settingInProgress',false)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 520,
+        "wires": [
+            [
+                "df03212a7e41deb1"
+            ]
+        ]
+    },
+    {
+        "id": "04d132d87ffeb91a",
+        "type": "link in",
+        "z": "85e21fcb925ef32f",
+        "name": "Save Settings to file in",
+        "links": [
+            "501090a1fd5f88f5",
+            "dc7936fb55cf6c52",
+            "1e34df4b19ff22cc"
+        ],
+        "x": 955,
+        "y": 420,
+        "wires": [
+            [
+                "89892a30.598e28"
+            ]
+        ]
+    },
+    {
+        "id": "df03212a7e41deb1",
+        "type": "link out",
+        "z": "85e21fcb925ef32f",
+        "name": "Continue Devie Readings out",
+        "links": [
+            "45a97566b65c65cc",
+            "05c0c7b4f59ca88d"
+        ],
+        "x": 1015,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "c2d22bcc1f4cf7b0",
+        "type": "inject",
+        "z": "85e21fcb925ef32f",
+        "name": "Archive clock",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "20",
+        "topic": "archiveClock",
+        "payloadType": "date",
+        "x": 140,
+        "y": 780,
+        "wires": [
+            [
+                "6a9b2f2af2f7d084"
+            ]
+        ]
+    },
+    {
+        "id": "6a9b2f2af2f7d084",
+        "type": "function",
+        "z": "85e21fcb925ef32f",
+        "name": "Archive Pulse",
+        "func": "var tray = global.get('tray');\nvar lastArchive = context.get('lastArchive');\nvar now = new Date().getTime();\nif ((now - lastArchive) <= tray.arcPeriod) return null;\ncontext.set('lastArchive', now);\nreturn {topic:'archivePulse', payload:true};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('lastArchive', new Date().getTime());",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 780,
+        "wires": [
+            [
+                "d74e019a27b1a659"
+            ]
+        ]
+    },
+    {
+        "id": "72b5ca0e2043aba0",
+        "type": "link out",
+        "z": "85e21fcb925ef32f",
+        "name": "Reset Out",
+        "links": [
+            "6c366c9b4d8b8f19"
+        ],
+        "x": 755,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "6c366c9b4d8b8f19",
+        "type": "link in",
+        "z": "85e21fcb925ef32f",
+        "name": "Reset in",
+        "links": [
+            "72b5ca0e2043aba0"
+        ],
+        "x": 55,
+        "y": 1260,
+        "wires": [
+            [
+                "557e4f40.b904e"
+            ]
+        ]
+    },
+    {
+        "id": "6af76a294daa96eb",
+        "type": "function",
+        "z": "85e21fcb925ef32f",
+        "name": "Save flow env variables",
+        "func": "global.set(msg.topic,msg.payload);\nreturn null;",
+        "outputs": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "93758a55568a2f76",
+        "type": "link out",
+        "z": "85e21fcb925ef32f",
+        "name": "Tray Setting In",
+        "mode": "link",
+        "links": [
+            "e9a01e5bc2f140ef"
+        ],
+        "x": 345,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "ebb5481bd4277b24",
+        "type": "delay",
+        "z": "85e21fcb925ef32f",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "3",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1040,
+        "y": 60,
+        "wires": [
+            [
+                "b018aa03d43d5655",
+                "8e84d8c955d1aeb1"
+            ]
+        ]
+    },
+    {
+        "id": "10e54acd6f4f5fb4",
+        "type": "inject",
+        "z": "85e21fcb925ef32f",
+        "name": "pm2Name",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "pm2Name",
+        "payload": "PM2NAME",
+        "payloadType": "env",
+        "x": 130,
+        "y": 1120,
+        "wires": [
+            [
+                "6af76a294daa96eb"
+            ]
+        ]
+    },
+    {
+        "id": "985cd59b3e414efe",
+        "type": "function",
+        "z": "85e21fcb925ef32f",
+        "name": "Get pm2Name",
+        "func": "msg.payload = global.get(\"pm2Name\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 1240,
+        "wires": [
+            [
+                "c0939e4a.6386f"
+            ]
+        ]
+    },
+    {
+        "id": "fd6a29d4dda908dd",
+        "type": "inject",
+        "z": "85e21fcb925ef32f",
+        "name": "Archive now",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "archiveNow",
+        "payloadType": "date",
+        "x": 130,
+        "y": 840,
+        "wires": [
+            [
+                "76d6712bed883108"
+            ]
+        ]
+    },
+    {
+        "id": "76d6712bed883108",
+        "type": "function",
+        "z": "85e21fcb925ef32f",
+        "name": "Single Archive Pulse",
+        "func": "return {topic:'archivePulse', payload:true};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('lastArchive', new Date().getTime());",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 840,
+        "wires": [
+            [
+                "d74e019a27b1a659"
+            ]
+        ]
+    },
+    {
+        "id": "501090a1fd5f88f5",
+        "type": "link out",
+        "z": "85e21fcb925ef32f",
+        "name": "Save config file out",
+        "links": [
+            "04d132d87ffeb91a"
+        ],
+        "x": 715,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "eec56d72bdbd1430",
+        "type": "delay",
+        "z": "85e21fcb925ef32f",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 680,
+        "y": 520,
+        "wires": [
+            [
+                "2cd296fd87868cea"
+            ]
+        ]
+    },
+    {
+        "id": "95bf73e1f0d68181",
+        "type": "delay",
+        "z": "85e21fcb925ef32f",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 340,
+        "y": 520,
+        "wires": [
+            [
+                "47de6287cc26419f"
+            ]
+        ]
+    },
+    {
+        "id": "b82f13a5e04e195a",
+        "type": "function",
+        "z": "85e21fcb925ef32f",
+        "name": "Pause Readings",
+        "func": "global.set('settingInProgress',true)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 180,
+        "y": 520,
+        "wires": [
+            [
+                "95bf73e1f0d68181"
+            ]
+        ]
+    },
+    {
+        "id": "45409b1230e854cd",
+        "type": "mqtt out",
+        "z": "85e21fcb925ef32f",
+        "name": "Publish Archive",
+        "topic": "",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "79250bf3.365cc4",
+        "x": 780,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "d74e019a27b1a659",
+        "type": "function",
+        "z": "85e21fcb925ef32f",
+        "name": "Publish tray",
+        "func": "if (!msg.payload) return null;\nvar tray = global.get('tray');\nvar newMsg = \n{\n    topic: global.get('trayProps').box + '/' + global.get('trayProps').type + '/' + global.get('trayProps').name + '/archive',\n    payload: JSON.stringify(tray)\n};\nreturn  newMsg;  \n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 780,
+        "wires": [
+            [
+                "45409b1230e854cd"
+            ]
+        ]
+    },
+    {
+        "id": "fcc98447c16c3949",
+        "type": "function",
+        "z": "85e21fcb925ef32f",
+        "name": "Create Setting",
+        "func": "let tray = global.get('tray');\nlet blinkyBusSettingMsg = \n{\n    topic : msg.topic, \n    payload : {\"command\":\"setting\",\"gpio\":0,\"channel\":0,\"value\":0,\"mask\":0} \n}\nlet blinkyBusMessage = false;\nlet freq = 125;\nswitch(msg.payload.cube)\n{\n    case 'clrCounter':\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":0,\"channel\":1,\"value\":msg.payload.value,\"mask\":1} ;\n        blinkyBusMessage = true;\n        break;\n    case 'interval':\n        let interval          = Math.floor(msg.payload.value * freq);\n        tray.interval.value   = Math.floor(interval / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":0,\"channel\":2,\"value\":interval,  \"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n    case 'startGate0':\n        let startGate0        = Math.floor(msg.payload.value * freq);\n        tray.startGate0.value = Math.floor(startGate0 / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":1,\"channel\":1,\"value\":startGate0,\"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n    case 'startGate1':\n        let startGate1        = Math.floor(msg.payload.value * freq);\n        tray.startGate1.value = Math.floor(startGate1 / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":2,\"channel\":1,\"value\":startGate1,\"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n    case 'startGate2':\n        let startGate2        = Math.floor(msg.payload.value * freq);\n        tray.startGate2.value = Math.floor(startGate2 / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":3,\"channel\":1,\"value\":startGate2,\"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n    case 'startGate3':\n        let startGate3        = Math.floor(msg.payload.value * freq);\n        tray.startGate3.value = Math.floor(startGate3 / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":4,\"channel\":1,\"value\":startGate3,\"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n    case 'startGate4':\n        let startGate4        = Math.floor(msg.payload.value * freq);\n        tray.startGate4.value = Math.floor(startGate4 / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":5,\"channel\":1,\"value\":startGate4,\"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n    case 'startGate5':\n        let startGate5        = Math.floor(msg.payload.value * freq);\n        tray.startGate5.value = Math.floor(startGate5 / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":6,\"channel\":1,\"value\":startGate5,\"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n    case 'startGate6':\n        let startGate6        = Math.floor(msg.payload.value * freq);\n        tray.startGate6.value = Math.floor(startGate6 / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":7,\"channel\":1,\"value\":startGate6,\"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n    case 'startGate7':\n        let startGate7        = Math.floor(msg.payload.value * freq);\n        tray.startGate7.value = Math.floor(startGate7 / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":8,\"channel\":1,\"value\":startGate7,\"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n    case 'stopGate0':\n        let stopGate0        = Math.floor(msg.payload.value * freq);\n        tray.stopGate0.value = Math.floor(stopGate0 / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":1,\"channel\":2,\"value\":stopGate0,\"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n    case 'stopGate1':\n        let stopGate1        = Math.floor(msg.payload.value * freq);\n        tray.stopGate1.value = Math.floor(stopGate1 / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":2,\"channel\":2,\"value\":stopGate1,\"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n    case 'stopGate2':\n        let stopGate2        = Math.floor(msg.payload.value * freq);\n        tray.stopGate2.value = Math.floor(stopGate2 / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":3,\"channel\":2,\"value\":stopGate2,\"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n    case 'stopGate3':\n        let stopGate3        = Math.floor(msg.payload.value * freq);\n        tray.stopGate3.value = Math.floor(stopGate3 / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":4,\"channel\":2,\"value\":stopGate3,\"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n    case 'stopGate4':\n        let stopGate4        = Math.floor(msg.payload.value * freq);\n        tray.stopGate4.value = Math.floor(stopGate4 / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":5,\"channel\":2,\"value\":stopGate4,\"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n    case 'stopGate5':\n        let stopGate5        = Math.floor(msg.payload.value * freq);\n        tray.stopGate5.value = Math.floor(stopGate5 / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":6,\"channel\":2,\"value\":stopGate5,\"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n    case 'stopGate6':\n        let stopGate6        = Math.floor(msg.payload.value * freq);\n        tray.stopGate6.value = Math.floor(stopGate6 / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":7,\"channel\":2,\"value\":stopGate6,\"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n    case 'stopGate7':\n        let stopGate7        = Math.floor(msg.payload.value * freq);\n        tray.stopGate7.value = Math.floor(stopGate7 / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":8,\"channel\":2,\"value\":stopGate7,\"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n    case 'gate0On':\n        tray.gate0On.value  = msg.payload.value;\n        blinkyBusSettingMsg.payload = getGateOnCommand();\n        blinkyBusMessage = true;\n        break;\n    case 'gate1On':\n        tray.gate1On.value  = msg.payload.value;\n        blinkyBusSettingMsg.payload = getGateOnCommand();\n        blinkyBusMessage = true;\n        break;\n    case 'gate2On':\n        tray.gate2On.value  = msg.payload.value;\n        blinkyBusSettingMsg.payload = getGateOnCommand();\n        blinkyBusMessage = true;\n        break;\n    case 'gate3On':\n        tray.gate3On.value  = msg.payload.value;\n        blinkyBusSettingMsg.payload = getGateOnCommand();\n        blinkyBusMessage = true;\n        break;\n    case 'gate4On':\n        tray.gate4On.value  = msg.payload.value;\n        blinkyBusSettingMsg.payload = getGateOnCommand();\n        blinkyBusMessage = true;\n        break;\n    case 'gate5On':\n        tray.gate5On.value  = msg.payload.value;\n        blinkyBusSettingMsg.payload = getGateOnCommand();\n        blinkyBusMessage = true;\n        break;\n    case 'gate6On':\n        tray.gate6On.value  = msg.payload.value;\n        blinkyBusSettingMsg.payload = getGateOnCommand();\n        blinkyBusMessage = true;\n        break;\n    case 'gate7On':\n        tray.gate7On.value  = msg.payload.value;\n        blinkyBusSettingMsg.payload = getGateOnCommand();\n        blinkyBusMessage = true;\n        break;\n    case 'nonblinkyBusSetting':\n        tray.nonblinkyBusSetting.value  = msg.payload.value;\n        blinkyBusMessage = false;\n        break;\n    default:\n        break;\n}\nlet msgArray = [null,null,null];\nif (blinkyBusMessage)\n{\n    global.set('settingInProgress',true);\n    var settingInProgressMsg = {topic:'settingInProgress', payload:true};\n    msgArray = [blinkyBusSettingMsg, settingInProgressMsg, null];\n    \n}\nelse\n{\n    global.set('settingInProgress',false);\n    msgArray = [null,null,{topic:'settingDone', payload:true}];\n}\nreturn msgArray;\nfunction getGateOnCommand()\n{\n    if (tray.gate0On.value >= 0.5) {tray.gate0On.value = 1} else {tray.gate0On.value = 0}\n    if (tray.gate1On.value >= 0.5) {tray.gate1On.value = 1} else {tray.gate1On.value = 0}\n    if (tray.gate2On.value >= 0.5) {tray.gate2On.value = 1} else {tray.gate2On.value = 0}\n    if (tray.gate3On.value >= 0.5) {tray.gate3On.value = 1} else {tray.gate3On.value = 0}\n    if (tray.gate4On.value >= 0.5) {tray.gate4On.value = 1} else {tray.gate4On.value = 0}\n    if (tray.gate5On.value >= 0.5) {tray.gate5On.value = 1} else {tray.gate5On.value = 0}\n    if (tray.gate6On.value >= 0.5) {tray.gate6On.value = 1} else {tray.gate6On.value = 0}\n    if (tray.gate7On.value >= 0.5) {tray.gate7On.value = 1} else {tray.gate7On.value = 0}\n    let gateOn = tray.gate0On.value;\n    gateOn = gateOn + 2   * tray.gate1On.value;\n    gateOn = gateOn + 4   * tray.gate2On.value;\n    gateOn = gateOn + 8   * tray.gate3On.value;\n    gateOn = gateOn + 16  * tray.gate4On.value;\n    gateOn = gateOn + 32  * tray.gate5On.value;\n    gateOn = gateOn + 64  * tray.gate6On.value;\n    gateOn = gateOn + 128 * tray.gate7On.value;\n    let gateOnCommand = {\"command\":\"setting\",\"gpio\":9,\"channel\":1,\"value\":gateOn,\"mask\":255};\n    return gateOnCommand;\n}\n",
+        "outputs": 3,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 200,
+        "y": 380,
+        "wires": [
+            [
+                "93758a55568a2f76"
+            ],
+            [
+                "a66ef2e5b482662a"
+            ],
+            [
+                "1e34df4b19ff22cc"
+            ]
+        ]
+    },
+    {
+        "id": "e9a01e5bc2f140ef",
+        "type": "link in",
+        "z": "85e21fcb925ef32f",
+        "name": "Canvas Settings In",
+        "links": [
+            "756ba0a6f071c881",
+            "56eb9898c37a8173",
+            "b018aa03d43d5655",
+            "93758a55568a2f76"
+        ],
+        "x": 55,
+        "y": 660,
+        "wires": [
+            [
+                "7b630952f0bca935"
+            ]
+        ]
+    },
+    {
+        "id": "dc7936fb55cf6c52",
+        "type": "link out",
+        "z": "85e21fcb925ef32f",
+        "name": "Setting Success Out",
+        "mode": "link",
+        "links": [
+            "04d132d87ffeb91a",
+            "45a97566b65c65cc"
+        ],
+        "x": 1085,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "340ca6cd6d6229e4",
+        "type": "function",
+        "z": "85e21fcb925ef32f",
+        "name": "Setting success",
+        "func": "global.set('settingInProgress', false);\nsettingSuccess = true;\nreturn {topic:\"settingSuccess\",payload:settingSuccess};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 960,
+        "y": 660,
+        "wires": [
+            [
+                "dc7936fb55cf6c52"
+            ]
+        ]
+    },
+    {
+        "id": "b018aa03d43d5655",
+        "type": "link out",
+        "z": "85e21fcb925ef32f",
+        "name": "Init tray",
+        "mode": "link",
+        "links": [
+            "e9a01e5bc2f140ef"
+        ],
+        "x": 1565,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "a5ba61bf663ce32e",
+        "type": "inject",
+        "z": "85e21fcb925ef32f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "4",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "10",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1030,
+        "y": 260,
+        "wires": [
+            [
+                "c4c80b41c4f5b19d"
+            ]
+        ]
+    },
+    {
+        "id": "c4c80b41c4f5b19d",
+        "type": "function",
+        "z": "85e21fcb925ef32f",
+        "name": "Increment watchdog",
+        "func": "var tray = global.get('tray');\ntray.watchdog.value = tray.watchdog.value + 1;\nif ( tray.watchdog.value > 32760 ) tray.watchdog.value = 0;\nmsg.payload = true\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1220,
+        "y": 260,
+        "wires": [
+            [
+                "f75b9887786b11c4"
+            ]
+        ]
+    },
+    {
+        "id": "0d6b50982a8ca654",
+        "type": "inject",
+        "z": "85e21fcb925ef32f",
+        "name": "overlay",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "overlay",
+        "payload": "OVERLAY",
+        "payloadType": "env",
+        "x": 120,
+        "y": 1060,
+        "wires": [
+            [
+                "6af76a294daa96eb"
+            ]
+        ]
+    },
+    {
+        "id": "2fd2771495cfbac9",
+        "type": "inject",
+        "z": "85e21fcb925ef32f",
+        "name": "project",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "project",
+        "payload": "PROJECT",
+        "payloadType": "env",
+        "x": 120,
+        "y": 1000,
+        "wires": [
+            [
+                "6af76a294daa96eb"
+            ]
+        ]
+    },
+    {
+        "id": "7b630952f0bca935",
+        "type": "pythonshell in",
+        "z": "85e21fcb925ef32f",
+        "name": "PYNQ Interface",
+        "pyfile": "zynqInterface.py",
+        "virtualenv": "",
+        "continuous": true,
+        "stdInData": true,
+        "x": 220,
+        "y": 660,
+        "wires": [
+            [
+                "6dde505ab4e5a809"
+            ]
+        ]
+    },
+    {
+        "id": "8e84d8c955d1aeb1",
+        "type": "delay",
+        "z": "85e21fcb925ef32f",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "10",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1160,
+        "y": 140,
+        "wires": [
+            [
+                "e093d33288c6fb5f"
+            ]
+        ]
+    },
+    {
+        "id": "e093d33288c6fb5f",
+        "type": "function",
+        "z": "85e21fcb925ef32f",
+        "name": "initSettings",
+        "func": "let tray = global.get('tray');\nlet settingsArray = [];\nlet freq = 125;\n\nlet interval          = Math.floor(tray.interval.value * freq);\ntray.interval.value   = Math.floor(interval / freq);\n\nlet startGate0        = Math.floor(tray.startGate0.value * freq);\ntray.startGate0.value = Math.floor(startGate0 / freq);\nlet startGate1        = Math.floor(tray.startGate1.value * freq);\ntray.startGate1.value = Math.floor(startGate1 / freq);\nlet startGate2        = Math.floor(tray.startGate2.value * freq);\ntray.startGate2.value = Math.floor(startGate2 / freq);\nlet startGate3        = Math.floor(tray.startGate3.value * freq);\ntray.startGate3.value = Math.floor(startGate3 / freq);\nlet startGate4        = Math.floor(tray.startGate4.value * freq);\ntray.startGate4.value = Math.floor(startGate4 / freq);\nlet startGate5        = Math.floor(tray.startGate5.value * freq);\ntray.startGate5.value = Math.floor(startGate5 / freq);\nlet startGate6        = Math.floor(tray.startGate6.value * freq);\ntray.startGate6.value = Math.floor(startGate6 / freq);\nlet startGate7        = Math.floor(tray.startGate7.value * freq);\ntray.startGate7.value = Math.floor(startGate7 / freq);\n\nlet stopGate0        = Math.floor(tray.stopGate0.value * freq);\ntray.stopGate0.value = Math.floor(stopGate0 / freq);\nlet stopGate1        = Math.floor(tray.stopGate1.value * freq);\ntray.stopGate1.value = Math.floor(stopGate1 / freq);\nlet stopGate2        = Math.floor(tray.stopGate2.value * freq);\ntray.stopGate2.value = Math.floor(stopGate2 / freq);\nlet stopGate3        = Math.floor(tray.stopGate3.value * freq);\ntray.stopGate3.value = Math.floor(stopGate3 / freq);\nlet stopGate4        = Math.floor(tray.stopGate4.value * freq);\ntray.stopGate4.value = Math.floor(stopGate4 / freq);\nlet stopGate5        = Math.floor(tray.stopGate5.value * freq);\ntray.stopGate5.value = Math.floor(stopGate5 / freq);\nlet stopGate6        = Math.floor(tray.stopGate6.value * freq);\ntray.stopGate6.value = Math.floor(stopGate6 / freq);\nlet stopGate7        = Math.floor(tray.stopGate7.value * freq);\ntray.stopGate7.value = Math.floor(stopGate7 / freq);\n\nif (tray.gate0On.value >= 0.5) {tray.gate0On.value = 1} else {tray.gate0On.value = 0}\nif (tray.gate1On.value >= 0.5) {tray.gate1On.value = 1} else {tray.gate1On.value = 0}\nif (tray.gate2On.value >= 0.5) {tray.gate2On.value = 1} else {tray.gate2On.value = 0}\nif (tray.gate3On.value >= 0.5) {tray.gate3On.value = 1} else {tray.gate3On.value = 0}\nif (tray.gate4On.value >= 0.5) {tray.gate4On.value = 1} else {tray.gate4On.value = 0}\nif (tray.gate5On.value >= 0.5) {tray.gate5On.value = 1} else {tray.gate5On.value = 0}\nif (tray.gate6On.value >= 0.5) {tray.gate6On.value = 1} else {tray.gate6On.value = 0}\nif (tray.gate7On.value >= 0.5) {tray.gate7On.value = 1} else {tray.gate7On.value = 0}\nlet gateOn = tray.gate0On.value;\ngateOn = gateOn + 2   * tray.gate1On.value;\ngateOn = gateOn + 4   * tray.gate2On.value;\ngateOn = gateOn + 8   * tray.gate3On.value;\ngateOn = gateOn + 16  * tray.gate4On.value;\ngateOn = gateOn + 32  * tray.gate5On.value;\ngateOn = gateOn + 64  * tray.gate6On.value;\ngateOn = gateOn + 128 * tray.gate7On.value;\n\nsettingsArray.push({\"command\":\"setting\",\"gpio\":0,\"channel\":1,\"value\":1,\"mask\":1});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":0,\"channel\":2,\"value\":interval,  \"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":1,\"channel\":1,\"value\":startGate0,\"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":2,\"channel\":1,\"value\":startGate1,\"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":3,\"channel\":1,\"value\":startGate2,\"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":4,\"channel\":1,\"value\":startGate3,\"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":5,\"channel\":1,\"value\":startGate4,\"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":6,\"channel\":1,\"value\":startGate5,\"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":7,\"channel\":1,\"value\":startGate6,\"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":8,\"channel\":1,\"value\":startGate7,\"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":1,\"channel\":2,\"value\":stopGate0,\"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":2,\"channel\":2,\"value\":stopGate1,\"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":3,\"channel\":2,\"value\":stopGate2,\"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":4,\"channel\":2,\"value\":stopGate3,\"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":5,\"channel\":2,\"value\":stopGate4,\"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":6,\"channel\":2,\"value\":stopGate5,\"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":7,\"channel\":2,\"value\":stopGate6,\"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":8,\"channel\":2,\"value\":stopGate7,\"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":9,\"channel\":1,\"value\":gateOn,\"mask\":255});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":0,\"channel\":1,\"value\":0,\"mask\":1});\ntray.clrCounter.value = 0;\n\nreturn {topic:\"initSettings\",payload:settingsArray};\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1310,
+        "y": 140,
+        "wires": [
+            [
+                "96b6d3e3bb4b4555"
+            ]
+        ]
+    },
+    {
+        "id": "96b6d3e3bb4b4555",
+        "type": "split",
+        "z": "85e21fcb925ef32f",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 1450,
+        "y": 140,
+        "wires": [
+            [
+                "b018aa03d43d5655"
+            ]
+        ]
+    },
+    {
+        "id": "6dde505ab4e5a809",
+        "type": "function",
+        "z": "85e21fcb925ef32f",
+        "name": "Remove CR",
+        "func": "msg.payload = msg.payload.split(\"\\n\")[0];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 660,
+        "wires": [
+            [
+                "d582f26f468aefb9"
+            ]
+        ]
+    },
+    {
+        "id": "502155af52e553e7",
+        "type": "switch",
+        "z": "85e21fcb925ef32f",
+        "name": "",
+        "property": "payload.command",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "init",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "setting",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 710,
+        "y": 660,
+        "wires": [
+            [],
+            [
+                "340ca6cd6d6229e4"
+            ]
+        ]
+    },
+    {
+        "id": "d582f26f468aefb9",
+        "type": "json",
+        "z": "85e21fcb925ef32f",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 570,
+        "y": 660,
+        "wires": [
+            [
+                "502155af52e553e7"
+            ]
+        ]
+    },
+    {
+        "id": "a66ef2e5b482662a",
+        "type": "link out",
+        "z": "85e21fcb925ef32f",
+        "name": "Create Setting out",
+        "mode": "link",
+        "links": [
+            "45a97566b65c65cc"
+        ],
+        "x": 345,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "1e34df4b19ff22cc",
+        "type": "link out",
+        "z": "85e21fcb925ef32f",
+        "name": "nonBlinkybusSetting Out",
+        "mode": "link",
+        "links": [
+            "04d132d87ffeb91a",
+            "45a97566b65c65cc",
+            "05c0c7b4f59ca88d"
+        ],
+        "x": 345,
+        "y": 420,
+        "wires": []
+    }
+]

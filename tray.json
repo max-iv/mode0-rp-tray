@@ -1,0 +1,546 @@
+{
+  "type": "gateGen125",
+  "name": "01",
+  "arcPeriod": 60000,
+  "timeStamp": 1646408271939,
+  "watchdog": {
+    "action": "reading",
+    "type": "scalar",
+    "value": 2,
+    "unit": "",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": -1,
+        "low": 0,
+        "high": 40000,
+        "hihi": 50000
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "clrCounter": {
+    "action": "setting",
+    "type": "scalar",
+    "value": 0,
+    "unit": "",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": -1,
+        "low": -1,
+        "high": 2,
+        "hihi": 2
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "gate0On": {
+    "action": "setting",
+    "type": "scalar",
+    "value": 1,
+    "unit": "",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": -1,
+        "low": -1,
+        "high": 2,
+        "hihi": 2
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "gate1On": {
+    "action": "setting",
+    "type": "scalar",
+    "value": 1,
+    "unit": "",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": -1,
+        "low": -1,
+        "high": 2,
+        "hihi": 2
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "gate2On": {
+    "action": "setting",
+    "type": "scalar",
+    "value": 1,
+    "unit": "",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": -1,
+        "low": -1,
+        "high": 2,
+        "hihi": 2
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "gate3On": {
+    "action": "setting",
+    "type": "scalar",
+    "value": 1,
+    "unit": "",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": -1,
+        "low": -1,
+        "high": 2,
+        "hihi": 2
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "gate4On": {
+    "action": "setting",
+    "type": "scalar",
+    "value": 1,
+    "unit": "",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": -1,
+        "low": -1,
+        "high": 2,
+        "hihi": 2
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "gate5On": {
+    "action": "setting",
+    "type": "scalar",
+    "value": 1,
+    "unit": "",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": -1,
+        "low": -1,
+        "high": 2,
+        "hihi": 2
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "gate6On": {
+    "action": "setting",
+    "type": "scalar",
+    "value": 1,
+    "unit": "",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": -1,
+        "low": -1,
+        "high": 2,
+        "hihi": 2
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "gate7On": {
+    "action": "setting",
+    "type": "scalar",
+    "value": 1,
+    "unit": "",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": -1,
+        "low": -1,
+        "high": 2,
+        "hihi": 2
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "interval": {
+    "action": "setting",
+    "type": "scalar",
+    "value": 2000000,
+    "unit": "uS",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": 5,
+        "low": 10,
+        "high": 15000000,
+        "hihi": 16000000
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "startGate0": {
+    "action": "setting",
+    "type": "scalar",
+    "value": 400000,
+    "unit": "uS",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": 5,
+        "low": 10,
+        "high": 15000000,
+        "hihi": 16000000
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "startGate1": {
+    "action": "setting",
+    "type": "scalar",
+    "value": 500000,
+    "unit": "uS",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": 5,
+        "low": 10,
+        "high": 15000000,
+        "hihi": 16000000
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "startGate2": {
+    "action": "setting",
+    "type": "scalar",
+    "value": 600000,
+    "unit": "uS",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": 5,
+        "low": 10,
+        "high": 15000000,
+        "hihi": 16000000
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "startGate3": {
+    "action": "setting",
+    "type": "scalar",
+    "value": 700000,
+    "unit": "uS",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": 5,
+        "low": 10,
+        "high": 15000000,
+        "hihi": 16000000
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "startGate4": {
+    "action": "setting",
+    "type": "scalar",
+    "value": 800000,
+    "unit": "uS",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": 5,
+        "low": 10,
+        "high": 15000000,
+        "hihi": 16000000
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "startGate5": {
+    "action": "setting",
+    "type": "scalar",
+    "value": 900000,
+    "unit": "uS",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": 5,
+        "low": 10,
+        "high": 15000000,
+        "hihi": 16000000
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "startGate6": {
+    "action": "setting",
+    "type": "scalar",
+    "value": 1000000,
+    "unit": "uS",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": 5,
+        "low": 10,
+        "high": 15000000,
+        "hihi": 16000000
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "startGate7": {
+    "action": "setting",
+    "type": "scalar",
+    "value": 1100000,
+    "unit": "uS",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": 5,
+        "low": 10,
+        "high": 15000000,
+        "hihi": 16000000
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "stopGate0": {
+    "action": "setting",
+    "type": "scalar",
+    "value": 500000,
+    "unit": "uS",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": 5,
+        "low": 10,
+        "high": 15000000,
+        "hihi": 16000000
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "stopGate1": {
+    "action": "setting",
+    "type": "scalar",
+    "value": 600000,
+    "unit": "uS",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": 5,
+        "low": 10,
+        "high": 15000000,
+        "hihi": 16000000
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "stopGate2": {
+    "action": "setting",
+    "type": "scalar",
+    "value": 700000,
+    "unit": "uS",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": 5,
+        "low": 10,
+        "high": 15000000,
+        "hihi": 16000000
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "stopGate3": {
+    "action": "setting",
+    "type": "scalar",
+    "value": 800000,
+    "unit": "uS",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": 5,
+        "low": 10,
+        "high": 15000000,
+        "hihi": 16000000
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "stopGate4": {
+    "action": "setting",
+    "type": "scalar",
+    "value": 900000,
+    "unit": "uS",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": 5,
+        "low": 10,
+        "high": 15000000,
+        "hihi": 16000000
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "stopGate5": {
+    "action": "setting",
+    "type": "scalar",
+    "value": 1000000,
+    "unit": "uS",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": 5,
+        "low": 10,
+        "high": 15000000,
+        "hihi": 16000000
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "stopGate6": {
+    "action": "setting",
+    "type": "scalar",
+    "value": 1100000,
+    "unit": "uS",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": 5,
+        "low": 10,
+        "high": 15000000,
+        "hihi": 16000000
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "stopGate7": {
+    "action": "setting",
+    "type": "scalar",
+    "value": 1200000,
+    "unit": "uS",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": 5,
+        "low": 10,
+        "high": 15000000,
+        "hihi": 16000000
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  }
+}
