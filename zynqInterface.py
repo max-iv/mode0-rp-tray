@@ -36,6 +36,10 @@ def getChannelOverlay(gpio,channel):
         return getGpioOverlay(gpio).channel2
 def writeSetting(setting):
     getChannelOverlay(setting["gpio"],setting["channel"]).write(val=setting["value"], mask=setting["mask"])
+def getReading(reading):
+    value = getChannelOverlay(reading["gpio"],reading["channel"]).read()
+    readingString = '{"command":"reading","gpio":'+ str(reading["gpio"]) +',"channel":' + str(reading["channel"]) + ',"value":' + str(value) + '}'
+    print(readingString)
 
 instructionText = sys.stdin.readline().strip('\n')
 instruction = json.loads(instructionText) 
@@ -48,4 +52,7 @@ while True:
     if instruction["command"] == "setting":
         writeSetting(instruction)
         print(instructionText)
+    if instruction["command"] == "reading":
+        getReading(instruction)
+        
 

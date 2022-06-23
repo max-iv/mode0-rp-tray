@@ -541,7 +541,8 @@
             "f5d0568e288098ed",
             "3fc0261f194a7067",
             "396e4a58f43bbdef",
-            "dc7936fb55cf6c52"
+            "dc7936fb55cf6c52",
+            "993dd0030ffbf166"
         ],
         "x": 955,
         "y": 340,
@@ -759,7 +760,8 @@
         "name": "Tray Setting In",
         "mode": "link",
         "links": [
-            "e9a01e5bc2f140ef"
+            "e9a01e5bc2f140ef",
+            "ae68c32974081996"
         ],
         "x": 345,
         "y": 340,
@@ -878,7 +880,7 @@
         "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('lastArchive', new Date().getTime());",
         "finalize": "",
         "libs": [],
-        "x": 330,
+        "x": 360,
         "y": 840,
         "wires": [
             [
@@ -1038,7 +1040,8 @@
             "756ba0a6f071c881",
             "56eb9898c37a8173",
             "b018aa03d43d5655",
-            "93758a55568a2f76"
+            "93758a55568a2f76",
+            "b3390c7c1b743364"
         ],
         "x": 55,
         "y": 660,
@@ -1093,54 +1096,6 @@
         "x": 1565,
         "y": 60,
         "wires": []
-    },
-    {
-        "id": "a5ba61bf663ce32e",
-        "type": "inject",
-        "z": "85e21fcb925ef32f",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "4",
-        "crontab": "",
-        "once": true,
-        "onceDelay": "10",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 1030,
-        "y": 260,
-        "wires": [
-            [
-                "c4c80b41c4f5b19d"
-            ]
-        ]
-    },
-    {
-        "id": "c4c80b41c4f5b19d",
-        "type": "function",
-        "z": "85e21fcb925ef32f",
-        "name": "Increment watchdog",
-        "func": "var tray = global.get('tray');\ntray.watchdog.value = tray.watchdog.value + 1;\nif ( tray.watchdog.value > 32760 ) tray.watchdog.value = 0;\nmsg.payload = true\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1220,
-        "y": 260,
-        "wires": [
-            [
-                "f75b9887786b11c4"
-            ]
-        ]
     },
     {
         "id": "0d6b50982a8ca654",
@@ -1316,17 +1271,25 @@
                 "t": "eq",
                 "v": "setting",
                 "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "reading",
+                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 2,
+        "outputs": 3,
         "x": 710,
         "y": 660,
         "wires": [
             [],
             [
                 "340ca6cd6d6229e4"
+            ],
+            [
+                "ed481b1d2110232a"
             ]
         ]
     },
@@ -1373,5 +1336,139 @@
         "x": 345,
         "y": 420,
         "wires": []
+    },
+    {
+        "id": "a2279e1c2c4409d2",
+        "type": "inject",
+        "z": "85e21fcb925ef32f",
+        "name": "readWatchDog",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "2",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "15",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 600,
+        "wires": [
+            [
+                "12fb87d74b200e05"
+            ]
+        ]
+    },
+    {
+        "id": "12fb87d74b200e05",
+        "type": "function",
+        "z": "85e21fcb925ef32f",
+        "name": "Setup WatchDog Read",
+        "func": "if (global.get('settingInProgress')) return null;\nlet command = {\"command\":\"reading\",\"gpio\":10,\"channel\":1,\"value\":0}\nreturn {topic: \"readWatchDog\", payload:command};\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 600,
+        "wires": [
+            [
+                "b3390c7c1b743364"
+            ]
+        ]
+    },
+    {
+        "id": "b3390c7c1b743364",
+        "type": "link out",
+        "z": "85e21fcb925ef32f",
+        "name": "WatchDog Read In",
+        "mode": "link",
+        "links": [
+            "e9a01e5bc2f140ef"
+        ],
+        "x": 495,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "ed481b1d2110232a",
+        "type": "function",
+        "z": "85e21fcb925ef32f",
+        "name": "Parse Reading",
+        "func": "let readingSuccess = true;\nlet tray = global.get('tray');\nif ((msg.payload.gpio == 10) && (msg.payload.channel == 1)) tray.watchdog.value = msg.payload.value;\nreturn {topic:\"readingSuccess\",payload:readingSuccess};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 960,
+        "y": 700,
+        "wires": [
+            [
+                "993dd0030ffbf166"
+            ]
+        ]
+    },
+    {
+        "id": "993dd0030ffbf166",
+        "type": "link out",
+        "z": "85e21fcb925ef32f",
+        "name": "Reading Success Out",
+        "mode": "link",
+        "links": [
+            "45a97566b65c65cc"
+        ],
+        "x": 1085,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "ae68c32974081996",
+        "type": "link in",
+        "z": "85e21fcb925ef32f",
+        "name": "Archive Now In",
+        "links": [
+            "93758a55568a2f76"
+        ],
+        "x": 55,
+        "y": 900,
+        "wires": [
+            [
+                "a3f60ecca605a6e4"
+            ]
+        ]
+    },
+    {
+        "id": "a3f60ecca605a6e4",
+        "type": "delay",
+        "z": "85e21fcb925ef32f",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 160,
+        "y": 900,
+        "wires": [
+            [
+                "76d6712bed883108"
+            ]
+        ]
     }
 ]

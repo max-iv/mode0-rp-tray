@@ -1,12 +1,12 @@
 {
   "type": "gateGen125",
   "name": "01",
-  "arcPeriod": 60000,
+  "arcPeriod": 600000,
   "timeStamp": 1646408271939,
   "watchdog": {
     "action": "reading",
     "type": "scalar",
-    "value": 9,
+    "value": 227,
     "unit": "",
     "alarm": {
       "value": 0,
