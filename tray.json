@@ -6,7 +6,7 @@
   "watchdog": {
     "action": "reading",
     "type": "scalar",
-    "value": 227,
+    "value": 4881,
     "unit": "",
     "alarm": {
       "value": 0,
@@ -146,7 +146,7 @@
   "gate5On": {
     "action": "setting",
     "type": "scalar",
-    "value": 1,
+    "value": 0,
     "unit": "",
     "alarm": {
       "value": 0,
@@ -166,7 +166,7 @@
   "gate6On": {
     "action": "setting",
     "type": "scalar",
-    "value": 1,
+    "value": 0,
     "unit": "",
     "alarm": {
       "value": 0,
@@ -186,7 +186,7 @@
   "gate7On": {
     "action": "setting",
     "type": "scalar",
-    "value": 1,
+    "value": 0,
     "unit": "",
     "alarm": {
       "value": 0,
@@ -203,18 +203,18 @@
       }
     }
   },
-  "interval": {
+  "repRate": {
     "action": "setting",
     "type": "scalar",
-    "value": 810000,
-    "unit": "uS",
+    "value": 5,
+    "unit": "Hz",
     "alarm": {
       "value": 0,
       "limits": {
-        "lolo": 5,
-        "low": 10,
-        "high": 15000000,
-        "hihi": 16000000
+        "lolo": 1.4,
+        "low": 1.5,
+        "high": 38,
+        "hihi": 39
       },
       "notify": {
         "name": "",
@@ -226,7 +226,7 @@
   "startGate0": {
     "action": "setting",
     "type": "scalar",
-    "value": 10,
+    "value": 1000,
     "unit": "uS",
     "alarm": {
       "value": 0,
@@ -246,15 +246,15 @@
   "startGate1": {
     "action": "setting",
     "type": "scalar",
-    "value": 100000,
+    "value": 1000,
     "unit": "uS",
     "alarm": {
       "value": 0,
       "limits": {
-        "lolo": 5,
-        "low": 10,
-        "high": 15000000,
-        "hihi": 16000000
+        "lolo": 800,
+        "low": 900,
+        "high": 1100,
+        "hihi": 1200
       },
       "notify": {
         "name": "",
@@ -266,7 +266,7 @@
   "startGate2": {
     "action": "setting",
     "type": "scalar",
-    "value": 200000,
+    "value": 995,
     "unit": "uS",
     "alarm": {
       "value": 0,
@@ -286,7 +286,7 @@
   "startGate3": {
     "action": "setting",
     "type": "scalar",
-    "value": 300000,
+    "value": 1495,
     "unit": "uS",
     "alarm": {
       "value": 0,
@@ -306,7 +306,7 @@
   "startGate4": {
     "action": "setting",
     "type": "scalar",
-    "value": 400000,
+    "value": 1000,
     "unit": "uS",
     "alarm": {
       "value": 0,
@@ -326,7 +326,7 @@
   "startGate5": {
     "action": "setting",
     "type": "scalar",
-    "value": 500000,
+    "value": 1000,
     "unit": "uS",
     "alarm": {
       "value": 0,
@@ -346,7 +346,7 @@
   "startGate6": {
     "action": "setting",
     "type": "scalar",
-    "value": 600000,
+    "value": 1000,
     "unit": "uS",
     "alarm": {
       "value": 0,
@@ -366,7 +366,7 @@
   "startGate7": {
     "action": "setting",
     "type": "scalar",
-    "value": 700000,
+    "value": 1000,
     "unit": "uS",
     "alarm": {
       "value": 0,
@@ -386,7 +386,7 @@
   "stopGate0": {
     "action": "setting",
     "type": "scalar",
-    "value": 100000,
+    "value": 2000,
     "unit": "uS",
     "alarm": {
       "value": 0,
@@ -406,15 +406,15 @@
   "stopGate1": {
     "action": "setting",
     "type": "scalar",
-    "value": 200000,
+    "value": 2000,
     "unit": "uS",
     "alarm": {
       "value": 0,
       "limits": {
-        "lolo": 5,
-        "low": 10,
-        "high": 15000000,
-        "hihi": 16000000
+        "lolo": 900,
+        "low": 1000,
+        "high": 1200,
+        "hihi": 1300
       },
       "notify": {
         "name": "",
@@ -426,7 +426,7 @@
   "stopGate2": {
     "action": "setting",
     "type": "scalar",
-    "value": 300000,
+    "value": 2005,
     "unit": "uS",
     "alarm": {
       "value": 0,
@@ -446,7 +446,7 @@
   "stopGate3": {
     "action": "setting",
     "type": "scalar",
-    "value": 400000,
+    "value": 1505,
     "unit": "uS",
     "alarm": {
       "value": 0,
@@ -466,7 +466,7 @@
   "stopGate4": {
     "action": "setting",
     "type": "scalar",
-    "value": 500000,
+    "value": 2000,
     "unit": "uS",
     "alarm": {
       "value": 0,
@@ -486,7 +486,7 @@
   "stopGate5": {
     "action": "setting",
     "type": "scalar",
-    "value": 600000,
+    "value": 2000,
     "unit": "uS",
     "alarm": {
       "value": 0,
@@ -506,7 +506,7 @@
   "stopGate6": {
     "action": "setting",
     "type": "scalar",
-    "value": 700000,
+    "value": 2000,
     "unit": "uS",
     "alarm": {
       "value": 0,
@@ -526,7 +526,7 @@
   "stopGate7": {
     "action": "setting",
     "type": "scalar",
-    "value": 800000,
+    "value": 2000,
     "unit": "uS",
     "alarm": {
       "value": 0,

@@ -1,6 +1,6 @@
 # gateGen125-tray
 ## need to add .env file with the following
-MQTTSUBSCRIBE=blinky-lite-v4/gateGen125/01/setting/#  
+MQTTSUBSCRIBE=mirrotron/gateGen125/01/setting/#  
 MQTTCLIENTID=gateGen125-01  
 MQTTSERVERIP=xxxx  
 MQTTUSERNAME=xxxx  
