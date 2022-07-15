@@ -6,7 +6,7 @@
   "watchdog": {
     "action": "reading",
     "type": "scalar",
-    "value": 4881,
+    "value": 113,
     "unit": "",
     "alarm": {
       "value": 0,
@@ -223,13 +223,73 @@
       }
     }
   },
+  "beamPulseLength": {
+    "action": "reading",
+    "type": "scalar",
+    "value": 1000,
+    "unit": "uS",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": 100,
+        "low": 200,
+        "high": 1100,
+        "hihi": 1200
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "rfPulseLength": {
+    "action": "reading",
+    "type": "scalar",
+    "value": 1010,
+    "unit": "uS",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": 100,
+        "low": 200,
+        "high": 1100,
+        "hihi": 1200
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "rfDutyFactor": {
+    "action": "reading",
+    "type": "scalar",
+    "value": 0.505,
+    "unit": "%",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": 0.1,
+        "low": 0.2,
+        "high": 4,
+        "hihi": 4.8
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
   "startGate0": {
     "action": "setting",
     "type": "scalar",
     "value": 1000,
     "unit": "uS",
     "alarm": {
-      "value": 0,
+      "value": 1,
       "limits": {
         "lolo": 5,
         "low": 10,
@@ -409,7 +469,7 @@
     "value": 2000,
     "unit": "uS",
     "alarm": {
-      "value": 0,
+      "value": 4,
       "limits": {
         "lolo": 900,
         "low": 1000,
@@ -535,6 +595,26 @@
         "low": 10,
         "high": 15000000,
         "hihi": 16000000
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "permit": {
+    "action": "reading",
+    "type": "scalar",
+    "value": 0,
+    "unit": "",
+    "alarm": {
+      "value": 3,
+      "limits": {
+        "lolo": 0,
+        "low": 0,
+        "high": 2,
+        "hihi": 2
       },
       "notify": {
         "name": "",
