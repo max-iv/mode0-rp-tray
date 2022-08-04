@@ -464,11 +464,16 @@
                 "t": "eq",
                 "v": "reset",
                 "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "postMortem",
+                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 4,
+        "outputs": 5,
         "x": 650,
         "y": 200,
         "wires": [
@@ -483,6 +488,9 @@
             ],
             [
                 "72b5ca0e2043aba0"
+            ],
+            [
+                "a5457d60ac4a24c4"
             ]
         ]
     },
@@ -1508,5 +1516,42 @@
                 "99fbe8135d0ce161"
             ]
         ]
+    },
+    {
+        "id": "a5457d60ac4a24c4",
+        "type": "function",
+        "z": "85e21fcb925ef32f",
+        "name": "PostMortem",
+        "func": "var trayCopy = JSON.parse(JSON.stringify(global.get('tray')));\ntrayCopy['postMortem'] = msg.payload;\nvar newMsg = \n{\n    topic: global.get('trayProps').box + '/' + global.get('trayProps').type + '/' + global.get('trayProps').name + '/postMortem',\n    payload: JSON.stringify(trayCopy)\n};\nreturn  newMsg;  \n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('lastArchive', new Date().getTime());",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 300,
+        "wires": [
+            [
+                "b05b7d6d938230c0"
+            ]
+        ]
+    },
+    {
+        "id": "b05b7d6d938230c0",
+        "type": "mqtt out",
+        "z": "85e21fcb925ef32f",
+        "name": "Publish Post Mortem",
+        "topic": "",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "79250bf3.365cc4",
+        "x": 1040,
+        "y": 260,
+        "wires": []
     }
 ]

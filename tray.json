@@ -6,7 +6,7 @@
   "watchdog": {
     "action": "reading",
     "type": "scalar",
-    "value": 113,
+    "value": 1600,
     "unit": "",
     "alarm": {
       "value": 0,
@@ -206,10 +206,10 @@
   "repRate": {
     "action": "setting",
     "type": "scalar",
-    "value": 5,
+    "value": 2,
     "unit": "Hz",
     "alarm": {
-      "value": 0,
+      "value": 3,
       "limits": {
         "lolo": 1.4,
         "low": 1.5,
@@ -266,13 +266,13 @@
   "rfDutyFactor": {
     "action": "reading",
     "type": "scalar",
-    "value": 0.505,
+    "value": 0.121,
     "unit": "%",
     "alarm": {
       "value": 0,
       "limits": {
-        "lolo": 0.1,
-        "low": 0.2,
+        "lolo": 0.01,
+        "low": 0.02,
         "high": 4,
         "hihi": 4.8
       },
@@ -289,7 +289,7 @@
     "value": 1000,
     "unit": "uS",
     "alarm": {
-      "value": 1,
+      "value": 0,
       "limits": {
         "lolo": 5,
         "low": 10,
@@ -311,10 +311,10 @@
     "alarm": {
       "value": 0,
       "limits": {
-        "lolo": 800,
-        "low": 900,
-        "high": 1100,
-        "hihi": 1200
+        "lolo": 5,
+        "low": 10,
+        "high": 15000000,
+        "hihi": 16000000
       },
       "notify": {
         "name": "",
@@ -469,12 +469,12 @@
     "value": 2000,
     "unit": "uS",
     "alarm": {
-      "value": 4,
+      "value": 0,
       "limits": {
-        "lolo": 900,
-        "low": 1000,
-        "high": 1200,
-        "hihi": 1300
+        "lolo": 5,
+        "low": 10,
+        "high": 15000000,
+        "hihi": 16000000
       },
       "notify": {
         "name": "",
