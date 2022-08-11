@@ -1,8 +1,9 @@
 # Timing Gate Generator
-* gateGen125-tray <a href="https://github.com/bl-mirrotron/gateGen125-tray" target="_blank">source code</a>
-* [Timing System Overview](https://bl-mirrotron.github.io/#timing-system)
+* <a href="https://github.com/bl-mirrotron/gateGen125-tray" target="_blank">Source code</a>
+* [Timing system overview](https://docs.bl-mirrotron.com/#timing-system)
+* [Control system overview](https://docs.bl-mirrotron.com/)
 
-The Timing Gate Generator uses a <a href="https://redpitaya.com/product-category/stemlab-125-14/" target="_blank">Red Pitaya Stemlab 125-14</a> to generate 8 timing channels system based on a 32 bit counter clocked at 125 MHz. The resolution of the timing system is 8nS and can have intervals as long as 17 seconds. The output of the gate generator uses the <a href="https://bl-mirrotron.github.io/mirrotron-rfq-llrf-timer-cube" target="_blank">RFQ LLRF Timer Cube</a> circuit as shown in Figure 1.
+The Timing Gate Generator uses a <a href="https://redpitaya.com/product-category/stemlab-125-14/" target="_blank">Red Pitaya Stemlab 125-14</a> to generate 8 timing channels system based on a 32 bit counter clocked at 125 MHz. The resolution of the timing system is 8nS and can have intervals as long as 17 seconds. The output of the gate generator uses the <a href="https://docs.bl-mirrotron.com/mirrotron-rfq-llrf-timer-cube">RFQ LLRF Timer Cube</a> circuit as shown in Figure 1.
 
 The FPGA code for the Gate Generator was developed with the <a href="https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools/archive.html" target="_blank">Vivado 2020.2 HLS</a> design edition following the  <a href="https://github.com/dspsandbox/FPGA-Notes-for-Scientists" target="_blank">FPGA Notes for Scientists</a> tutorials. the overall Vivado Design view is shown in Figure 2 and a closeup of the gate design is shown in Figure 3. The design requires three custom real-time-logic (RTL) blocks
 * <a href="doc/interval_counter.vhd.txt" target="_blank">Interval counter</a> The maximum count value of the interval counter determines the length of the gate generator interval.
