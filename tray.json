@@ -1,12 +1,17 @@
 {
-  "type": "gateGen125",
+  "type": "mode0-rp",
   "name": "01",
   "arcPeriod": 600000,
   "timeStamp": 1646408271939,
+  "alias": {
+    "action": "setting",
+    "type": "string",
+    "value": "Mode0 01"
+  },
   "watchdog": {
     "action": "reading",
     "type": "scalar",
-    "value": 1600,
+    "value": 973,
     "unit": "",
     "alarm": {
       "value": 0,
@@ -23,7 +28,7 @@
       }
     }
   },
-  "clrCounter": {
+  "reset": {
     "action": "setting",
     "type": "scalar",
     "value": 0,
@@ -43,18 +48,18 @@
       }
     }
   },
-  "gate0On": {
+  "frontEndLpfShiftR": {
     "action": "setting",
     "type": "scalar",
-    "value": 1,
+    "value": 10,
     "unit": "",
     "alarm": {
       "value": 0,
       "limits": {
         "lolo": -1,
         "low": -1,
-        "high": 2,
-        "hihi": 2
+        "high": 31,
+        "hihi": 31
       },
       "notify": {
         "name": "",
@@ -63,18 +68,18 @@
       }
     }
   },
-  "gate1On": {
+  "clkDivide": {
     "action": "setting",
     "type": "scalar",
-    "value": 1,
+    "value": 5,
     "unit": "",
     "alarm": {
       "value": 0,
       "limits": {
         "lolo": -1,
         "low": -1,
-        "high": 2,
-        "hihi": 2
+        "high": 31,
+        "hihi": 31
       },
       "notify": {
         "name": "",
@@ -83,538 +88,338 @@
       }
     }
   },
-  "gate2On": {
+  "thetaPhaseRot": {
     "action": "setting",
     "type": "scalar",
-    "value": 1,
+    "value": 60,
+    "unit": "deg",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": -181,
+        "low": -181,
+        "high": 181,
+        "hihi": 181
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "notchFilterMemory": {
+    "action": "setting",
+    "type": "scalar",
+    "value": 976,
     "unit": "",
     "alarm": {
       "value": 0,
-      "limits": {
-        "lolo": -1,
-        "low": -1,
-        "high": 2,
-        "hihi": 2
-      },
-      "notify": {
-        "name": "",
-        "number": "",
-        "time": 0
-      }
-    }
-  },
-  "gate3On": {
-    "action": "setting",
-    "type": "scalar",
-    "value": 1,
-    "unit": "",
-    "alarm": {
-      "value": 0,
-      "limits": {
-        "lolo": -1,
-        "low": -1,
-        "high": 2,
-        "hihi": 2
-      },
-      "notify": {
-        "name": "",
-        "number": "",
-        "time": 0
-      }
-    }
-  },
-  "gate4On": {
-    "action": "setting",
-    "type": "scalar",
-    "value": 1,
-    "unit": "",
-    "alarm": {
-      "value": 0,
-      "limits": {
-        "lolo": -1,
-        "low": -1,
-        "high": 2,
-        "hihi": 2
-      },
-      "notify": {
-        "name": "",
-        "number": "",
-        "time": 0
-      }
-    }
-  },
-  "gate5On": {
-    "action": "setting",
-    "type": "scalar",
-    "value": 0,
-    "unit": "",
-    "alarm": {
-      "value": 0,
-      "limits": {
-        "lolo": -1,
-        "low": -1,
-        "high": 2,
-        "hihi": 2
-      },
-      "notify": {
-        "name": "",
-        "number": "",
-        "time": 0
-      }
-    }
-  },
-  "gate6On": {
-    "action": "setting",
-    "type": "scalar",
-    "value": 0,
-    "unit": "",
-    "alarm": {
-      "value": 0,
-      "limits": {
-        "lolo": -1,
-        "low": -1,
-        "high": 2,
-        "hihi": 2
-      },
-      "notify": {
-        "name": "",
-        "number": "",
-        "time": 0
-      }
-    }
-  },
-  "gate7On": {
-    "action": "setting",
-    "type": "scalar",
-    "value": 0,
-    "unit": "",
-    "alarm": {
-      "value": 0,
-      "limits": {
-        "lolo": -1,
-        "low": -1,
-        "high": 2,
-        "hihi": 2
-      },
-      "notify": {
-        "name": "",
-        "number": "",
-        "time": 0
-      }
-    }
-  },
-  "repRate": {
-    "action": "setting",
-    "type": "scalar",
-    "value": 2,
-    "unit": "Hz",
-    "alarm": {
-      "value": 3,
-      "limits": {
-        "lolo": 1.4,
-        "low": 1.5,
-        "high": 38,
-        "hihi": 39
-      },
-      "notify": {
-        "name": "",
-        "number": "",
-        "time": 0
-      }
-    }
-  },
-  "beamPulseLength": {
-    "action": "reading",
-    "type": "scalar",
-    "value": 1000,
-    "unit": "uS",
-    "alarm": {
-      "value": 0,
-      "limits": {
-        "lolo": 100,
-        "low": 200,
-        "high": 1100,
-        "hihi": 1200
-      },
-      "notify": {
-        "name": "",
-        "number": "",
-        "time": 0
-      }
-    }
-  },
-  "rfPulseLength": {
-    "action": "reading",
-    "type": "scalar",
-    "value": 1010,
-    "unit": "uS",
-    "alarm": {
-      "value": 0,
-      "limits": {
-        "lolo": 100,
-        "low": 200,
-        "high": 1100,
-        "hihi": 1200
-      },
-      "notify": {
-        "name": "",
-        "number": "",
-        "time": 0
-      }
-    }
-  },
-  "rfDutyFactor": {
-    "action": "reading",
-    "type": "scalar",
-    "value": 0.121,
-    "unit": "%",
-    "alarm": {
-      "value": 0,
-      "limits": {
-        "lolo": 0.01,
-        "low": 0.02,
-        "high": 4,
-        "hihi": 4.8
-      },
-      "notify": {
-        "name": "",
-        "number": "",
-        "time": 0
-      }
-    }
-  },
-  "startGate0": {
-    "action": "setting",
-    "type": "scalar",
-    "value": 1000,
-    "unit": "uS",
-    "alarm": {
-      "value": 0,
-      "limits": {
-        "lolo": 5,
-        "low": 10,
-        "high": 15000000,
-        "hihi": 16000000
-      },
-      "notify": {
-        "name": "",
-        "number": "",
-        "time": 0
-      }
-    }
-  },
-  "startGate1": {
-    "action": "setting",
-    "type": "scalar",
-    "value": 1000,
-    "unit": "uS",
-    "alarm": {
-      "value": 0,
-      "limits": {
-        "lolo": 5,
-        "low": 10,
-        "high": 15000000,
-        "hihi": 16000000
-      },
-      "notify": {
-        "name": "",
-        "number": "",
-        "time": 0
-      }
-    }
-  },
-  "startGate2": {
-    "action": "setting",
-    "type": "scalar",
-    "value": 995,
-    "unit": "uS",
-    "alarm": {
-      "value": 0,
-      "limits": {
-        "lolo": 5,
-        "low": 10,
-        "high": 15000000,
-        "hihi": 16000000
-      },
-      "notify": {
-        "name": "",
-        "number": "",
-        "time": 0
-      }
-    }
-  },
-  "startGate3": {
-    "action": "setting",
-    "type": "scalar",
-    "value": 1495,
-    "unit": "uS",
-    "alarm": {
-      "value": 0,
-      "limits": {
-        "lolo": 5,
-        "low": 10,
-        "high": 15000000,
-        "hihi": 16000000
-      },
-      "notify": {
-        "name": "",
-        "number": "",
-        "time": 0
-      }
-    }
-  },
-  "startGate4": {
-    "action": "setting",
-    "type": "scalar",
-    "value": 1000,
-    "unit": "uS",
-    "alarm": {
-      "value": 0,
-      "limits": {
-        "lolo": 5,
-        "low": 10,
-        "high": 15000000,
-        "hihi": 16000000
-      },
-      "notify": {
-        "name": "",
-        "number": "",
-        "time": 0
-      }
-    }
-  },
-  "startGate5": {
-    "action": "setting",
-    "type": "scalar",
-    "value": 1000,
-    "unit": "uS",
-    "alarm": {
-      "value": 0,
-      "limits": {
-        "lolo": 5,
-        "low": 10,
-        "high": 15000000,
-        "hihi": 16000000
-      },
-      "notify": {
-        "name": "",
-        "number": "",
-        "time": 0
-      }
-    }
-  },
-  "startGate6": {
-    "action": "setting",
-    "type": "scalar",
-    "value": 1000,
-    "unit": "uS",
-    "alarm": {
-      "value": 0,
-      "limits": {
-        "lolo": 5,
-        "low": 10,
-        "high": 15000000,
-        "hihi": 16000000
-      },
-      "notify": {
-        "name": "",
-        "number": "",
-        "time": 0
-      }
-    }
-  },
-  "startGate7": {
-    "action": "setting",
-    "type": "scalar",
-    "value": 1000,
-    "unit": "uS",
-    "alarm": {
-      "value": 0,
-      "limits": {
-        "lolo": 5,
-        "low": 10,
-        "high": 15000000,
-        "hihi": 16000000
-      },
-      "notify": {
-        "name": "",
-        "number": "",
-        "time": 0
-      }
-    }
-  },
-  "stopGate0": {
-    "action": "setting",
-    "type": "scalar",
-    "value": 2000,
-    "unit": "uS",
-    "alarm": {
-      "value": 0,
-      "limits": {
-        "lolo": 5,
-        "low": 10,
-        "high": 15000000,
-        "hihi": 16000000
-      },
-      "notify": {
-        "name": "",
-        "number": "",
-        "time": 0
-      }
-    }
-  },
-  "stopGate1": {
-    "action": "setting",
-    "type": "scalar",
-    "value": 2000,
-    "unit": "uS",
-    "alarm": {
-      "value": 0,
-      "limits": {
-        "lolo": 5,
-        "low": 10,
-        "high": 15000000,
-        "hihi": 16000000
-      },
-      "notify": {
-        "name": "",
-        "number": "",
-        "time": 0
-      }
-    }
-  },
-  "stopGate2": {
-    "action": "setting",
-    "type": "scalar",
-    "value": 2005,
-    "unit": "uS",
-    "alarm": {
-      "value": 0,
-      "limits": {
-        "lolo": 5,
-        "low": 10,
-        "high": 15000000,
-        "hihi": 16000000
-      },
-      "notify": {
-        "name": "",
-        "number": "",
-        "time": 0
-      }
-    }
-  },
-  "stopGate3": {
-    "action": "setting",
-    "type": "scalar",
-    "value": 1505,
-    "unit": "uS",
-    "alarm": {
-      "value": 0,
-      "limits": {
-        "lolo": 5,
-        "low": 10,
-        "high": 15000000,
-        "hihi": 16000000
-      },
-      "notify": {
-        "name": "",
-        "number": "",
-        "time": 0
-      }
-    }
-  },
-  "stopGate4": {
-    "action": "setting",
-    "type": "scalar",
-    "value": 2000,
-    "unit": "uS",
-    "alarm": {
-      "value": 0,
-      "limits": {
-        "lolo": 5,
-        "low": 10,
-        "high": 15000000,
-        "hihi": 16000000
-      },
-      "notify": {
-        "name": "",
-        "number": "",
-        "time": 0
-      }
-    }
-  },
-  "stopGate5": {
-    "action": "setting",
-    "type": "scalar",
-    "value": 2000,
-    "unit": "uS",
-    "alarm": {
-      "value": 0,
-      "limits": {
-        "lolo": 5,
-        "low": 10,
-        "high": 15000000,
-        "hihi": 16000000
-      },
-      "notify": {
-        "name": "",
-        "number": "",
-        "time": 0
-      }
-    }
-  },
-  "stopGate6": {
-    "action": "setting",
-    "type": "scalar",
-    "value": 2000,
-    "unit": "uS",
-    "alarm": {
-      "value": 0,
-      "limits": {
-        "lolo": 5,
-        "low": 10,
-        "high": 15000000,
-        "hihi": 16000000
-      },
-      "notify": {
-        "name": "",
-        "number": "",
-        "time": 0
-      }
-    }
-  },
-  "stopGate7": {
-    "action": "setting",
-    "type": "scalar",
-    "value": 2000,
-    "unit": "uS",
-    "alarm": {
-      "value": 0,
-      "limits": {
-        "lolo": 5,
-        "low": 10,
-        "high": 15000000,
-        "hihi": 16000000
-      },
-      "notify": {
-        "name": "",
-        "number": "",
-        "time": 0
-      }
-    }
-  },
-  "permit": {
-    "action": "reading",
-    "type": "scalar",
-    "value": 0,
-    "unit": "",
-    "alarm": {
-      "value": 3,
       "limits": {
         "lolo": 0,
         "low": 0,
+        "high": 1024,
+        "hihi": 1024
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "gmult": {
+    "action": "setting",
+    "type": "scalar",
+    "value": 0.4,
+    "unit": "",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": -1,
+        "low": -1,
+        "high": 1,
+        "hihi": 1
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "gainShiftL": {
+    "action": "setting",
+    "type": "scalar",
+    "value": 2,
+    "unit": "",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": -1,
+        "low": -1,
+        "high": 31,
+        "hihi": 31
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "clipLvl": {
+    "action": "setting",
+    "type": "scalar",
+    "value": 500,
+    "unit": "mV",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": 0,
+        "low": 0,
+        "high": 1000,
+        "hihi": 1000
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "dac01on": {
+    "action": "setting",
+    "type": "scalar",
+    "value": 1,
+    "unit": "",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": -1,
+        "low": -1,
         "high": 2,
         "hihi": 2
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "dac02on": {
+    "action": "setting",
+    "type": "scalar",
+    "value": 0,
+    "unit": "",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": -1,
+        "low": -1,
+        "high": 2,
+        "hihi": 2
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "readbackLpfShiftR": {
+    "action": "setting",
+    "type": "scalar",
+    "value": 18,
+    "unit": "",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": -1,
+        "low": -1,
+        "high": 31,
+        "hihi": 31
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "frontEndLpf": {
+    "action": "reading",
+    "type": "scalar",
+    "value": 15.259,
+    "unit": "kHz",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": 1,
+        "low": 2,
+        "high": 100,
+        "hihi": 100
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "clkFreq": {
+    "action": "reading",
+    "type": "scalar",
+    "value": 3.906,
+    "unit": "MHz",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": 1,
+        "low": 2,
+        "high": 100,
+        "hihi": 100
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "notchFreq": {
+    "action": "reading",
+    "type": "scalar",
+    "value": 4.002,
+    "unit": "kHz",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": 1,
+        "low": 2,
+        "high": 100,
+        "hihi": 100
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "gainSign": {
+    "action": "reading",
+    "type": "scalar",
+    "value": 1,
+    "unit": "",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": -2,
+        "low": -2,
+        "high": 2,
+        "hihi": 2
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "gain": {
+    "action": "reading",
+    "type": "scalar",
+    "value": 4.1,
+    "unit": "dB",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": -100,
+        "low": -100,
+        "high": 100,
+        "hihi": 100
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "readbackLpf": {
+    "action": "reading",
+    "type": "scalar",
+    "value": 1.86,
+    "unit": "Hz",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": 0,
+        "low": 0,
+        "high": 100,
+        "hihi": 100
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "phaseShifterDrive": {
+    "action": "reading",
+    "type": "scalar",
+    "value": 184.3,
+    "unit": "mV",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": 0,
+        "low": 0,
+        "high": 1000,
+        "hihi": 1000
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "thetaBeam": {
+    "action": "reading",
+    "type": "scalar",
+    "value": -32.16,
+    "unit": "deg",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": -181,
+        "low": -181,
+        "high": 181,
+        "hihi": 181
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "magBeam": {
+    "action": "reading",
+    "type": "scalar",
+    "value": 223.3,
+    "unit": "mV",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": 0,
+        "low": 0,
+        "high": 1000,
+        "hihi": 1000
       },
       "notify": {
         "name": "",

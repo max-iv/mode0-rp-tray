@@ -126,7 +126,7 @@
         "type": "function",
         "z": "85e21fcb925ef32f",
         "name": "Save tray config in Memory",
-        "func": "msg.payload.watchdog.value = 0;\nglobal.set('settingInProgress', true);\nglobal.set('tray', msg.payload);\nreturn {topic:'overlay',payload:{\"command\":\"init\",\"overlay\":global.get('overlay')}};",
+        "func": "msg.payload.watchdog.value = 0;\nglobal.set('settingInProgress', true);\nglobal.set('tray', msg.payload);\nreturn {topic:'overlay',payload:[{\"command\":\"init\",\"overlay\":global.get('overlay')}]};",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -464,16 +464,11 @@
                 "t": "eq",
                 "v": "reset",
                 "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "postMortem",
-                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 5,
+        "outputs": 4,
         "x": 650,
         "y": 200,
         "wires": [
@@ -488,9 +483,6 @@
             ],
             [
                 "72b5ca0e2043aba0"
-            ],
-            [
-                "a5457d60ac4a24c4"
             ]
         ]
     },
@@ -1019,7 +1011,7 @@
         "type": "function",
         "z": "85e21fcb925ef32f",
         "name": "Create Setting",
-        "func": "let tray = global.get('tray');\nlet blinkyBusSettingMsg = \n{\n    topic : msg.topic, \n    payload : {\"command\":\"setting\",\"gpio\":0,\"channel\":0,\"value\":0,\"mask\":0} \n}\nlet blinkyBusMessage = false;\nlet freq = 125;\nswitch(msg.payload.cube)\n{\n    case 'clrCounter':\n        tray.clrCounter.value = msg.payload.value;\n        if (tray.clrCounter.value >= 0.5) {tray.clrCounter.value = 1} else {tray.clrCounter.value = 0}\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":0,\"channel\":1,\"value\":tray.clrCounter.value,\"mask\":1} ;\n        blinkyBusMessage = true;\n        break;\n    case 'repRate':\n        let interval          = Math.floor((1000000.0 / msg.payload.value)  * freq);\n        tray.repRate.value    = Math.floor(1000 * 1000000.0 * freq / interval) / 1000; \nnode.warn(interval / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":0,\"channel\":2,\"value\":interval,  \"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n/*\n    case 'interval':\n        let interval          = Math.floor(msg.payload.value * freq);\n        tray.interval.value   = Math.floor(interval / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":0,\"channel\":2,\"value\":interval,  \"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n*/\n    case 'startGate0':\n        let startGate0        = Math.floor(msg.payload.value * freq);\n        tray.startGate0.value = Math.floor(startGate0 / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":1,\"channel\":1,\"value\":startGate0,\"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n    case 'startGate1':\n        let startGate1        = Math.floor(msg.payload.value * freq);\n        tray.startGate1.value = Math.floor(startGate1 / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":2,\"channel\":1,\"value\":startGate1,\"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n    case 'startGate2':\n        let startGate2        = Math.floor(msg.payload.value * freq);\n        tray.startGate2.value = Math.floor(startGate2 / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":3,\"channel\":1,\"value\":startGate2,\"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n    case 'startGate3':\n        let startGate3        = Math.floor(msg.payload.value * freq);\n        tray.startGate3.value = Math.floor(startGate3 / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":4,\"channel\":1,\"value\":startGate3,\"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n    case 'startGate4':\n        let startGate4        = Math.floor(msg.payload.value * freq);\n        tray.startGate4.value = Math.floor(startGate4 / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":5,\"channel\":1,\"value\":startGate4,\"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n    case 'startGate5':\n        let startGate5        = Math.floor(msg.payload.value * freq);\n        tray.startGate5.value = Math.floor(startGate5 / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":6,\"channel\":1,\"value\":startGate5,\"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n    case 'startGate6':\n        let startGate6        = Math.floor(msg.payload.value * freq);\n        tray.startGate6.value = Math.floor(startGate6 / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":7,\"channel\":1,\"value\":startGate6,\"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n    case 'startGate7':\n        let startGate7        = Math.floor(msg.payload.value * freq);\n        tray.startGate7.value = Math.floor(startGate7 / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":8,\"channel\":1,\"value\":startGate7,\"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n    case 'stopGate0':\n        let stopGate0        = Math.floor(msg.payload.value * freq);\n        tray.stopGate0.value = Math.floor(stopGate0 / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":1,\"channel\":2,\"value\":stopGate0,\"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n    case 'stopGate1':\n        let stopGate1        = Math.floor(msg.payload.value * freq);\n        tray.stopGate1.value = Math.floor(stopGate1 / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":2,\"channel\":2,\"value\":stopGate1,\"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n    case 'stopGate2':\n        let stopGate2        = Math.floor(msg.payload.value * freq);\n        tray.stopGate2.value = Math.floor(stopGate2 / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":3,\"channel\":2,\"value\":stopGate2,\"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n    case 'stopGate3':\n        let stopGate3        = Math.floor(msg.payload.value * freq);\n        tray.stopGate3.value = Math.floor(stopGate3 / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":4,\"channel\":2,\"value\":stopGate3,\"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n    case 'stopGate4':\n        let stopGate4        = Math.floor(msg.payload.value * freq);\n        tray.stopGate4.value = Math.floor(stopGate4 / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":5,\"channel\":2,\"value\":stopGate4,\"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n    case 'stopGate5':\n        let stopGate5        = Math.floor(msg.payload.value * freq);\n        tray.stopGate5.value = Math.floor(stopGate5 / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":6,\"channel\":2,\"value\":stopGate5,\"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n    case 'stopGate6':\n        let stopGate6        = Math.floor(msg.payload.value * freq);\n        tray.stopGate6.value = Math.floor(stopGate6 / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":7,\"channel\":2,\"value\":stopGate6,\"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n    case 'stopGate7':\n        let stopGate7        = Math.floor(msg.payload.value * freq);\n        tray.stopGate7.value = Math.floor(stopGate7 / freq);\n        blinkyBusSettingMsg.payload = {\"command\":\"setting\",\"gpio\":8,\"channel\":2,\"value\":stopGate7,\"mask\":4294967295};\n        blinkyBusMessage = true;\n        break;\n    case 'gate0On':\n        tray.gate0On.value  = msg.payload.value;\n        blinkyBusSettingMsg.payload = getGateOnCommand();\n        blinkyBusMessage = true;\n        break;\n    case 'gate1On':\n        tray.gate1On.value  = msg.payload.value;\n        blinkyBusSettingMsg.payload = getGateOnCommand();\n        blinkyBusMessage = true;\n        break;\n    case 'gate2On':\n        tray.gate2On.value  = msg.payload.value;\n        blinkyBusSettingMsg.payload = getGateOnCommand();\n        blinkyBusMessage = true;\n        break;\n    case 'gate3On':\n        tray.gate3On.value  = msg.payload.value;\n        blinkyBusSettingMsg.payload = getGateOnCommand();\n        blinkyBusMessage = true;\n        break;\n    case 'gate4On':\n        tray.gate4On.value  = msg.payload.value;\n        blinkyBusSettingMsg.payload = getGateOnCommand();\n        blinkyBusMessage = true;\n        break;\n    case 'gate5On':\n        tray.gate5On.value  = msg.payload.value;\n        blinkyBusSettingMsg.payload = getGateOnCommand();\n        blinkyBusMessage = true;\n        break;\n    case 'gate6On':\n        tray.gate6On.value  = msg.payload.value;\n        blinkyBusSettingMsg.payload = getGateOnCommand();\n        blinkyBusMessage = true;\n        break;\n    case 'gate7On':\n        tray.gate7On.value  = msg.payload.value;\n        blinkyBusSettingMsg.payload = getGateOnCommand();\n        blinkyBusMessage = true;\n        break;\n    case 'nonblinkyBusSetting':\n        tray.nonblinkyBusSetting.value  = msg.payload.value;\n        blinkyBusMessage = false;\n        break;\n    default:\n        break;\n}\nlet msgArray = [null,null,null];\nif (blinkyBusMessage)\n{\n    global.set('settingInProgress',true);\n    var settingInProgressMsg = {topic:'settingInProgress', payload:true};\n    msgArray = [blinkyBusSettingMsg, settingInProgressMsg, null];\n    \n}\nelse\n{\n    global.set('settingInProgress',false);\n    msgArray = [null,null,{topic:'settingDone', payload:true}];\n}\nreturn msgArray;\nfunction getGateOnCommand()\n{\n    if (tray.gate0On.value >= 0.5) {tray.gate0On.value = 1} else {tray.gate0On.value = 0}\n    if (tray.gate1On.value >= 0.5) {tray.gate1On.value = 1} else {tray.gate1On.value = 0}\n    if (tray.gate2On.value >= 0.5) {tray.gate2On.value = 1} else {tray.gate2On.value = 0}\n    if (tray.gate3On.value >= 0.5) {tray.gate3On.value = 1} else {tray.gate3On.value = 0}\n    if (tray.gate4On.value >= 0.5) {tray.gate4On.value = 1} else {tray.gate4On.value = 0}\n    if (tray.gate5On.value >= 0.5) {tray.gate5On.value = 1} else {tray.gate5On.value = 0}\n    if (tray.gate6On.value >= 0.5) {tray.gate6On.value = 1} else {tray.gate6On.value = 0}\n    if (tray.gate7On.value >= 0.5) {tray.gate7On.value = 1} else {tray.gate7On.value = 0}\n    let gateOn = tray.gate0On.value;\n    gateOn = gateOn + 2   * tray.gate1On.value;\n    gateOn = gateOn + 4   * tray.gate2On.value;\n    gateOn = gateOn + 8   * tray.gate3On.value;\n    gateOn = gateOn + 16  * tray.gate4On.value;\n    gateOn = gateOn + 32  * tray.gate5On.value;\n    gateOn = gateOn + 64  * tray.gate6On.value;\n    gateOn = gateOn + 128 * tray.gate7On.value;\n    let gateOnCommand = {\"command\":\"setting\",\"gpio\":9,\"channel\":1,\"value\":gateOn,\"mask\":255};\n    return gateOnCommand;\n}\n",
+        "func": "let two31Minus1 = 2147483647;\nlet tray = global.get('tray');\nlet blinkyBusSettingMsg = \n{\n    topic : msg.topic, \n    payload : [] \n}\nlet blinkyBusMessage = false;\ntray[msg.payload.cube].value = msg.payload.value;\nlet setValue = msg.payload.value;\nswitch(msg.payload.cube)\n{\n    case 'reset':\n        setValue = msg.payload.value;\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":64});\n        blinkyBusMessage = true;\n        break;\n    case 'frontEndLpfShiftR':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":68});\n        blinkyBusMessage = true;\n        break;\n    case 'clkDivide':\n        setValue = Math.floor(msg.payload.value - 1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":72});\n        blinkyBusMessage = true;\n        break;\n    case 'thetaPhaseRot':\n        setValue = Math.floor(Math.cos(msg.payload.value * Math.PI / 180.0) * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":76});\n        setValue = Math.floor(Math.sin(msg.payload.value * Math.PI / 180.0) * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":80});\n        blinkyBusMessage = true;\n        break;\n    case 'notchFilterMemory':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":84});\n        blinkyBusMessage = true;\n        break;\n    case 'gmult':\n        setValue = Math.floor(msg.payload.value * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":88});\n        blinkyBusMessage = true;\n        break;\n    case 'gainShiftL':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":92});\n        blinkyBusMessage = true;\n        break;\n    case 'clipLvl':\n        setValue = Math.floor( msg.payload.value * 0.001 * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":96});\n        setValue = Math.floor(-msg.payload.value * 0.001 * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":100});\n        blinkyBusMessage = true;\n        break;\n    case 'dac01on':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":104});\n        blinkyBusMessage = true;\n        break;\n    case 'dac02on':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":108});\n        blinkyBusMessage = true;\n        break;\n    case 'readbackLpfShiftR':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":112});\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":116});\n        blinkyBusMessage = true;\n        break;\n    case 'nonblinkyBusSetting':\n        tray.nonblinkyBusSetting.value  = msg.payload.value;\n        blinkyBusMessage = false;\n        break;\n    default:\n        break;\n}\nlet msgArray = [null,null,null];\nif (blinkyBusMessage)\n{\n    global.set('settingInProgress',true);\n    var settingInProgressMsg = {topic:'settingInProgress', payload:true};\n    msgArray = [blinkyBusSettingMsg, settingInProgressMsg, null];\n    \n}\nelse\n{\n    global.set('settingInProgress',false);\n    msgArray = [null,null,{topic:'settingDone', payload:true}];\n}\nreturn msgArray;\n",
         "outputs": 3,
         "noerr": 0,
         "initialize": "",
@@ -1055,7 +1047,7 @@
         "y": 660,
         "wires": [
             [
-                "7b630952f0bca935"
+                "48d6365101511c92"
             ]
         ]
     },
@@ -1069,7 +1061,7 @@
             "04d132d87ffeb91a",
             "45a97566b65c65cc"
         ],
-        "x": 1085,
+        "x": 1365,
         "y": 660,
         "wires": []
     },
@@ -1078,17 +1070,17 @@
         "type": "function",
         "z": "85e21fcb925ef32f",
         "name": "Setting success",
-        "func": "global.set('settingInProgress', false);\nsettingSuccess = true;\nreturn {topic:\"settingSuccess\",payload:settingSuccess};",
+        "func": "let tray = global.get('tray');\nglobal.set('settingInProgress', false);\ncalcReadings();\nsettingSuccess = true;\nreturn {topic:\"settingSuccess\",payload:settingSuccess};\nfunction calcReadings()\n{\n    tray.frontEndLpf.value = Math.round(125e6 / (8 * twoToN(tray.frontEndLpfShiftR.value) ) ) / 1000;\n    tray.clkFreq.value = Math.round(125e3 / twoToN(tray.clkDivide.value)) / 1000;\n    tray.notchFreq.value = Math.round(125e6 / (tray.notchFilterMemory.value * twoToN(tray.clkDivide.value) ) ) / 1000;\n    tray.gainSign.value = 1;\n    if (tray.gmult.value < 0) tray.gainSign.value = -1;\n    tray.gain.value = Math.round(200.0 * Math.log10(tray.gainSign.value * tray.gmult.value * twoToN(tray.gainShiftL.value) ) ) / 10;\n    tray.readbackLpf.value = Math.round(125e8 / (8 * twoToN(tray.readbackLpfShiftR.value) * twoToN(tray.clkDivide.value))) / 100;\n}\nfunction twoToN(n)\n{\n    pow = 1;\n    for (let ii = 0; ii < n; ++ii) pow = pow * 2;\n    return pow;\n}\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 960,
+        "x": 1080,
         "y": 660,
         "wires": [
             [
-                "dc7936fb55cf6c52"
+                "a1bc2acb789b944b"
             ]
         ]
     },
@@ -1101,7 +1093,7 @@
         "links": [
             "e9a01e5bc2f140ef"
         ],
-        "x": 1565,
+        "x": 1475,
         "y": 60,
         "wires": []
     },
@@ -1172,7 +1164,7 @@
         "virtualenv": "",
         "continuous": true,
         "stdInData": true,
-        "x": 220,
+        "x": 340,
         "y": 660,
         "wires": [
             [
@@ -1197,7 +1189,7 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 1160,
+        "x": 1180,
         "y": 140,
         "wires": [
             [
@@ -1210,32 +1202,13 @@
         "type": "function",
         "z": "85e21fcb925ef32f",
         "name": "initSettings",
-        "func": "let tray = global.get('tray');\nlet settingsArray = [];\nlet freq = 125;\n\nlet interval          = Math.floor((1000000.0 / tray.repRate.value)  * freq);\ntray.repRate.value    = Math.floor(1000 * 1000000.0 * freq / interval) / 1000; \n//node.warn(interval / freq);\n/*\nlet interval          = Math.floor(tray.interval.value * freq);\ntray.interval.value   = Math.floor(interval / freq);\n*/\nlet startGate0        = Math.floor(tray.startGate0.value * freq);\ntray.startGate0.value = Math.floor(startGate0 / freq);\nlet startGate1        = Math.floor(tray.startGate1.value * freq);\ntray.startGate1.value = Math.floor(startGate1 / freq);\nlet startGate2        = Math.floor(tray.startGate2.value * freq);\ntray.startGate2.value = Math.floor(startGate2 / freq);\nlet startGate3        = Math.floor(tray.startGate3.value * freq);\ntray.startGate3.value = Math.floor(startGate3 / freq);\nlet startGate4        = Math.floor(tray.startGate4.value * freq);\ntray.startGate4.value = Math.floor(startGate4 / freq);\nlet startGate5        = Math.floor(tray.startGate5.value * freq);\ntray.startGate5.value = Math.floor(startGate5 / freq);\nlet startGate6        = Math.floor(tray.startGate6.value * freq);\ntray.startGate6.value = Math.floor(startGate6 / freq);\nlet startGate7        = Math.floor(tray.startGate7.value * freq);\ntray.startGate7.value = Math.floor(startGate7 / freq);\n\nlet stopGate0        = Math.floor(tray.stopGate0.value * freq);\ntray.stopGate0.value = Math.floor(stopGate0 / freq);\nlet stopGate1        = Math.floor(tray.stopGate1.value * freq);\ntray.stopGate1.value = Math.floor(stopGate1 / freq);\nlet stopGate2        = Math.floor(tray.stopGate2.value * freq);\ntray.stopGate2.value = Math.floor(stopGate2 / freq);\nlet stopGate3        = Math.floor(tray.stopGate3.value * freq);\ntray.stopGate3.value = Math.floor(stopGate3 / freq);\nlet stopGate4        = Math.floor(tray.stopGate4.value * freq);\ntray.stopGate4.value = Math.floor(stopGate4 / freq);\nlet stopGate5        = Math.floor(tray.stopGate5.value * freq);\ntray.stopGate5.value = Math.floor(stopGate5 / freq);\nlet stopGate6        = Math.floor(tray.stopGate6.value * freq);\ntray.stopGate6.value = Math.floor(stopGate6 / freq);\nlet stopGate7        = Math.floor(tray.stopGate7.value * freq);\ntray.stopGate7.value = Math.floor(stopGate7 / freq);\n\nif (tray.gate0On.value >= 0.5) {tray.gate0On.value = 1} else {tray.gate0On.value = 0}\nif (tray.gate1On.value >= 0.5) {tray.gate1On.value = 1} else {tray.gate1On.value = 0}\nif (tray.gate2On.value >= 0.5) {tray.gate2On.value = 1} else {tray.gate2On.value = 0}\nif (tray.gate3On.value >= 0.5) {tray.gate3On.value = 1} else {tray.gate3On.value = 0}\nif (tray.gate4On.value >= 0.5) {tray.gate4On.value = 1} else {tray.gate4On.value = 0}\nif (tray.gate5On.value >= 0.5) {tray.gate5On.value = 1} else {tray.gate5On.value = 0}\nif (tray.gate6On.value >= 0.5) {tray.gate6On.value = 1} else {tray.gate6On.value = 0}\nif (tray.gate7On.value >= 0.5) {tray.gate7On.value = 1} else {tray.gate7On.value = 0}\nlet gateOn = tray.gate0On.value;\ngateOn = gateOn + 2   * tray.gate1On.value;\ngateOn = gateOn + 4   * tray.gate2On.value;\ngateOn = gateOn + 8   * tray.gate3On.value;\ngateOn = gateOn + 16  * tray.gate4On.value;\ngateOn = gateOn + 32  * tray.gate5On.value;\ngateOn = gateOn + 64  * tray.gate6On.value;\ngateOn = gateOn + 128 * tray.gate7On.value;\n\nsettingsArray.push({\"command\":\"setting\",\"gpio\":0,\"channel\":1,\"value\":1,\"mask\":1});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":0,\"channel\":2,\"value\":interval,  \"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":1,\"channel\":1,\"value\":startGate0,\"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":2,\"channel\":1,\"value\":startGate1,\"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":3,\"channel\":1,\"value\":startGate2,\"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":4,\"channel\":1,\"value\":startGate3,\"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":5,\"channel\":1,\"value\":startGate4,\"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":6,\"channel\":1,\"value\":startGate5,\"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":7,\"channel\":1,\"value\":startGate6,\"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":8,\"channel\":1,\"value\":startGate7,\"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":1,\"channel\":2,\"value\":stopGate0,\"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":2,\"channel\":2,\"value\":stopGate1,\"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":3,\"channel\":2,\"value\":stopGate2,\"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":4,\"channel\":2,\"value\":stopGate3,\"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":5,\"channel\":2,\"value\":stopGate4,\"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":6,\"channel\":2,\"value\":stopGate5,\"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":7,\"channel\":2,\"value\":stopGate6,\"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":8,\"channel\":2,\"value\":stopGate7,\"mask\":4294967295});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":9,\"channel\":1,\"value\":gateOn,\"mask\":255});\nsettingsArray.push({\"command\":\"setting\",\"gpio\":0,\"channel\":1,\"value\":0,\"mask\":1});\ntray.clrCounter.value = 0;\n\nreturn {topic:\"initSettings\",payload:settingsArray};\n",
+        "func": "let tray = global.get('tray');\nlet settingsArray = [];\nlet two31Minus1 = 2147483647;\n\ntray.reset.value = 1;\nlet setReg = [];\n\nsetReg.push(tray.reset.value);\nsetReg.push(Math.floor(tray.frontEndLpfShiftR.value));\nsetReg.push(Math.floor(tray.clkDivide.value - 1));\nsetReg.push(Math.floor(Math.cos((tray.thetaPhaseRot.value * Math.PI / 180.0)) * two31Minus1));\nsetReg.push(Math.floor(Math.sin((tray.thetaPhaseRot.value * Math.PI / 180.0)) * two31Minus1));\nsetReg.push(Math.floor(tray.notchFilterMemory.value));\nsetReg.push(Math.floor(tray.gmult.value * two31Minus1));\nsetReg.push(Math.floor(tray.gainShiftL.value));\nsetReg.push(Math.floor( tray.clipLvl.value * 0.001 * two31Minus1));\nsetReg.push(Math.floor(-tray.clipLvl.value * 0.001 * two31Minus1));\nsetReg.push(Math.floor(tray.dac01on.value));\nsetReg.push(Math.floor(tray.dac02on.value));\nsetReg.push(Math.floor(tray.readbackLpfShiftR.value));\nsetReg.push(Math.floor(tray.readbackLpfShiftR.value));\nfor (let ii = 0; ii < setReg.length; ++ii)\n{\n    settingsArray.push({\"command\":\"setting\",\"value\":setReg[ii],\"offset\":(64 + ii * 4)});\n}\ntray.reset.value = 0;\nsetReg[0] = tray.reset.value;\nsettingsArray.push({\"command\":\"setting\",\"value\":setReg[0],\"offset\":64});\n\nreturn {topic:\"initSettings\",payload:settingsArray};\n\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1310,
-        "y": 140,
-        "wires": [
-            [
-                "96b6d3e3bb4b4555"
-            ]
-        ]
-    },
-    {
-        "id": "96b6d3e3bb4b4555",
-        "type": "split",
-        "z": "85e21fcb925ef32f",
-        "name": "",
-        "splt": "\\n",
-        "spltType": "str",
-        "arraySplt": 1,
-        "arraySpltType": "len",
-        "stream": false,
-        "addname": "",
-        "x": 1450,
+        "x": 1330,
         "y": 140,
         "wires": [
             [
@@ -1254,7 +1227,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 410,
+        "x": 530,
         "y": 660,
         "wires": [
             [
@@ -1289,7 +1262,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 3,
-        "x": 710,
+        "x": 830,
         "y": 660,
         "wires": [
             [],
@@ -1309,7 +1282,7 @@
         "property": "payload",
         "action": "obj",
         "pretty": false,
-        "x": 570,
+        "x": 690,
         "y": 660,
         "wires": [
             [
@@ -1378,14 +1351,14 @@
         "id": "12fb87d74b200e05",
         "type": "function",
         "z": "85e21fcb925ef32f",
-        "name": "Setup WatchDog Read",
-        "func": "if (global.get('settingInProgress')) return null;\nlet command = {\"command\":\"reading\",\"gpio\":10,\"channel\":1,\"value\":0}\nreturn {topic: \"readWatchDog\", payload:command};\n",
+        "name": "Setup readings",
+        "func": "if (global.get('settingInProgress')) return null;\nlet readingsArray = [];\nfor (let ii = 0; ii < 4; ++ii)\n{\n    readingsArray.push({\"command\":\"reading\",\"offset\":(ii * 4)});\n}\nreturn {topic: \"readWatchDog\", payload:readingsArray};\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 360,
+        "x": 340,
         "y": 600,
         "wires": [
             [
@@ -1402,7 +1375,7 @@
         "links": [
             "e9a01e5bc2f140ef"
         ],
-        "x": 495,
+        "x": 475,
         "y": 600,
         "wires": []
     },
@@ -1411,17 +1384,17 @@
         "type": "function",
         "z": "85e21fcb925ef32f",
         "name": "Parse Reading",
-        "func": "let readingSuccess = true;\nlet tray = global.get('tray');\nif ((msg.payload.gpio == 10) && (msg.payload.channel == 1))\n{\n    tray.watchdog.value = msg.payload.value;\n    tray.beamPulseLength.value = tray.stopGate0.value - tray.startGate0.value;\n    tray.rfPulseLength.value = tray.stopGate2.value - tray.startGate2.value;\n    tray.rfDutyFactor.value = Math.round(tray.rfPulseLength.value * tray.repRate.value * 0.1) / 1000;\n}\nreturn {topic:\"readingSuccess\",payload:readingSuccess};",
+        "func": "let readingSuccess = true;\nlet tray = global.get('tray');\n\nswitch(msg.payload.offset)\n{\n    case 0:\n        tray.phaseShifterDrive.value = Math.round(normRead(msg.payload.value) * 10000) / 10;\n        break;\n    case 4:\n        context.set(\"ival\", normRead(msg.payload.value));\n        break;\n    case 8:\n        context.set(\"qval\", normRead(msg.payload.value));\n        break;\n    case 12:\n        tray.watchdog.value = msg.payload.value;\n        setBeamParam();\n        break;\n    default:\n        break;\n}\n\nreturn {topic:\"readingSuccess\",payload:readingSuccess};\nfunction normRead(pynqInt)\n{\n    let normVal = pynqInt;\n    let two31Minus1 = 2147483647;\n    let two31 = 2147483648;\n    let two32 = 4294967296;\n    normVal = pynqInt;\n    if (pynqInt >= two31) normVal = pynqInt - two32;\n    normVal = normVal / two31Minus1;   \n    return normVal;\n}\nfunction setBeamParam()\n{\n    ival = context.get(\"ival\");\n    qval = context.get(\"qval\");\n    tray.thetaBeam.value = Math.round(Math.atan2(qval, ival) * 180.0 * 100/ Math.PI) / 100;\n    tray.magBeam.value   = Math.round(Math.sqrt(ival * ival + qval * qval) * 10000)/ 10;\n    return;\n}\n",
         "outputs": 1,
         "noerr": 0,
-        "initialize": "",
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set(\"ival\", 0.000001);\ncontext.set(\"qval\", 0.000001);",
         "finalize": "",
         "libs": [],
-        "x": 960,
+        "x": 1080,
         "y": 700,
         "wires": [
             [
-                "4f430d87765c1bd8"
+                "99fbe8135d0ce161"
             ]
         ]
     },
@@ -1434,7 +1407,7 @@
         "links": [
             "45a97566b65c65cc"
         ],
-        "x": 1495,
+        "x": 1425,
         "y": 700,
         "wires": []
     },
@@ -1459,7 +1432,7 @@
         "type": "delay",
         "z": "85e21fcb925ef32f",
         "name": "",
-        "pauseType": "delay",
+        "pauseType": "rate",
         "timeout": "2",
         "timeoutUnits": "seconds",
         "rate": "1",
@@ -1468,10 +1441,10 @@
         "randomFirst": "1",
         "randomLast": "5",
         "randomUnits": "seconds",
-        "drop": false,
+        "drop": true,
         "allowrate": false,
         "outputs": 1,
-        "x": 160,
+        "x": 170,
         "y": 900,
         "wires": [
             [
@@ -1490,7 +1463,7 @@
         "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('lastAlarm', -1);",
         "finalize": "",
         "libs": [],
-        "x": 1360,
+        "x": 1290,
         "y": 700,
         "wires": [
             [
@@ -1499,59 +1472,76 @@
         ]
     },
     {
-        "id": "4f430d87765c1bd8",
-        "type": "function",
+        "id": "48d6365101511c92",
+        "type": "split",
         "z": "85e21fcb925ef32f",
-        "name": "Check for Permit",
-        "func": "var tray = global.get('tray');\ntray.permit.value = 1;\nif (scalarAlarmScan(tray, 'reading')) tray.permit.value = 0;\nif (scalarAlarmScan(tray, 'setting')) tray.permit.value = 0;\n\nreturn msg;\nfunction getActionArray(tray, type, actionType)\n{\n    var actionArray = [];\n    var keys = Object.keys(tray);\n    for (var ii = 0; ii < keys.length; ++ii)\n    {\n        if (tray[keys[ii]].hasOwnProperty('type'))\n        {\n            if (tray[keys[ii]].type == type)\n            {\n                if (tray[keys[ii]].action == actionType)\n                {\n                    actionArray.push(tray[keys[ii]]);\n                }\n            }\n        }\n    }\n    return actionArray;\n}\nfunction scalarAlarmScan(tray, actionType)\n{\n    var alarmFlag = false;\n    var actionArray = getActionArray(tray, 'scalar', actionType);\n    if (actionArray.length > 0)\n    {\n        for (var ii = 0; ii < actionArray.length; ++ii)\n        {\n            actionArray[ii].alarm.value = 0;\n            if (!isNaN(actionArray[ii].value))\n            {\n                if (actionArray[ii].value <= actionArray[ii].alarm.limits.low)  actionArray[ii].alarm.value = 1;\n                if (actionArray[ii].value <= actionArray[ii].alarm.limits.lolo) actionArray[ii].alarm.value = 3;\n                if (actionArray[ii].value >= actionArray[ii].alarm.limits.high) actionArray[ii].alarm.value = 2;\n                if (actionArray[ii].value >= actionArray[ii].alarm.limits.hihi) actionArray[ii].alarm.value = 4;\n                if (actionArray[ii].alarm.value > 2) alarmFlag = true;\n            }\n        }\n    }\n    return alarmFlag;\n}\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1150,
-        "y": 700,
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 150,
+        "y": 660,
         "wires": [
             [
-                "99fbe8135d0ce161"
+                "7b630952f0bca935"
             ]
         ]
     },
     {
-        "id": "a5457d60ac4a24c4",
-        "type": "function",
+        "id": "a1bc2acb789b944b",
+        "type": "delay",
         "z": "85e21fcb925ef32f",
-        "name": "PostMortem",
-        "func": "var trayCopy = JSON.parse(JSON.stringify(global.get('tray')));\ntrayCopy['postMortem'] = msg.payload;\nvar newMsg = \n{\n    topic: global.get('trayProps').box + '/' + global.get('trayProps').type + '/' + global.get('trayProps').name + '/postMortem',\n    payload: JSON.stringify(trayCopy)\n};\nreturn  newMsg;  \n",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
         "outputs": 1,
-        "noerr": 0,
-        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('lastArchive', new Date().getTime());",
-        "finalize": "",
-        "libs": [],
-        "x": 810,
+        "x": 1250,
+        "y": 660,
+        "wires": [
+            [
+                "dc7936fb55cf6c52"
+            ]
+        ]
+    },
+    {
+        "id": "1a589248d99eebbc",
+        "type": "inject",
+        "z": "85e21fcb925ef32f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "setting",
+        "payload": "{\"cube\":\"clipLvl\",\"value\":100}",
+        "payloadType": "json",
+        "x": 110,
         "y": 300,
         "wires": [
             [
-                "b05b7d6d938230c0"
+                "fcc98447c16c3949"
             ]
         ]
-    },
-    {
-        "id": "b05b7d6d938230c0",
-        "type": "mqtt out",
-        "z": "85e21fcb925ef32f",
-        "name": "Publish Post Mortem",
-        "topic": "",
-        "qos": "0",
-        "retain": "false",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "79250bf3.365cc4",
-        "x": 1040,
-        "y": 260,
-        "wires": []
     }
 ]
