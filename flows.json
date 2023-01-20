@@ -46,7 +46,7 @@
                     "edited": false
                 },
                 "page-sidebar-backgroundColor": {
-                    "value": "#000000",
+                    "value": "#333333",
                     "edited": false
                 },
                 "group-textColor": {
@@ -76,6 +76,13 @@
                 "base-font": {
                     "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
                 }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
             }
         },
         "site": {
@@ -120,6 +127,25 @@
         "willPayload": "",
         "willMsg": {},
         "sessionExpiry": ""
+    },
+    {
+        "id": "eec05fc3d294d90f",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "fd4f209029bad863",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "eec05fc3d294d90f",
+        "order": 1,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
     },
     {
         "id": "30f384ea.cf21fc",
@@ -229,7 +255,7 @@
         "type": "function",
         "z": "85e21fcb925ef32f",
         "name": "Init flow Variables",
-        "func": "var mqttSplit = msg.payload.split('/');\nvar trayProps = {\n    box         :   mqttSplit[0],\n    type        :   mqttSplit[1],\n    name        :   mqttSplit[2],\n};\nglobal.set('trayProps',trayProps);\nglobal.set('settingInProgress', false);\n\nreturn {topic: 'readFile', payload:true};",
+        "func": "var mqttSplit = msg.payload.split('/');\nvar trayProps = {\n    box         :   mqttSplit[0],\n    type        :   mqttSplit[1],\n    name        :   mqttSplit[2],\n};\nglobal.set('trayProps',trayProps);\nglobal.set('settingInProgress', false);\nglobal.set('restartFftPlot', true);\n\nreturn {topic: 'readFile', payload:true};",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1011,7 +1037,7 @@
         "type": "function",
         "z": "85e21fcb925ef32f",
         "name": "Create Setting",
-        "func": "let two31Minus1 = 2147483647;\nlet tray = global.get('tray');\nlet blinkyBusSettingMsg = \n{\n    topic : msg.topic, \n    payload : [] \n}\nlet blinkyBusMessage = false;\ntray[msg.payload.cube].value = msg.payload.value;\nlet setValue = msg.payload.value;\nswitch(msg.payload.cube)\n{\n    case 'reset':\n        setValue = msg.payload.value;\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":64});\n        blinkyBusMessage = true;\n        break;\n    case 'frontEndLpfShiftR':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":68});\n        blinkyBusMessage = true;\n        break;\n    case 'clkDivide':\n        setValue = Math.floor(msg.payload.value - 1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":72});\n        blinkyBusMessage = true;\n        break;\n    case 'thetaPhaseRot':\n        setValue = Math.floor(Math.cos(msg.payload.value * Math.PI / 180.0) * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":76});\n        setValue = Math.floor(Math.sin(msg.payload.value * Math.PI / 180.0) * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":80});\n        blinkyBusMessage = true;\n        break;\n    case 'notchFilterMemory':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":84});\n        blinkyBusMessage = true;\n        break;\n    case 'gmult':\n        setValue = Math.floor(msg.payload.value * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":88});\n        blinkyBusMessage = true;\n        break;\n    case 'gainShiftL':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":92});\n        blinkyBusMessage = true;\n        break;\n    case 'clipLvl':\n        setValue = Math.floor( msg.payload.value * 0.001 * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":96});\n        setValue = Math.floor(-msg.payload.value * 0.001 * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":100});\n        blinkyBusMessage = true;\n        break;\n    case 'dac01on':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":104});\n        setValue = setValue + 2 * Math.floor(tray.dac02on.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":120});\n        blinkyBusMessage = true;\n        break;\n    case 'dac02on':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":108});\n        setValue = Math.floor(tray.dac01on.value) + 2 * setValue;\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":120});\n        blinkyBusMessage = true;\n        break;\n    case 'readbackLpfShiftR':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":112});\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":116});\n        blinkyBusMessage = true;\n        break;\n    case 'nonblinkyBusSetting':\n        tray.nonblinkyBusSetting.value  = msg.payload.value;\n        blinkyBusMessage = false;\n        break;\n    default:\n        break;\n}\nlet msgArray = [null,null,null];\nif (blinkyBusMessage)\n{\n    global.set('settingInProgress',true);\n    var settingInProgressMsg = {topic:'settingInProgress', payload:true};\n    msgArray = [blinkyBusSettingMsg, settingInProgressMsg, null];\n    \n}\nelse\n{\n    global.set('settingInProgress',false);\n    msgArray = [null,null,{topic:'settingDone', payload:true}];\n}\nreturn msgArray;\n",
+        "func": "let two31Minus1 = 2147483647;\nlet tray = global.get('tray');\nlet blinkyBusSettingMsg = \n{\n    topic : msg.topic, \n    payload : [] \n}\nlet blinkyBusMessage = false;\ntray[msg.payload.cube].value = msg.payload.value;\nlet setValue = msg.payload.value;\nswitch(msg.payload.cube)\n{\n    case 'reset':\n        setValue = msg.payload.value;\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":64});\n        blinkyBusMessage = true;\n        break;\n    case 'frontEndLpfShiftR':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":68});\n        blinkyBusMessage = true;\n        break;\n    case 'clkDivide':\n        setValue = Math.floor(msg.payload.value - 1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":72});\n        blinkyBusMessage = true;\n        break;\n    case 'thetaPhaseRot':\n        setValue = Math.floor(Math.cos(msg.payload.value * Math.PI / 180.0) * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":76});\n        setValue = Math.floor(Math.sin(msg.payload.value * Math.PI / 180.0) * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":80});\n        blinkyBusMessage = true;\n        break;\n    case 'notchFilterMemory':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":84});\n        blinkyBusMessage = true;\n        break;\n    case 'gmult':\n        setValue = Math.floor(msg.payload.value * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":88});\n        blinkyBusMessage = true;\n        break;\n    case 'gainShiftL':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":92});\n        blinkyBusMessage = true;\n        break;\n    case 'clipLvl':\n        setValue = Math.floor( msg.payload.value * 0.001 * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":96});\n        setValue = Math.floor(-msg.payload.value * 0.001 * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":100});\n        blinkyBusMessage = true;\n        break;\n    case 'dac01on':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":104});\n        setValue = setValue + 2 * Math.floor(tray.dac02on.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":120});\n        blinkyBusMessage = true;\n        break;\n    case 'dac02on':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":108});\n        setValue = Math.floor(tray.dac01on.value) + 2 * setValue;\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":120});\n        blinkyBusMessage = true;\n        break;\n    case 'readbackLpfShiftR':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":112});\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":116});\n        blinkyBusMessage = true;\n        break;\n    case 'waveformClkDivide':\n        setValue = Math.floor(msg.payload.value - 1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":124});\n        blinkyBusMessage = true;\n        global.set('restartFftPlot', true);\n        break;\n    case 'waveformSamplePower':\n        tray.waveformSamplePower.value  = msg.payload.value;\n        blinkyBusMessage = false;\n        global.set('restartFftPlot', true);\n        break;\n    case 'fftDisplayPts':\n        tray.fftDisplayPts.value  = msg.payload.value;\n        blinkyBusMessage = false;\n        global.set('restartFftPlot', true);\n        break;\n    case 'fftAverages':\n        tray.fftAverages.value  = msg.payload.value;\n        blinkyBusMessage = false;\n        global.set('restartFftPlot', true);\n        break;\n    case 'nonblinkyBusSetting':\n        tray.nonblinkyBusSetting.value  = msg.payload.value;\n        blinkyBusMessage = false;\n        break;\n    default:\n        break;\n}\nlet msgArray = [null,null,null];\nif (blinkyBusMessage)\n{\n    global.set('settingInProgress',true);\n    var settingInProgressMsg = {topic:'settingInProgress', payload:true};\n    msgArray = [blinkyBusSettingMsg, settingInProgressMsg, null];\n    \n}\nelse\n{\n    global.set('settingInProgress',false);\n    msgArray = [null,null,{topic:'settingDone', payload:true}];\n}\nreturn msgArray;\n",
         "outputs": 3,
         "noerr": 0,
         "initialize": "",
@@ -1061,8 +1087,8 @@
             "04d132d87ffeb91a",
             "45a97566b65c65cc"
         ],
-        "x": 1365,
-        "y": 660,
+        "x": 1475,
+        "y": 620,
         "wires": []
     },
     {
@@ -1076,8 +1102,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1080,
-        "y": 660,
+        "x": 1190,
+        "y": 620,
         "wires": [
             [
                 "a1bc2acb789b944b"
@@ -1164,7 +1190,7 @@
         "virtualenv": "",
         "continuous": true,
         "stdInData": true,
-        "x": 340,
+        "x": 320,
         "y": 660,
         "wires": [
             [
@@ -1202,7 +1228,7 @@
         "type": "function",
         "z": "85e21fcb925ef32f",
         "name": "initSettings",
-        "func": "let tray = global.get('tray');\nlet settingsArray = [];\nlet two31Minus1 = 2147483647;\n\ntray.reset.value = 1;\nlet setReg = [];\n\nsetReg.push(tray.reset.value);\nsetReg.push(Math.floor(tray.frontEndLpfShiftR.value));\nsetReg.push(Math.floor(tray.clkDivide.value - 1));\nsetReg.push(Math.floor(Math.cos((tray.thetaPhaseRot.value * Math.PI / 180.0)) * two31Minus1));\nsetReg.push(Math.floor(Math.sin((tray.thetaPhaseRot.value * Math.PI / 180.0)) * two31Minus1));\nsetReg.push(Math.floor(tray.notchFilterMemory.value));\nsetReg.push(Math.floor(tray.gmult.value * two31Minus1));\nsetReg.push(Math.floor(tray.gainShiftL.value));\nsetReg.push(Math.floor( tray.clipLvl.value * 0.001 * two31Minus1));\nsetReg.push(Math.floor(-tray.clipLvl.value * 0.001 * two31Minus1));\nsetReg.push(Math.floor(tray.dac01on.value));\nsetReg.push(Math.floor(tray.dac02on.value));\nsetReg.push(Math.floor(tray.readbackLpfShiftR.value));\nsetReg.push(Math.floor(tray.readbackLpfShiftR.value));\nlet switchValue = Math.floor(tray.dac01on.value) + 2 * Math.floor(tray.dac02on.value);\nsetReg.push(switchValue);\nfor (let ii = 0; ii < setReg.length; ++ii)\n{\n    settingsArray.push({\"command\":\"setting\",\"value\":setReg[ii],\"offset\":(64 + ii * 4)});\n}\ntray.reset.value = 0;\nsetReg[0] = tray.reset.value;\nsettingsArray.push({\"command\":\"setting\",\"value\":setReg[0],\"offset\":64});\n\nreturn {topic:\"initSettings\",payload:settingsArray};\n\n",
+        "func": "let tray = global.get('tray');\nlet settingsArray = [];\nlet two31Minus1 = 2147483647;\n\ntray.reset.value = 1;\nlet setReg = [];\n\nsetReg.push(tray.reset.value);\nsetReg.push(Math.floor(tray.frontEndLpfShiftR.value));\nsetReg.push(Math.floor(tray.clkDivide.value - 1));\nsetReg.push(Math.floor(Math.cos((tray.thetaPhaseRot.value * Math.PI / 180.0)) * two31Minus1));\nsetReg.push(Math.floor(Math.sin((tray.thetaPhaseRot.value * Math.PI / 180.0)) * two31Minus1));\nsetReg.push(Math.floor(tray.notchFilterMemory.value));\nsetReg.push(Math.floor(tray.gmult.value * two31Minus1));\nsetReg.push(Math.floor(tray.gainShiftL.value));\nsetReg.push(Math.floor( tray.clipLvl.value * 0.001 * two31Minus1));\nsetReg.push(Math.floor(-tray.clipLvl.value * 0.001 * two31Minus1));\nsetReg.push(Math.floor(tray.dac01on.value));\nsetReg.push(Math.floor(tray.dac02on.value));\nsetReg.push(Math.floor(tray.readbackLpfShiftR.value));\nsetReg.push(Math.floor(tray.readbackLpfShiftR.value));\nlet switchValue = Math.floor(tray.dac01on.value) + 2 * Math.floor(tray.dac02on.value);\nsetReg.push(switchValue);\nsetReg.push(Math.floor(tray.waveformClkDivide.value - 1));\nfor (let ii = 0; ii < setReg.length; ++ii)\n{\n    settingsArray.push({\"command\":\"setting\",\"value\":setReg[ii],\"offset\":(64 + ii * 4)});\n}\ntray.reset.value = 0;\nsetReg[0] = tray.reset.value;\nsettingsArray.push({\"command\":\"setting\",\"value\":setReg[0],\"offset\":64});\n\nreturn {topic:\"initSettings\",payload:settingsArray};\n\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1217,25 +1243,6 @@
         ]
     },
     {
-        "id": "6dde505ab4e5a809",
-        "type": "function",
-        "z": "85e21fcb925ef32f",
-        "name": "Remove CR",
-        "func": "msg.payload = msg.payload.split(\"\\n\")[0];\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 530,
-        "y": 660,
-        "wires": [
-            [
-                "d582f26f468aefb9"
-            ]
-        ]
-    },
-    {
         "id": "502155af52e553e7",
         "type": "switch",
         "z": "85e21fcb925ef32f",
@@ -1245,11 +1252,6 @@
         "rules": [
             {
                 "t": "eq",
-                "v": "init",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
                 "v": "setting",
                 "vt": "str"
             },
@@ -1257,20 +1259,27 @@
                 "t": "eq",
                 "v": "reading",
                 "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "trace",
+                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
         "outputs": 3,
-        "x": 830,
+        "x": 990,
         "y": 660,
         "wires": [
-            [],
             [
                 "340ca6cd6d6229e4"
             ],
             [
                 "ed481b1d2110232a"
+            ],
+            [
+                "b1fea3d32f4d6399"
             ]
         ]
     },
@@ -1282,7 +1291,7 @@
         "property": "payload",
         "action": "obj",
         "pretty": false,
-        "x": 690,
+        "x": 730,
         "y": 660,
         "wires": [
             [
@@ -1352,7 +1361,7 @@
         "type": "function",
         "z": "85e21fcb925ef32f",
         "name": "Setup readings",
-        "func": "if (global.get('settingInProgress')) return null;\nlet readingsArray = [];\nfor (let ii = 0; ii < 4; ++ii)\n{\n    readingsArray.push({\"command\":\"reading\",\"offset\":(ii * 4)});\n}\nreturn {topic: \"readWatchDog\", payload:readingsArray};\n",
+        "func": "let tray = global.get('tray');\nif (global.get('settingInProgress')) return null;\nlet readingsArray = [];\nfor (let ii = 0; ii < 4; ++ii)\n{\n    readingsArray.push({\"command\":\"reading\",\"offset\":(ii * 4)});\n}\nreadingsArray.push({\"command\":\"trace\",\"samples\":raise2toN(tray.waveformSamplePower.value), \"fftDisplayPts\":tray.fftDisplayPts.value});\nreturn {topic: \"readWatchDog\", payload:readingsArray};\n\nfunction raise2toN(npower)\n{\n    let pow2 = 1;\n    if (npower == 0) return pow2;\n    for (ii = 0; ii < npower; ++ii)\n    {\n        pow2 = pow2 * 2;\n    }\n    return pow2;\n}\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1375,7 +1384,7 @@
         "links": [
             "e9a01e5bc2f140ef"
         ],
-        "x": 475,
+        "x": 485,
         "y": 600,
         "wires": []
     },
@@ -1390,8 +1399,8 @@
         "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set(\"ival\", 0.000001);\ncontext.set(\"qval\", 0.000001);",
         "finalize": "",
         "libs": [],
-        "x": 1080,
-        "y": 700,
+        "x": 1190,
+        "y": 660,
         "wires": [
             [
                 "99fbe8135d0ce161"
@@ -1407,8 +1416,8 @@
         "links": [
             "45a97566b65c65cc"
         ],
-        "x": 1425,
-        "y": 700,
+        "x": 1535,
+        "y": 660,
         "wires": []
     },
     {
@@ -1463,8 +1472,8 @@
         "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('lastAlarm', -1);",
         "finalize": "",
         "libs": [],
-        "x": 1290,
-        "y": 700,
+        "x": 1400,
+        "y": 660,
         "wires": [
             [
                 "993dd0030ffbf166"
@@ -1507,8 +1516,8 @@
         "drop": true,
         "allowrate": false,
         "outputs": 1,
-        "x": 1250,
-        "y": 660,
+        "x": 1360,
+        "y": 620,
         "wires": [
             [
                 "dc7936fb55cf6c52"
@@ -1541,6 +1550,89 @@
         "wires": [
             [
                 "fcc98447c16c3949"
+            ]
+        ]
+    },
+    {
+        "id": "aef6c5b313d2bc87",
+        "type": "ui_chart",
+        "z": "85e21fcb925ef32f",
+        "name": "",
+        "group": "fd4f209029bad863",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "x",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1370,
+        "y": 700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6dde505ab4e5a809",
+        "type": "function",
+        "z": "85e21fcb925ef32f",
+        "name": "Remove CR",
+        "func": "msg.payload = msg.payload.split(\"\\n\")[0];\nreturn msg;\n/*\nlet traceTest = msg.payload.substring(0,5);\nif (traceTest != 'trace')\n{\n    msg.payload = msg.payload.split(\"\\n\")[0];\n    return [msg,null];\n}\nvar dataView = new DataView(new ArrayBuffer(2));\nvar ndataPts = msg.payload.length - 7;\nlet charArray = [];\nfor (let ii = 0; ii < ndataPts; ++ii)\n{\n    charArray.push(msg.payload.charCodeAt(ii + 6));\n}\n\nndataPts = ndataPts / 2;\ntrace = [];\nfor (let ii = 0; ii < ndataPts; ++ii)\n{\n    dataView.setUint8(0, charArray[ii * 2]);\n    dataView.setUint8(1, charArray[ii * 2 + 1]);\n    trace.push(dataView.getInt16(0 , true));\n}\n\nreturn [null,{topic:'trace', payload:{value:trace}}];\n*/",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 660,
+        "wires": [
+            [
+                "d582f26f468aefb9"
+            ]
+        ]
+    },
+    {
+        "id": "b1fea3d32f4d6399",
+        "type": "function",
+        "z": "85e21fcb925ef32f",
+        "name": "CalcFFT",
+        "func": "let tray = global.get('tray');\nmsg.payload.value[0] = msg.payload.value[1];\nlet npts = msg.payload.value.length;\nfor (let ii = 0; ii < npts; ++ii)\n{\n    msg.payload.value[ii] = Math.pow(10, msg.payload.value[ii] / 1000);\n}\nmagVecHistory = context.get('magVecHistory');\nif (global.get('restartFftPlot'))\n{\n    magVecHistory = [];\n    global.set('restartFftPlot', false);\n}\nmagVecHistory.push([...msg.payload.value]);\nwhile (magVecHistory.length > tray.fftAverages.value) magVecHistory.shift();\nlet magVec = [];\nfor (let ii = 0; ii < npts; ++ii)\n{\n    let avg = 0;\n    for (ivec = 0; ivec < magVecHistory.length; ++ivec)\n    {\n        avg = avg + magVecHistory[ivec][ii];\n    }\n    avg = avg / magVecHistory.length;\n    magVec.push(avg);\n}\ncontext.set('magVecHistory',magVecHistory);\n\nvar magChart = [\n    {\n        series : [\"Spectrum\"],\n        data   : [[]],\n        labels : [\"\"]\n    }\n];\nlet freqVec = [];\nfor (let ii = 0; ii < npts; ++ii)\n{\n    freqVec.push(Math.round(125e6 * ii / raise2toN(tray.waveformClkDivide.value + tray.waveformSamplePower.value)));\n    magVec[ii] = Math.round(1000 * Math.log10(magVec[ii])  +  100 * (15 - 90.308 - tray.gain.value)) / 100\n    magChart[0].data[0].push({\"x\":freqVec[ii],\"y\":magVec[ii]});\n}\n\nreturn [{topic:\"fftmag\",payload:[freqVec, magVec]},{topic:'MagChart',payload: magChart}];\n\n\nfunction raise2toN(npower)\n{\n    let pow2 = 1;\n    if (npower == 0) return pow2;\n    for (ii = 0; ii < npower; ++ii)\n    {\n        pow2 = pow2 * 2;\n    }\n    return pow2;\n}\n",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('magVecHistory',[]);",
+        "finalize": "",
+        "libs": [],
+        "x": 1170,
+        "y": 700,
+        "wires": [
+            [],
+            [
+                "aef6c5b313d2bc87"
             ]
         ]
     }
