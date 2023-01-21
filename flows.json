@@ -86,7 +86,7 @@
             }
         },
         "site": {
-            "name": "Blinky-Lite-Tutorial",
+            "name": "Mode 0 FFT",
             "hideToolbar": "false",
             "allowSwipe": "false",
             "dateFormat": "DD/MM/YYYY",
@@ -139,7 +139,7 @@
     {
         "id": "fd4f209029bad863",
         "type": "ui_group",
-        "name": "Default",
+        "name": "Mode 0 FFT",
         "tab": "eec05fc3d294d90f",
         "order": 1,
         "disp": true,
@@ -178,8 +178,8 @@
         "nl": false,
         "rap": false,
         "inputs": 0,
-        "x": 130,
-        "y": 200,
+        "x": 150,
+        "y": 280,
         "wires": [
             [
                 "f812bb6a.1aec68"
@@ -265,7 +265,8 @@
         "y": 60,
         "wires": [
             [
-                "4a8d91e8.fcb68"
+                "4a8d91e8.fcb68",
+                "4557da94a9d40a69"
             ]
         ]
     },
@@ -279,8 +280,8 @@
         "createDir": false,
         "overwriteFile": "true",
         "encoding": "none",
-        "x": 1290,
-        "y": 420,
+        "x": 1310,
+        "y": 500,
         "wires": [
             []
         ]
@@ -296,8 +297,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1100,
-        "y": 420,
+        "x": 1120,
+        "y": 500,
         "wires": [
             [
                 "168ce872.83d788"
@@ -312,8 +313,8 @@
         "property": "payload",
         "action": "obj",
         "pretty": false,
-        "x": 310,
-        "y": 200,
+        "x": 330,
+        "y": 280,
         "wires": [
             [
                 "e0d2b8e49c2e469b"
@@ -332,8 +333,8 @@
         "winHide": false,
         "oldrc": false,
         "name": "Restart",
-        "x": 700,
-        "y": 1240,
+        "x": 720,
+        "y": 1320,
         "wires": [
             [],
             [],
@@ -362,8 +363,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 310,
-        "y": 1260,
+        "x": 330,
+        "y": 1340,
         "wires": [
             [
                 "985cd59b3e414efe"
@@ -384,8 +385,8 @@
         "timer": "",
         "oldrc": false,
         "name": "Reboot",
-        "x": 500,
-        "y": 1300,
+        "x": 520,
+        "y": 1380,
         "wires": [
             [],
             [],
@@ -409,8 +410,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 160,
-        "y": 1260,
+        "x": 180,
+        "y": 1340,
         "wires": [
             [
                 "9e290594.69c548"
@@ -431,8 +432,8 @@
         "correl": "",
         "expiry": "",
         "broker": "79250bf3.365cc4",
-        "x": 1250,
-        "y": 340,
+        "x": 1270,
+        "y": 420,
         "wires": []
     },
     {
@@ -443,8 +444,8 @@
         "links": [
             "4bddb9a0e424ebf4"
         ],
-        "x": 755,
-        "y": 140,
+        "x": 775,
+        "y": 220,
         "wires": []
     },
     {
@@ -455,8 +456,8 @@
         "links": [
             "4493527757138cdc"
         ],
-        "x": 55,
-        "y": 380,
+        "x": 75,
+        "y": 460,
         "wires": [
             [
                 "fcc98447c16c3949"
@@ -495,8 +496,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 4,
-        "x": 650,
-        "y": 200,
+        "x": 670,
+        "y": 280,
         "wires": [
             [
                 "4493527757138cdc"
@@ -523,8 +524,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 470,
-        "y": 200,
+        "x": 490,
+        "y": 280,
         "wires": [
             [
                 "f9be9054ce456982"
@@ -542,8 +543,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1070,
-        "y": 340,
+        "x": 1090,
+        "y": 420,
         "wires": [
             [
                 "5152879001ec63ea"
@@ -570,8 +571,8 @@
             "dc7936fb55cf6c52",
             "993dd0030ffbf166"
         ],
-        "x": 955,
-        "y": 340,
+        "x": 975,
+        "y": 420,
         "wires": [
             [
                 "f75b9887786b11c4"
@@ -587,8 +588,8 @@
             "45a97566b65c65cc",
             "05c0c7b4f59ca88d"
         ],
-        "x": 755,
-        "y": 180,
+        "x": 775,
+        "y": 260,
         "wires": []
     },
     {
@@ -599,8 +600,8 @@
         "links": [
             "720ccfb4b4949146"
         ],
-        "x": 755,
-        "y": 220,
+        "x": 775,
+        "y": 300,
         "wires": []
     },
     {
@@ -611,8 +612,8 @@
         "links": [
             "c81b72b9290d1c36"
         ],
-        "x": 55,
-        "y": 520,
+        "x": 75,
+        "y": 600,
         "wires": [
             [
                 "b82f13a5e04e195a"
@@ -630,8 +631,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 500,
-        "y": 520,
+        "x": 520,
+        "y": 600,
         "wires": [
             [
                 "eec56d72bdbd1430",
@@ -650,8 +651,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 870,
-        "y": 520,
+        "x": 890,
+        "y": 600,
         "wires": [
             [
                 "df03212a7e41deb1"
@@ -668,8 +669,8 @@
             "dc7936fb55cf6c52",
             "1e34df4b19ff22cc"
         ],
-        "x": 955,
-        "y": 420,
+        "x": 975,
+        "y": 500,
         "wires": [
             [
                 "89892a30.598e28"
@@ -685,8 +686,8 @@
             "45a97566b65c65cc",
             "05c0c7b4f59ca88d"
         ],
-        "x": 1015,
-        "y": 520,
+        "x": 1035,
+        "y": 600,
         "wires": []
     },
     {
@@ -709,8 +710,8 @@
         "onceDelay": "20",
         "topic": "archiveClock",
         "payloadType": "date",
-        "x": 140,
-        "y": 780,
+        "x": 160,
+        "y": 860,
         "wires": [
             [
                 "6a9b2f2af2f7d084"
@@ -728,8 +729,8 @@
         "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('lastArchive', new Date().getTime());",
         "finalize": "",
         "libs": [],
-        "x": 350,
-        "y": 780,
+        "x": 370,
+        "y": 860,
         "wires": [
             [
                 "d74e019a27b1a659"
@@ -744,8 +745,8 @@
         "links": [
             "6c366c9b4d8b8f19"
         ],
-        "x": 755,
-        "y": 260,
+        "x": 775,
+        "y": 340,
         "wires": []
     },
     {
@@ -756,8 +757,8 @@
         "links": [
             "72b5ca0e2043aba0"
         ],
-        "x": 55,
-        "y": 1260,
+        "x": 75,
+        "y": 1340,
         "wires": [
             [
                 "557e4f40.b904e"
@@ -775,8 +776,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 330,
-        "y": 1060,
+        "x": 350,
+        "y": 1140,
         "wires": []
     },
     {
@@ -789,8 +790,8 @@
             "e9a01e5bc2f140ef",
             "ae68c32974081996"
         ],
-        "x": 345,
-        "y": 340,
+        "x": 365,
+        "y": 420,
         "wires": []
     },
     {
@@ -840,8 +841,8 @@
         "topic": "pm2Name",
         "payload": "PM2NAME",
         "payloadType": "env",
-        "x": 130,
-        "y": 1120,
+        "x": 150,
+        "y": 1200,
         "wires": [
             [
                 "6af76a294daa96eb"
@@ -859,8 +860,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 520,
-        "y": 1240,
+        "x": 540,
+        "y": 1320,
         "wires": [
             [
                 "c0939e4a.6386f"
@@ -887,8 +888,8 @@
         "onceDelay": 0.1,
         "topic": "archiveNow",
         "payloadType": "date",
-        "x": 130,
-        "y": 840,
+        "x": 150,
+        "y": 920,
         "wires": [
             [
                 "76d6712bed883108"
@@ -906,8 +907,8 @@
         "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('lastArchive', new Date().getTime());",
         "finalize": "",
         "libs": [],
-        "x": 360,
-        "y": 840,
+        "x": 380,
+        "y": 920,
         "wires": [
             [
                 "d74e019a27b1a659"
@@ -922,8 +923,8 @@
         "links": [
             "04d132d87ffeb91a"
         ],
-        "x": 645,
-        "y": 480,
+        "x": 665,
+        "y": 560,
         "wires": []
     },
     {
@@ -943,8 +944,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 680,
-        "y": 520,
+        "x": 700,
+        "y": 600,
         "wires": [
             [
                 "2cd296fd87868cea"
@@ -968,8 +969,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 340,
-        "y": 520,
+        "x": 360,
+        "y": 600,
         "wires": [
             [
                 "47de6287cc26419f"
@@ -987,8 +988,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 180,
-        "y": 520,
+        "x": 200,
+        "y": 600,
         "wires": [
             [
                 "95bf73e1f0d68181"
@@ -1009,8 +1010,8 @@
         "correl": "",
         "expiry": "",
         "broker": "79250bf3.365cc4",
-        "x": 780,
-        "y": 780,
+        "x": 800,
+        "y": 860,
         "wires": []
     },
     {
@@ -1024,8 +1025,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 570,
-        "y": 780,
+        "x": 590,
+        "y": 860,
         "wires": [
             [
                 "45409b1230e854cd"
@@ -1037,14 +1038,14 @@
         "type": "function",
         "z": "85e21fcb925ef32f",
         "name": "Create Setting",
-        "func": "let two31Minus1 = 2147483647;\nlet tray = global.get('tray');\nlet blinkyBusSettingMsg = \n{\n    topic : msg.topic, \n    payload : [] \n}\nlet blinkyBusMessage = false;\ntray[msg.payload.cube].value = msg.payload.value;\nlet setValue = msg.payload.value;\nswitch(msg.payload.cube)\n{\n    case 'reset':\n        setValue = msg.payload.value;\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":64});\n        blinkyBusMessage = true;\n        break;\n    case 'frontEndLpfShiftR':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":68});\n        blinkyBusMessage = true;\n        break;\n    case 'clkDivide':\n        setValue = Math.floor(msg.payload.value - 1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":72});\n        blinkyBusMessage = true;\n        break;\n    case 'thetaPhaseRot':\n        setValue = Math.floor(Math.cos(msg.payload.value * Math.PI / 180.0) * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":76});\n        setValue = Math.floor(Math.sin(msg.payload.value * Math.PI / 180.0) * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":80});\n        blinkyBusMessage = true;\n        break;\n    case 'notchFilterMemory':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":84});\n        blinkyBusMessage = true;\n        break;\n    case 'gmult':\n        setValue = Math.floor(msg.payload.value * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":88});\n        blinkyBusMessage = true;\n        break;\n    case 'gainShiftL':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":92});\n        blinkyBusMessage = true;\n        break;\n    case 'clipLvl':\n        setValue = Math.floor( msg.payload.value * 0.001 * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":96});\n        setValue = Math.floor(-msg.payload.value * 0.001 * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":100});\n        blinkyBusMessage = true;\n        break;\n    case 'dac01on':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":104});\n        setValue = setValue + 2 * Math.floor(tray.dac02on.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":120});\n        blinkyBusMessage = true;\n        break;\n    case 'dac02on':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":108});\n        setValue = Math.floor(tray.dac01on.value) + 2 * setValue;\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":120});\n        blinkyBusMessage = true;\n        break;\n    case 'readbackLpfShiftR':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":112});\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":116});\n        blinkyBusMessage = true;\n        break;\n    case 'waveformClkDivide':\n        setValue = Math.floor(msg.payload.value - 1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":124});\n        blinkyBusMessage = true;\n        global.set('restartFftPlot', true);\n        break;\n    case 'waveformSamplePower':\n        tray.waveformSamplePower.value  = msg.payload.value;\n        blinkyBusMessage = false;\n        global.set('restartFftPlot', true);\n        break;\n    case 'fftDisplayPts':\n        tray.fftDisplayPts.value  = msg.payload.value;\n        blinkyBusMessage = false;\n        global.set('restartFftPlot', true);\n        break;\n    case 'fftAverages':\n        tray.fftAverages.value  = msg.payload.value;\n        blinkyBusMessage = false;\n        global.set('restartFftPlot', true);\n        break;\n    case 'nonblinkyBusSetting':\n        tray.nonblinkyBusSetting.value  = msg.payload.value;\n        blinkyBusMessage = false;\n        break;\n    default:\n        break;\n}\nlet msgArray = [null,null,null];\nif (blinkyBusMessage)\n{\n    global.set('settingInProgress',true);\n    var settingInProgressMsg = {topic:'settingInProgress', payload:true};\n    msgArray = [blinkyBusSettingMsg, settingInProgressMsg, null];\n    \n}\nelse\n{\n    global.set('settingInProgress',false);\n    msgArray = [null,null,{topic:'settingDone', payload:true}];\n}\nreturn msgArray;\n",
+        "func": "let two31Minus1 = 2147483647;\nlet tray = global.get('tray');\nlet blinkyBusSettingMsg = \n{\n    topic : msg.topic, \n    payload : [] \n}\nlet blinkyBusMessage = false;\ntray[msg.payload.cube].value = msg.payload.value;\nlet setValue = msg.payload.value;\nswitch(msg.payload.cube)\n{\n    case 'reset':\n        setValue = msg.payload.value;\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":64});\n        blinkyBusMessage = true;\n        break;\n    case 'frontEndLpfShiftR':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":68});\n        blinkyBusMessage = true;\n        break;\n    case 'clkDivide':\n        setValue = Math.floor(msg.payload.value - 1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":72});\n        blinkyBusMessage = true;\n        break;\n    case 'thetaPhaseRot':\n        setValue = Math.floor(Math.cos(msg.payload.value * Math.PI / 180.0) * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":76});\n        setValue = Math.floor(Math.sin(msg.payload.value * Math.PI / 180.0) * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":80});\n        blinkyBusMessage = true;\n        break;\n    case 'notchFilterMemory':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":84});\n        blinkyBusMessage = true;\n        break;\n    case 'gmult':\n        setValue = Math.floor(msg.payload.value * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":88});\n        blinkyBusMessage = true;\n        break;\n    case 'gainShiftL':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":92});\n        blinkyBusMessage = true;\n        break;\n    case 'clipLvl':\n        setValue = Math.floor( msg.payload.value * 0.001 * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":96});\n        setValue = Math.floor(-msg.payload.value * 0.001 * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":100});\n        blinkyBusMessage = true;\n        break;\n    case 'dac01on':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":104});\n        setValue = setValue + 2 * Math.floor(tray.dac02on.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":120});\n        blinkyBusMessage = true;\n        break;\n    case 'dac02on':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":108});\n        setValue = Math.floor(tray.dac01on.value) + 2 * setValue;\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":120});\n        blinkyBusMessage = true;\n        break;\n    case 'readbackLpfShiftR':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":112});\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":116});\n        blinkyBusMessage = true;\n        break;\n    case 'waveformClkDivide':\n        setValue = Math.floor(msg.payload.value - 1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":124});\n        blinkyBusMessage = true;\n        global.set('restartFftPlot', true);\n        break;\n    case 'waveformSamplePower':\n        tray.waveformSamplePower.value  = msg.payload.value;\n        blinkyBusMessage = false;\n        global.set('restartFftPlot', true);\n        break;\n    case 'fftDisplayPts':\n        tray.fftDisplayPts.value  = msg.payload.value;\n        blinkyBusMessage = false;\n        global.set('restartFftPlot', true);\n        break;\n    case 'fftAverages':\n        tray.fftAverages.value  = msg.payload.value;\n        blinkyBusMessage = false;\n        global.set('restartFftPlot', true);\n        break;\n    case 'alias':\n        tray.alias.value  = msg.payload.value;\n        blinkyBusMessage = false;\n        break;\n    case 'nonblinkyBusSetting':\n        tray.nonblinkyBusSetting.value  = msg.payload.value;\n        blinkyBusMessage = false;\n        break;\n    default:\n        break;\n}\nlet msgArray = [null,null,null];\nif (blinkyBusMessage)\n{\n    global.set('settingInProgress',true);\n    var settingInProgressMsg = {topic:'settingInProgress', payload:true};\n    msgArray = [blinkyBusSettingMsg, settingInProgressMsg, null];\n    \n}\nelse\n{\n    global.set('settingInProgress',false);\n    msgArray = [null,null,{topic:'settingDone', payload:true}];\n}\nreturn msgArray;\n",
         "outputs": 3,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 200,
-        "y": 380,
+        "x": 220,
+        "y": 460,
         "wires": [
             [
                 "93758a55568a2f76"
@@ -1069,8 +1070,8 @@
             "93758a55568a2f76",
             "b3390c7c1b743364"
         ],
-        "x": 55,
-        "y": 660,
+        "x": 75,
+        "y": 740,
         "wires": [
             [
                 "48d6365101511c92"
@@ -1087,8 +1088,8 @@
             "04d132d87ffeb91a",
             "45a97566b65c65cc"
         ],
-        "x": 1475,
-        "y": 620,
+        "x": 1495,
+        "y": 700,
         "wires": []
     },
     {
@@ -1102,8 +1103,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1190,
-        "y": 620,
+        "x": 1210,
+        "y": 700,
         "wires": [
             [
                 "a1bc2acb789b944b"
@@ -1144,8 +1145,8 @@
         "topic": "overlay",
         "payload": "OVERLAY",
         "payloadType": "env",
-        "x": 120,
-        "y": 1060,
+        "x": 140,
+        "y": 1140,
         "wires": [
             [
                 "6af76a294daa96eb"
@@ -1173,8 +1174,8 @@
         "topic": "project",
         "payload": "PROJECT",
         "payloadType": "env",
-        "x": 120,
-        "y": 1000,
+        "x": 140,
+        "y": 1080,
         "wires": [
             [
                 "6af76a294daa96eb"
@@ -1190,8 +1191,8 @@
         "virtualenv": "",
         "continuous": true,
         "stdInData": true,
-        "x": 320,
-        "y": 660,
+        "x": 340,
+        "y": 740,
         "wires": [
             [
                 "6dde505ab4e5a809"
@@ -1215,8 +1216,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 1180,
-        "y": 140,
+        "x": 1200,
+        "y": 80,
         "wires": [
             [
                 "e093d33288c6fb5f"
@@ -1234,8 +1235,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1330,
-        "y": 140,
+        "x": 1350,
+        "y": 80,
         "wires": [
             [
                 "b018aa03d43d5655"
@@ -1269,8 +1270,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 3,
-        "x": 990,
-        "y": 660,
+        "x": 1010,
+        "y": 740,
         "wires": [
             [
                 "340ca6cd6d6229e4"
@@ -1291,8 +1292,8 @@
         "property": "payload",
         "action": "obj",
         "pretty": false,
-        "x": 730,
-        "y": 660,
+        "x": 750,
+        "y": 740,
         "wires": [
             [
                 "502155af52e553e7"
@@ -1308,8 +1309,8 @@
         "links": [
             "45a97566b65c65cc"
         ],
-        "x": 345,
-        "y": 380,
+        "x": 365,
+        "y": 460,
         "wires": []
     },
     {
@@ -1323,8 +1324,8 @@
             "45a97566b65c65cc",
             "05c0c7b4f59ca88d"
         ],
-        "x": 345,
-        "y": 420,
+        "x": 365,
+        "y": 500,
         "wires": []
     },
     {
@@ -1348,8 +1349,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 140,
-        "y": 600,
+        "x": 160,
+        "y": 680,
         "wires": [
             [
                 "12fb87d74b200e05"
@@ -1367,8 +1368,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 340,
-        "y": 600,
+        "x": 360,
+        "y": 680,
         "wires": [
             [
                 "b3390c7c1b743364"
@@ -1384,8 +1385,8 @@
         "links": [
             "e9a01e5bc2f140ef"
         ],
-        "x": 485,
-        "y": 600,
+        "x": 505,
+        "y": 680,
         "wires": []
     },
     {
@@ -1399,8 +1400,8 @@
         "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set(\"ival\", 0.000001);\ncontext.set(\"qval\", 0.000001);",
         "finalize": "",
         "libs": [],
-        "x": 1190,
-        "y": 660,
+        "x": 1210,
+        "y": 740,
         "wires": [
             [
                 "99fbe8135d0ce161"
@@ -1416,8 +1417,8 @@
         "links": [
             "45a97566b65c65cc"
         ],
-        "x": 1535,
-        "y": 660,
+        "x": 1555,
+        "y": 740,
         "wires": []
     },
     {
@@ -1428,8 +1429,8 @@
         "links": [
             "93758a55568a2f76"
         ],
-        "x": 55,
-        "y": 900,
+        "x": 75,
+        "y": 980,
         "wires": [
             [
                 "a3f60ecca605a6e4"
@@ -1453,8 +1454,8 @@
         "drop": true,
         "allowrate": false,
         "outputs": 1,
-        "x": 170,
-        "y": 900,
+        "x": 190,
+        "y": 980,
         "wires": [
             [
                 "76d6712bed883108"
@@ -1472,8 +1473,8 @@
         "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('lastAlarm', -1);",
         "finalize": "",
         "libs": [],
-        "x": 1400,
-        "y": 660,
+        "x": 1420,
+        "y": 740,
         "wires": [
             [
                 "993dd0030ffbf166"
@@ -1491,8 +1492,8 @@
         "arraySpltType": "len",
         "stream": false,
         "addname": "",
-        "x": 150,
-        "y": 660,
+        "x": 170,
+        "y": 740,
         "wires": [
             [
                 "7b630952f0bca935"
@@ -1516,8 +1517,8 @@
         "drop": true,
         "allowrate": false,
         "outputs": 1,
-        "x": 1360,
-        "y": 620,
+        "x": 1380,
+        "y": 700,
         "wires": [
             [
                 "dc7936fb55cf6c52"
@@ -1545,8 +1546,8 @@
         "topic": "setting",
         "payload": "{\"cube\":\"clipLvl\",\"value\":100}",
         "payloadType": "json",
-        "x": 110,
-        "y": 300,
+        "x": 130,
+        "y": 380,
         "wires": [
             [
                 "fcc98447c16c3949"
@@ -1562,7 +1563,7 @@
         "order": 0,
         "width": 0,
         "height": 0,
-        "label": "chart",
+        "label": "Spectrum",
         "chartType": "line",
         "legend": "false",
         "xformat": "x",
@@ -1591,8 +1592,8 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 1370,
-        "y": 700,
+        "x": 1340,
+        "y": 860,
         "wires": [
             []
         ]
@@ -1608,8 +1609,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 490,
-        "y": 660,
+        "x": 510,
+        "y": 740,
         "wires": [
             [
                 "d582f26f468aefb9"
@@ -1621,18 +1622,191 @@
         "type": "function",
         "z": "85e21fcb925ef32f",
         "name": "CalcFFT",
-        "func": "let tray = global.get('tray');\nmsg.payload.value[0] = msg.payload.value[1];\nlet npts = msg.payload.value.length;\nfor (let ii = 0; ii < npts; ++ii)\n{\n    msg.payload.value[ii] = Math.pow(10, msg.payload.value[ii] / 1000);\n}\nmagVecHistory = context.get('magVecHistory');\nif (global.get('restartFftPlot'))\n{\n    magVecHistory = [];\n    global.set('restartFftPlot', false);\n}\nmagVecHistory.push([...msg.payload.value]);\nwhile (magVecHistory.length > tray.fftAverages.value) magVecHistory.shift();\nlet magVec = [];\nfor (let ii = 0; ii < npts; ++ii)\n{\n    let avg = 0;\n    for (ivec = 0; ivec < magVecHistory.length; ++ivec)\n    {\n        avg = avg + magVecHistory[ivec][ii];\n    }\n    avg = avg / magVecHistory.length;\n    magVec.push(avg);\n}\ncontext.set('magVecHistory',magVecHistory);\n\nvar magChart = [\n    {\n        series : [\"Spectrum\"],\n        data   : [[]],\n        labels : [\"\"]\n    }\n];\nlet freqVec = [];\nfor (let ii = 0; ii < npts; ++ii)\n{\n    freqVec.push(Math.round(125e6 * ii / raise2toN(tray.waveformClkDivide.value + tray.waveformSamplePower.value)));\n    magVec[ii] = Math.round(1000 * Math.log10(magVec[ii])  +  100 * (15 - 90.308 - tray.gain.value)) / 100\n    magChart[0].data[0].push({\"x\":freqVec[ii],\"y\":magVec[ii]});\n}\n\nreturn [{topic:\"fftmag\",payload:[freqVec, magVec]},{topic:'MagChart',payload: magChart}];\n\n\nfunction raise2toN(npower)\n{\n    let pow2 = 1;\n    if (npower == 0) return pow2;\n    for (ii = 0; ii < npower; ++ii)\n    {\n        pow2 = pow2 * 2;\n    }\n    return pow2;\n}\n",
+        "func": "let tray = global.get('tray');\nlet fftTray = global.get('fftTray');\nmsg.payload.value[0] = msg.payload.value[1];\nlet npts = msg.payload.value.length;\nfor (let ii = 0; ii < npts; ++ii)\n{\n    msg.payload.value[ii] = Math.pow(10, msg.payload.value[ii] / 1000);\n}\nmagVecHistory = context.get('magVecHistory');\nif (global.get('restartFftPlot'))\n{\n    magVecHistory = [];\n    global.set('restartFftPlot', false);\n}\nmagVecHistory.push([...msg.payload.value]);\nwhile (magVecHistory.length > tray.fftAverages.value) magVecHistory.shift();\nfftTray.fftVec.value[0] = [];\nfftTray.fftVec.value[1] = [];\nfor (let ii = 0; ii < npts; ++ii)\n{\n    let avg = 0;\n    for (ivec = 0; ivec < magVecHistory.length; ++ivec)\n    {\n        avg = avg + magVecHistory[ivec][ii];\n    }\n    avg = avg / magVecHistory.length;\n    fftTray.fftVec.value[1].push(avg);\n}\ncontext.set('magVecHistory',magVecHistory);\n\nvar magChart = [\n    {\n        series : [\"Spectrum\"],\n        data   : [[]],\n        labels : [\"\"]\n    }\n];\nfor (let ii = 0; ii < npts; ++ii)\n{\n    fftTray.fftVec.value[0].push(Math.round(125e6 * ii / raise2toN(tray.waveformClkDivide.value + tray.waveformSamplePower.value)));\n    fftTray.fftVec.value[1][ii] = Math.round(1000 * Math.log10(fftTray.fftVec.value[1][ii])  +  100 * (15 - 90.308 - tray.gain.value)) / 100;\n    magChart[0].data[0].push({\"x\":fftTray.fftVec.value[0][ii],\"y\":fftTray.fftVec.value[1][ii]});\n}\n\nreturn [{topic:\"fftmag\",payload:true},{topic:'MagChart',payload: magChart}];\n\n\nfunction raise2toN(npower)\n{\n    let pow2 = 1;\n    if (npower == 0) return pow2;\n    for (ii = 0; ii < npower; ++ii)\n    {\n        pow2 = pow2 * 2;\n    }\n    return pow2;\n}\n",
         "outputs": 2,
         "noerr": 0,
         "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('magVecHistory',[]);",
         "finalize": "",
         "libs": [],
-        "x": 1170,
-        "y": 700,
+        "x": 1190,
+        "y": 780,
         "wires": [
-            [],
+            [
+                "3a445bec11e0143b"
+            ],
             [
                 "aef6c5b313d2bc87"
+            ]
+        ]
+    },
+    {
+        "id": "a1a9ea43fcc7c1f0",
+        "type": "function",
+        "z": "85e21fcb925ef32f",
+        "name": "Save fftTray config in Memory",
+        "func": "global.set('fftTray', msg.payload);\nreturn null;",
+        "outputs": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 850,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "4557da94a9d40a69",
+        "type": "file in",
+        "z": "85e21fcb925ef32f",
+        "name": "Read fftTray config",
+        "filename": "fftTray.json",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 490,
+        "y": 140,
+        "wires": [
+            [
+                "d0224a6349bb8347"
+            ]
+        ]
+    },
+    {
+        "id": "d0224a6349bb8347",
+        "type": "json",
+        "z": "85e21fcb925ef32f",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 650,
+        "y": 140,
+        "wires": [
+            [
+                "a1a9ea43fcc7c1f0"
+            ]
+        ]
+    },
+    {
+        "id": "3a445bec11e0143b",
+        "type": "function",
+        "z": "85e21fcb925ef32f",
+        "name": "Publish fftTray",
+        "func": "if (!msg.payload) return null;\nvar fftTray = global.get('fftTray');\nvar newMsg = \n{\n    topic: global.get('trayProps').box + '/' + fftTray.type + '/' + fftTray.name + '/reading',\n    payload: JSON.stringify(fftTray)\n};\nreturn  newMsg;  \n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1400,
+        "y": 800,
+        "wires": [
+            [
+                "6c180dc85b447443"
+            ]
+        ]
+    },
+    {
+        "id": "6c180dc85b447443",
+        "type": "mqtt out",
+        "z": "85e21fcb925ef32f",
+        "name": "Publish Readings",
+        "topic": "",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "79250bf3.365cc4",
+        "x": 1610,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "a8caadc0e6520a7d",
+        "type": "inject",
+        "z": "85e21fcb925ef32f",
+        "name": "Archive clock",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "20",
+        "topic": "archiveClock",
+        "payloadType": "date",
+        "x": 1220,
+        "y": 940,
+        "wires": [
+            [
+                "555571bf52c7c2f2"
+            ]
+        ]
+    },
+    {
+        "id": "555571bf52c7c2f2",
+        "type": "function",
+        "z": "85e21fcb925ef32f",
+        "name": "Archive Pulse",
+        "func": "var fftTray = global.get('fftTray');\nvar lastArchive = context.get('lastArchive');\nvar now = new Date().getTime();\nif ((now - lastArchive) <= fftTray.arcPeriod) return null;\ncontext.set('lastArchive', now);\nreturn {topic:'archivePulse', payload:true};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('lastArchive', new Date().getTime());",
+        "finalize": "",
+        "libs": [],
+        "x": 1430,
+        "y": 940,
+        "wires": [
+            [
+                "3663d8f093ff3d23"
+            ]
+        ]
+    },
+    {
+        "id": "50a540776fef1149",
+        "type": "mqtt out",
+        "z": "85e21fcb925ef32f",
+        "name": "Publish Archive",
+        "topic": "",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "79250bf3.365cc4",
+        "x": 1860,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "3663d8f093ff3d23",
+        "type": "function",
+        "z": "85e21fcb925ef32f",
+        "name": "Publish fftTray",
+        "func": "if (!msg.payload) return null;\nvar fftTray = global.get('fftTray');\nvar newMsg = \n{\n    topic: global.get('trayProps').box + '/' + fftTray.type + '/' + fftTray.name + '/archive',\n    payload: JSON.stringify(fftTray)\n};\nreturn  newMsg;  \n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1660,
+        "y": 940,
+        "wires": [
+            [
+                "50a540776fef1149"
             ]
         ]
     }
