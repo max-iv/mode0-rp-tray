@@ -1,12 +1,12 @@
 {
   "type": "mode0-rp-fft",
-  "name": "02",
+  "name": "01",
   "arcPeriod": 60000,
   "timeStamp": 1646408271939,
   "alias": {
     "action": "setting",
     "type": "string",
-    "value": "Mode0 02 FFT"
+    "value": "Mode0 01 FFT"
   },
   "fftVec": {
     "action": "reading",
