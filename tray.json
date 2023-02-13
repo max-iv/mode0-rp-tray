@@ -11,7 +11,7 @@
   "watchdog": {
     "action": "reading",
     "type": "scalar",
-    "value": 26253,
+    "value": 0,
     "unit": "",
     "alarm": {
       "value": 0,
@@ -38,8 +38,8 @@
       "limits": {
         "lolo": -1,
         "low": -1,
-        "high": 2,
-        "hihi": 2
+        "high": 1,
+        "hihi": 1
       },
       "notify": {
         "name": "",
@@ -56,10 +56,10 @@
     "alarm": {
       "value": 0,
       "limits": {
-        "lolo": -1,
-        "low": -1,
-        "high": 31,
-        "hihi": 31
+        "lolo": 9,
+        "low": 9,
+        "high": 11,
+        "hihi": 11
       },
       "notify": {
         "name": "",
@@ -76,10 +76,10 @@
     "alarm": {
       "value": 0,
       "limits": {
-        "lolo": -1,
-        "low": -1,
-        "high": 31,
-        "hihi": 31
+        "lolo": 3,
+        "low": 3,
+        "high": 5,
+        "hihi": 5
       },
       "notify": {
         "name": "",
@@ -96,10 +96,10 @@
     "alarm": {
       "value": 0,
       "limits": {
-        "lolo": -1,
-        "low": -1,
-        "high": 31,
-        "hihi": 31
+        "lolo": 10,
+        "low": 10,
+        "high": 12,
+        "hihi": 12
       },
       "notify": {
         "name": "",
@@ -116,10 +116,10 @@
     "alarm": {
       "value": 0,
       "limits": {
-        "lolo": 1,
-        "low": 2,
-        "high": 15,
-        "hihi": 16
+        "lolo": 12,
+        "low": 12,
+        "high": 14,
+        "hihi": 14
       },
       "notify": {
         "name": "",
@@ -136,10 +136,10 @@
     "alarm": {
       "value": 0,
       "limits": {
-        "lolo": 100,
-        "low": 101,
-        "high": 16000,
-        "hihi": 16500
+        "lolo": 1023,
+        "low": 1023,
+        "high": 1025,
+        "hihi": 1025
       },
       "notify": {
         "name": "",
@@ -176,10 +176,10 @@
     "alarm": {
       "value": 0,
       "limits": {
-        "lolo": -181,
-        "low": -181,
-        "high": 181,
-        "hihi": 181
+        "lolo": 70,
+        "low": 70,
+        "high": 90,
+        "hihi": 90
       },
       "notify": {
         "name": "",
@@ -196,8 +196,8 @@
     "alarm": {
       "value": 0,
       "limits": {
-        "lolo": 0,
-        "low": 0,
+        "lolo": 1020,
+        "low": 1020,
         "high": 1024,
         "hihi": 1024
       },
@@ -216,10 +216,10 @@
     "alarm": {
       "value": 0,
       "limits": {
-        "lolo": -1,
-        "low": -1,
-        "high": 1,
-        "hihi": 1
+        "lolo": 0.2,
+        "low": 0.2,
+        "high": 0.4,
+        "hihi": 0.4
       },
       "notify": {
         "name": "",
@@ -236,10 +236,10 @@
     "alarm": {
       "value": 0,
       "limits": {
-        "lolo": -1,
-        "low": -1,
-        "high": 31,
-        "hihi": 31
+        "lolo": 9,
+        "low": 9,
+        "high": 11,
+        "hihi": 11
       },
       "notify": {
         "name": "",
@@ -256,10 +256,10 @@
     "alarm": {
       "value": 0,
       "limits": {
-        "lolo": 0,
-        "low": 0,
-        "high": 1000,
-        "hihi": 1000
+        "lolo": 20,
+        "low": 20,
+        "high": 30,
+        "hihi": 30
       },
       "notify": {
         "name": "",
@@ -271,7 +271,7 @@
   "dac01on": {
     "action": "setting",
     "type": "scalar",
-    "value": 1,
+    "value": 0,
     "unit": "",
     "alarm": {
       "value": 0,
@@ -298,8 +298,8 @@
       "limits": {
         "lolo": -1,
         "low": -1,
-        "high": 2,
-        "hihi": 2
+        "high": 1,
+        "hihi": 1
       },
       "notify": {
         "name": "",
@@ -316,10 +316,10 @@
     "alarm": {
       "value": 0,
       "limits": {
-        "lolo": -1,
-        "low": -1,
-        "high": 31,
-        "hihi": 31
+        "lolo": 15,
+        "low": 15,
+        "high": 20,
+        "hihi": 20
       },
       "notify": {
         "name": "",
@@ -336,10 +336,10 @@
     "alarm": {
       "value": 0,
       "limits": {
-        "lolo": 1,
-        "low": 2,
-        "high": 100,
-        "hihi": 100
+        "lolo": 13,
+        "low": 14,
+        "high": 16,
+        "hihi": 17
       },
       "notify": {
         "name": "",
@@ -356,10 +356,10 @@
     "alarm": {
       "value": 0,
       "limits": {
-        "lolo": 1,
-        "low": 2,
-        "high": 100,
-        "hihi": 100
+        "lolo": 6,
+        "low": 6,
+        "high": 9,
+        "hihi": 9
       },
       "notify": {
         "name": "",
@@ -376,10 +376,10 @@
     "alarm": {
       "value": 0,
       "limits": {
-        "lolo": 1,
-        "low": 2,
-        "high": 100,
-        "hihi": 100
+        "lolo": 6,
+        "low": 6,
+        "high": 9,
+        "hihi": 9
       },
       "notify": {
         "name": "",
@@ -396,8 +396,8 @@
     "alarm": {
       "value": 0,
       "limits": {
-        "lolo": -2,
-        "low": -2,
+        "lolo": 0,
+        "low": 0,
         "high": 2,
         "hihi": 2
       },
@@ -416,10 +416,10 @@
     "alarm": {
       "value": 0,
       "limits": {
-        "lolo": -100,
-        "low": -100,
-        "high": 100,
-        "hihi": 100
+        "lolo": 45,
+        "low": 47,
+        "high": 51,
+        "hihi": 53
       },
       "notify": {
         "name": "",
@@ -438,8 +438,8 @@
       "limits": {
         "lolo": 0,
         "low": 0,
-        "high": 100,
-        "hihi": 100
+        "high": 10,
+        "hihi": 10
       },
       "notify": {
         "name": "",
@@ -451,15 +451,15 @@
   "phaseShifterDrive": {
     "action": "reading",
     "type": "scalar",
-    "value": 3.4,
+    "value": 2.6,
     "unit": "mV",
     "alarm": {
       "value": 0,
       "limits": {
         "lolo": 0,
         "low": 0,
-        "high": 1000,
-        "hihi": 1000
+        "high": 7,
+        "hihi": 10
       },
       "notify": {
         "name": "",
@@ -471,15 +471,15 @@
   "thetaBeam": {
     "action": "reading",
     "type": "scalar",
-    "value": 165.39,
+    "value": -66.68,
     "unit": "deg",
     "alarm": {
-      "value": 0,
+      "value": 3,
       "limits": {
-        "lolo": -181,
-        "low": -181,
-        "high": 181,
-        "hihi": 181
+        "lolo": 150,
+        "low": 155,
+        "high": 177,
+        "hihi": 180
       },
       "notify": {
         "name": "",
@@ -491,15 +491,15 @@
   "magBeam": {
     "action": "reading",
     "type": "scalar",
-    "value": 72.6,
+    "value": 3.8,
     "unit": "mV",
     "alarm": {
       "value": 0,
       "limits": {
         "lolo": 0,
         "low": 0,
-        "high": 1000,
-        "hihi": 1000
+        "high": 80,
+        "hihi": 90
       },
       "notify": {
         "name": "",
