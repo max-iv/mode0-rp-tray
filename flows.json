@@ -790,7 +790,7 @@
             "e9a01e5bc2f140ef",
             "ae68c32974081996"
         ],
-        "x": 365,
+        "x": 665,
         "y": 420,
         "wires": []
     },
@@ -815,8 +815,8 @@
         "y": 60,
         "wires": [
             [
-                "b018aa03d43d5655",
-                "8e84d8c955d1aeb1"
+                "8e84d8c955d1aeb1",
+                "622d8df42f67d006"
             ]
         ]
     },
@@ -1010,7 +1010,7 @@
         "correl": "",
         "expiry": "",
         "broker": "79250bf3.365cc4",
-        "x": 800,
+        "x": 760,
         "y": 860,
         "wires": []
     },
@@ -1048,7 +1048,7 @@
         "y": 460,
         "wires": [
             [
-                "93758a55568a2f76"
+                "b81b8b21eefe96a0"
             ],
             [
                 "a66ef2e5b482662a"
@@ -1074,7 +1074,7 @@
         "y": 740,
         "wires": [
             [
-                "48d6365101511c92"
+                "7b630952f0bca935"
             ]
         ]
     },
@@ -1088,7 +1088,7 @@
             "04d132d87ffeb91a",
             "45a97566b65c65cc"
         ],
-        "x": 1495,
+        "x": 1385,
         "y": 700,
         "wires": []
     },
@@ -1103,7 +1103,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1210,
+        "x": 1100,
         "y": 700,
         "wires": [
             [
@@ -1120,7 +1120,7 @@
         "links": [
             "e9a01e5bc2f140ef"
         ],
-        "x": 1475,
+        "x": 1755,
         "y": 60,
         "wires": []
     },
@@ -1191,7 +1191,7 @@
         "virtualenv": "",
         "continuous": true,
         "stdInData": true,
-        "x": 500,
+        "x": 220,
         "y": 740,
         "wires": [
             [
@@ -1239,7 +1239,7 @@
         "y": 80,
         "wires": [
             [
-                "b018aa03d43d5655"
+                "622d8df42f67d006"
             ]
         ]
     },
@@ -1270,7 +1270,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 3,
-        "x": 1010,
+        "x": 890,
         "y": 740,
         "wires": [
             [
@@ -1292,7 +1292,7 @@
         "property": "payload",
         "action": "obj",
         "pretty": false,
-        "x": 850,
+        "x": 530,
         "y": 740,
         "wires": [
             [
@@ -1372,7 +1372,7 @@
         "y": 680,
         "wires": [
             [
-                "b3390c7c1b743364"
+                "b48cec48fcf68e01"
             ]
         ]
     },
@@ -1385,7 +1385,7 @@
         "links": [
             "e9a01e5bc2f140ef"
         ],
-        "x": 505,
+        "x": 935,
         "y": 680,
         "wires": []
     },
@@ -1400,7 +1400,7 @@
         "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set(\"ival\", 0.000001);\ncontext.set(\"qval\", 0.000001);",
         "finalize": "",
         "libs": [],
-        "x": 1210,
+        "x": 1100,
         "y": 740,
         "wires": [
             [
@@ -1417,7 +1417,7 @@
         "links": [
             "45a97566b65c65cc"
         ],
-        "x": 1555,
+        "x": 1445,
         "y": 740,
         "wires": []
     },
@@ -1473,30 +1473,11 @@
         "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('lastAlarm', -1);",
         "finalize": "",
         "libs": [],
-        "x": 1420,
+        "x": 1310,
         "y": 740,
         "wires": [
             [
                 "993dd0030ffbf166"
-            ]
-        ]
-    },
-    {
-        "id": "48d6365101511c92",
-        "type": "split",
-        "z": "85e21fcb925ef32f",
-        "name": "",
-        "splt": "\\n",
-        "spltType": "str",
-        "arraySplt": 1,
-        "arraySpltType": "len",
-        "stream": false,
-        "addname": "",
-        "x": 170,
-        "y": 740,
-        "wires": [
-            [
-                "6b61b2f5deba7ea6"
             ]
         ]
     },
@@ -1517,7 +1498,7 @@
         "drop": true,
         "allowrate": false,
         "outputs": 1,
-        "x": 1380,
+        "x": 1270,
         "y": 700,
         "wires": [
             [
@@ -1592,7 +1573,7 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 1340,
+        "x": 1230,
         "y": 860,
         "wires": [
             []
@@ -1609,7 +1590,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 690,
+        "x": 390,
         "y": 740,
         "wires": [
             [
@@ -1628,7 +1609,7 @@
         "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('magVecHistory',[]);",
         "finalize": "",
         "libs": [],
-        "x": 1190,
+        "x": 1080,
         "y": 780,
         "wires": [
             [
@@ -1700,7 +1681,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1400,
+        "x": 1290,
         "y": 800,
         "wires": [
             [
@@ -1722,7 +1703,7 @@
         "correl": "",
         "expiry": "",
         "broker": "79250bf3.365cc4",
-        "x": 1610,
+        "x": 1500,
         "y": 800,
         "wires": []
     },
@@ -1811,7 +1792,26 @@
         ]
     },
     {
-        "id": "6b61b2f5deba7ea6",
+        "id": "b48cec48fcf68e01",
+        "type": "split",
+        "z": "85e21fcb925ef32f",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 510,
+        "y": 680,
+        "wires": [
+            [
+                "6738289574005425"
+            ]
+        ]
+    },
+    {
+        "id": "6738289574005425",
         "type": "delay",
         "z": "85e21fcb925ef32f",
         "name": "",
@@ -1827,11 +1827,118 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 310,
-        "y": 740,
+        "x": 650,
+        "y": 680,
         "wires": [
             [
-                "7b630952f0bca935"
+                "1a174497e8c14f2f"
+            ]
+        ]
+    },
+    {
+        "id": "1a174497e8c14f2f",
+        "type": "function",
+        "z": "85e21fcb925ef32f",
+        "name": "Stop for settings",
+        "func": "if (global.get('settingInProgress')) return null;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 680,
+        "wires": [
+            [
+                "b3390c7c1b743364"
+            ]
+        ]
+    },
+    {
+        "id": "b81b8b21eefe96a0",
+        "type": "split",
+        "z": "85e21fcb925ef32f",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 410,
+        "y": 420,
+        "wires": [
+            [
+                "eb4cf9c2ce006d0e"
+            ]
+        ]
+    },
+    {
+        "id": "eb4cf9c2ce006d0e",
+        "type": "delay",
+        "z": "85e21fcb925ef32f",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "0.3",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 550,
+        "y": 420,
+        "wires": [
+            [
+                "93758a55568a2f76"
+            ]
+        ]
+    },
+    {
+        "id": "622d8df42f67d006",
+        "type": "split",
+        "z": "85e21fcb925ef32f",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 1500,
+        "y": 60,
+        "wires": [
+            [
+                "a4165f6f0fd10439"
+            ]
+        ]
+    },
+    {
+        "id": "a4165f6f0fd10439",
+        "type": "delay",
+        "z": "85e21fcb925ef32f",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "0.3",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1640,
+        "y": 60,
+        "wires": [
+            [
+                "b018aa03d43d5655"
             ]
         ]
     }
