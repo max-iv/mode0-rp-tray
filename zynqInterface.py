@@ -13,27 +13,22 @@ def getReading(reading):
 def getTrace(trace):
     samples = trace["samples"]
     fftDisplayPts = trace["fftDisplayPts"]
-    input_buffer_1 = pynq.allocate(shape=(samples,), dtype=np.int16)
+    fftrim2 = [0] * fftDisplayPts
+    try:
+        input_buffer_1 = pynq.allocate(shape=(samples,), dtype=np.int16)
 
-    ol.axi_gpio_0.channel1.write(val=0, mask=0x1) #Trig low
-    ol.axi_gpio_0.channel2.write(val=samples, mask=0xffffffff) #Set samples
-    ol.axi_dma_0.recvchannel.transfer(input_buffer_1)
-    ol.axi_gpio_0.channel1.write(val=1, mask=0x1) #Trig high
-    ol.axi_dma_0.recvchannel.wait()
-    fft = np.fft.fft(input_buffer_1) / samples
-    fftrim1 = 2000 * np.log10(abs(fft[0:fftDisplayPts]))
-    fftrim2 = np.zeros(shape=(fftDisplayPts,), dtype=np.int16)
-    for ii in range(fftDisplayPts):
-        fftrim2[ii] = int(fftrim1[ii])
-
-#    bufI = []
-#    for ii in range(0,samples):
-#        bufI.append(struct.pack("h", input_buffer_1[ii]))
-#    bufTotal = b''.join(bufI)
-#    print('trace',end='\n')
-#    sys.stdout.buffer.write(bufTotal)
-#    print('',end='\n')
-
+        ol.axi_gpio_0.channel1.write(val=0, mask=0x1) #Trig low
+        ol.axi_gpio_0.channel2.write(val=samples, mask=0xffffffff) #Set samples
+        ol.axi_dma_0.recvchannel.transfer(input_buffer_1)
+        ol.axi_gpio_0.channel1.write(val=1, mask=0x1) #Trig high
+        ol.axi_dma_0.recvchannel.wait()
+        fft = np.fft.fft(input_buffer_1) / samples
+        fftrim1 = 2000 * np.log10(abs(fft[0:fftDisplayPts]))
+        fftrim2 = fftrim1.tolist()
+        for ii in range(fftDisplayPts):
+            fftrim2[ii] = int(fftrim2[ii])
+    except:
+        fftrim2 = [0] * fftDisplayPts
     print('{"command":"trace","value":',end='[')
     for ii in range(0,fftDisplayPts - 1):
         print(fftrim2[ii],end=",")
