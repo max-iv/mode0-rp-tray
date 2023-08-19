@@ -20,7 +20,7 @@
 
 module.exports = {
     // the tcp port that the Node-RED web server is listening on
-    uiPort: process.env.PORT || 1880,
+    uiPort: process.env.NODEREDPORT,
 
     // By default, the Node-RED UI accepts connections on all IPv4 interfaces.
     // The following property can be used to listen on a specific interface. For
@@ -72,7 +72,7 @@ module.exports = {
     // Note: once you set this property, do not change it - doing so will prevent
     // node-red from being able to decrypt your existing credentials and they will be
     // lost.
-    credentialSecret: process.env.NODEREDCONFIGSECRET,
+    credentialSecret: false,
 
     // By default, all user data is stored in the Node-RED install directory. To
     // use a different location, the following property can be used
@@ -100,7 +100,7 @@ module.exports = {
     // When httpAdminRoot is used to move the UI to a different root path, the
     // following property can be used to identify a directory of static content
     // that should be served at http://localhost:1880/.
-    httpStatic: 'html-static/',
+//    httpStatic: 'html-static/',
 
     // The maximum size of HTTP request that will be accepted by the runtime api.
     // Default: 5mb
@@ -232,6 +232,68 @@ module.exports = {
             metrics: false,
             // Whether or not to include audit events in the log output
             audit: false
+        }
+    },
+    disableEditor: (process.env.ENABLE_NODERED_EDITOR === '0'),
+//    disableEditor: false,
+    editorTheme: {
+        /** The following property can be used to set a custom theme for the editor.
+         * See https://github.com/node-red-contrib-themes/theme-collection for
+         * a collection of themes to chose from.
+         */
+        theme: "dark-scroll",
+
+        /** To disable the 'Welcome to Node-RED' tour that is displayed the first
+         * time you access the editor for each release of Node-RED, set this to false
+         */
+        tours: false,
+        page: {
+            title: "mode0-rp-tray"
+        },
+        header: {
+            title: "mode0-rp-tray"
+         },
+    
+
+        palette: {
+            /** The following property can be used to order the categories in the editor
+             * palette. If a node's category is not in the list, the category will get
+             * added to the end of the palette.
+             * If not set, the following default order is used:
+             */
+            categories: ['common', 'function', 'network', 'sequence', 'parser', 'storage','subflows'],
+        },
+
+        projects: {
+            /** To enable the Projects feature, set this value to true */
+            enabled: false,
+            workflow: {
+                /** Set the default projects workflow mode.
+                 *  - manual - you must manually commit changes
+                 *  - auto - changes are automatically committed
+                 * This can be overridden per-user from the 'Git config'
+                 * section of 'User Settings' within the editor
+                 */
+                mode: "manual"
+            }
+        },
+        codeEditor: 
+        {
+            lib: "monaco",
+            options: 
+            {
+//                theme: "vs",
+                formatOnType: false,
+                formatOnPaste: false,
+                useTabStops: true,
+                colorDecorators: true,
+                fontSize: 14,
+                "bracketPairColorization.enabled": true,
+                minimap: 
+                {
+                  enabled: false
+                }
+            }
         }
     }
 }
