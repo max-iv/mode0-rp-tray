@@ -33,15 +33,15 @@ def getTrace(trace):
     for ii in range(0,fftDisplayPts - 1):
         print(fftrim2[ii],end=",")
     print(fftrim2[fftDisplayPts - 1],end="]}\n")
-    
+
 instructionText = sys.stdin.readline().strip('\n')
-instruction = json.loads(instructionText) 
+instruction = json.loads(instructionText)
 ol = pynq.Overlay(instruction["overlay"] );
 print(instructionText)
 
 while True:
     instructionText = sys.stdin.readline().strip('\n')
-    instruction = json.loads(instructionText) 
+    instruction = json.loads(instructionText)
     if instruction["command"] == "setting":
         writeSetting(instruction)
         print(instructionText)
@@ -49,5 +49,5 @@ while True:
         getReading(instruction)
     if instruction["command"] == "trace":
         getTrace(instruction)
-        
+
 
