@@ -1,15 +1,8 @@
 [
     {
-        "id": "85e21fcb925ef32f",
-        "type": "tab",
-        "label": "mode0-rp Tray",
-        "disabled": true,
-        "info": ""
-    },
-    {
         "id": "4a5a8ec8ddc999ab",
         "type": "tab",
-        "label": "Flow 1",
+        "label": "mode0-rp tray",
         "disabled": false,
         "info": "",
         "env": []
@@ -157,1811 +150,12 @@
         "className": ""
     },
     {
-        "id": "30f384ea.cf21fc",
-        "type": "function",
-        "z": "85e21fcb925ef32f",
-        "name": "Save tray config in Memory",
-        "func": "msg.payload.watchdog.value = 0;\nglobal.set('settingInProgress', true);\nglobal.set('tray', msg.payload);\nreturn {topic:'overlay',payload:[{\"command\":\"init\",\"overlay\":global.get('overlay')}]};",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 840,
-        "y": 60,
-        "wires": [
-            [
-                "ebb5481bd4277b24"
-            ]
-        ]
-    },
-    {
-        "id": "5023092b.a0fe38",
-        "type": "mqtt in",
-        "z": "85e21fcb925ef32f",
-        "name": "Subscribe Settings",
-        "topic": "$(MQTTSUBSCRIBE)",
-        "qos": "0",
-        "datatype": "auto",
-        "broker": "79250bf3.365cc4",
-        "nl": false,
-        "rap": false,
-        "inputs": 0,
-        "x": 150,
-        "y": 280,
-        "wires": [
-            [
-                "f812bb6a.1aec68"
-            ]
-        ]
-    },
-    {
-        "id": "49c7b59e.00e86c",
-        "type": "inject",
-        "z": "85e21fcb925ef32f",
-        "name": "read Tray",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": "2",
-        "topic": "readTraydesc",
-        "payload": "MQTTSUBSCRIBE",
-        "payloadType": "env",
-        "x": 120,
-        "y": 60,
-        "wires": [
-            [
-                "f7b2b73c.569598"
-            ]
-        ]
-    },
-    {
-        "id": "4a8d91e8.fcb68",
-        "type": "file in",
-        "z": "85e21fcb925ef32f",
-        "name": "Read tray config",
-        "filename": "tray.json",
-        "format": "utf8",
-        "chunk": false,
-        "sendError": false,
-        "encoding": "none",
-        "allProps": false,
-        "x": 480,
-        "y": 60,
-        "wires": [
-            [
-                "4b0be623.7f7b88"
-            ]
-        ]
-    },
-    {
-        "id": "4b0be623.7f7b88",
-        "type": "json",
-        "z": "85e21fcb925ef32f",
-        "name": "",
-        "property": "payload",
-        "action": "obj",
-        "pretty": false,
-        "x": 650,
-        "y": 60,
-        "wires": [
-            [
-                "30f384ea.cf21fc"
-            ]
-        ]
-    },
-    {
-        "id": "f7b2b73c.569598",
-        "type": "function",
-        "z": "85e21fcb925ef32f",
-        "name": "Init flow Variables",
-        "func": "var mqttSplit = msg.payload.split('/');\nvar trayProps = {\n    box         :   mqttSplit[0],\n    type        :   mqttSplit[1],\n    name        :   mqttSplit[2],\n};\nglobal.set('trayProps',trayProps);\nglobal.set('settingInProgress', false);\nglobal.set('restartFftPlot', true);\n\nreturn {topic: 'readFile', payload:true};",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 290,
-        "y": 60,
-        "wires": [
-            [
-                "4a8d91e8.fcb68",
-                "4557da94a9d40a69"
-            ]
-        ]
-    },
-    {
-        "id": "168ce872.83d788",
-        "type": "file",
-        "z": "85e21fcb925ef32f",
-        "name": "Init Settings",
-        "filename": "tray.json",
-        "appendNewline": true,
-        "createDir": false,
-        "overwriteFile": "true",
-        "encoding": "none",
-        "x": 1310,
-        "y": 500,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "89892a30.598e28",
-        "type": "function",
-        "z": "85e21fcb925ef32f",
-        "name": "Save Settings to File",
-        "func": "var jsonPretty = JSON.stringify(global.get('tray'),null,2);\nreturn {topic: msg.payload, payload:jsonPretty};",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1120,
-        "y": 500,
-        "wires": [
-            [
-                "168ce872.83d788"
-            ]
-        ]
-    },
-    {
-        "id": "f812bb6a.1aec68",
-        "type": "json",
-        "z": "85e21fcb925ef32f",
-        "name": "",
-        "property": "payload",
-        "action": "obj",
-        "pretty": false,
-        "x": 330,
-        "y": 280,
-        "wires": [
-            [
-                "e0d2b8e49c2e469b"
-            ]
-        ]
-    },
-    {
-        "id": "c0939e4a.6386f",
-        "type": "exec",
-        "z": "85e21fcb925ef32f",
-        "command": "pm2 restart ",
-        "addpay": "payload",
-        "append": "",
-        "useSpawn": "false",
-        "timer": "",
-        "winHide": false,
-        "oldrc": false,
-        "name": "Restart",
-        "x": 720,
-        "y": 1320,
-        "wires": [
-            [],
-            [],
-            []
-        ]
-    },
-    {
-        "id": "9e290594.69c548",
-        "type": "switch",
-        "z": "85e21fcb925ef32f",
-        "name": "Reset Tray",
-        "property": "payload",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "1",
-                "vt": "num"
-            },
-            {
-                "t": "eq",
-                "v": "2",
-                "vt": "num"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 330,
-        "y": 1340,
-        "wires": [
-            [
-                "985cd59b3e414efe"
-            ],
-            [
-                "236a8168.66f7fe"
-            ]
-        ]
-    },
-    {
-        "id": "236a8168.66f7fe",
-        "type": "exec",
-        "z": "85e21fcb925ef32f",
-        "command": "sudo reboot",
-        "addpay": false,
-        "append": "",
-        "useSpawn": "false",
-        "timer": "",
-        "oldrc": false,
-        "name": "Reboot",
-        "x": 520,
-        "y": 1380,
-        "wires": [
-            [],
-            [],
-            []
-        ]
-    },
-    {
-        "id": "557e4f40.b904e",
-        "type": "delay",
-        "z": "85e21fcb925ef32f",
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "2",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 180,
-        "y": 1340,
-        "wires": [
-            [
-                "9e290594.69c548"
-            ]
-        ]
-    },
-    {
-        "id": "5152879001ec63ea",
-        "type": "mqtt out",
-        "z": "85e21fcb925ef32f",
-        "name": "Publish Readings",
-        "topic": "",
-        "qos": "0",
-        "retain": "false",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "79250bf3.365cc4",
-        "x": 1270,
-        "y": 420,
-        "wires": []
-    },
-    {
-        "id": "4493527757138cdc",
-        "type": "link out",
-        "z": "85e21fcb925ef32f",
-        "name": "New Setting In",
-        "links": [
-            "4bddb9a0e424ebf4"
-        ],
-        "x": 775,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "4bddb9a0e424ebf4",
-        "type": "link in",
-        "z": "85e21fcb925ef32f",
-        "name": "blinkybus setting in",
-        "links": [
-            "4493527757138cdc"
-        ],
-        "x": 75,
-        "y": 460,
-        "wires": [
-            [
-                "fcc98447c16c3949"
-            ]
-        ]
-    },
-    {
-        "id": "f9be9054ce456982",
-        "type": "switch",
-        "z": "85e21fcb925ef32f",
-        "name": "",
-        "property": "topic",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "setting",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "ping",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "config",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "reset",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 4,
-        "x": 670,
-        "y": 280,
-        "wires": [
-            [
-                "4493527757138cdc"
-            ],
-            [
-                "91cded1b31446957"
-            ],
-            [
-                "c81b72b9290d1c36"
-            ],
-            [
-                "72b5ca0e2043aba0"
-            ]
-        ]
-    },
-    {
-        "id": "e0d2b8e49c2e469b",
-        "type": "function",
-        "z": "85e21fcb925ef32f",
-        "name": "Filter MQTT",
-        "func": "return {topic:msg.topic.split('/')[4], payload:msg.payload};",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 490,
-        "y": 280,
-        "wires": [
-            [
-                "f9be9054ce456982"
-            ]
-        ]
-    },
-    {
-        "id": "f75b9887786b11c4",
-        "type": "function",
-        "z": "85e21fcb925ef32f",
-        "name": "Publish tray",
-        "func": "if (!msg.payload) return null;\nvar tray = global.get('tray');\nvar newMsg = \n{\n    topic: global.get('trayProps').box + '/' + global.get('trayProps').type + '/' + global.get('trayProps').name + '/reading',\n    payload: JSON.stringify(tray)\n};\nreturn  newMsg;  \n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1090,
-        "y": 420,
-        "wires": [
-            [
-                "5152879001ec63ea"
-            ]
-        ]
-    },
-    {
-        "id": "45a97566b65c65cc",
-        "type": "link in",
-        "z": "85e21fcb925ef32f",
-        "name": "Publish Tray In",
-        "links": [
-            "0bf699584a2609d5",
-            "1e34df4b19ff22cc",
-            "6af21e76e0c4ad80",
-            "86aff585d6d97f09",
-            "91cded1b31446957",
-            "a66ef2e5b482662a",
-            "df03212a7e41deb1",
-            "f0c1e263384a520f",
-            "f5d0568e288098ed",
-            "3fc0261f194a7067",
-            "396e4a58f43bbdef",
-            "dc7936fb55cf6c52",
-            "993dd0030ffbf166",
-            "5621597cfd7fea57"
-        ],
-        "x": 975,
-        "y": 420,
-        "wires": [
-            [
-                "f75b9887786b11c4"
-            ]
-        ]
-    },
-    {
-        "id": "91cded1b31446957",
-        "type": "link out",
-        "z": "85e21fcb925ef32f",
-        "name": "Ping Out",
-        "links": [
-            "45a97566b65c65cc",
-            "05c0c7b4f59ca88d"
-        ],
-        "x": 775,
-        "y": 260,
-        "wires": []
-    },
-    {
-        "id": "c81b72b9290d1c36",
-        "type": "link out",
-        "z": "85e21fcb925ef32f",
-        "name": "Config Out",
-        "links": [
-            "720ccfb4b4949146",
-            "ed4feb3ac3ec52cb"
-        ],
-        "x": 775,
-        "y": 300,
-        "wires": []
-    },
-    {
-        "id": "720ccfb4b4949146",
-        "type": "link in",
-        "z": "85e21fcb925ef32f",
-        "name": "Pause Tray Readings in",
-        "links": [
-            "c81b72b9290d1c36"
-        ],
-        "x": 75,
-        "y": 600,
-        "wires": [
-            [
-                "b82f13a5e04e195a"
-            ]
-        ]
-    },
-    {
-        "id": "47de6287cc26419f",
-        "type": "function",
-        "z": "85e21fcb925ef32f",
-        "name": "Save config file",
-        "func": "let cubeAlarm = global.get('tray')[msg.payload.cube].alarm;\ncubeAlarm.limits.lolo = msg.payload.limits.lolo;\ncubeAlarm.limits.low  = msg.payload.limits.low;\ncubeAlarm.limits.high = msg.payload.limits.high;\ncubeAlarm.limits.hihi = msg.payload.limits.hihi;\ncubeAlarm.notify.name = msg.payload.notify.name;\ncubeAlarm.notify.number = msg.payload.notify.number;\nreturn {topic:'trayConfigCompleted', payload:true};",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 520,
-        "y": 600,
-        "wires": [
-            [
-                "eec56d72bdbd1430",
-                "501090a1fd5f88f5"
-            ]
-        ]
-    },
-    {
-        "id": "2cd296fd87868cea",
-        "type": "function",
-        "z": "85e21fcb925ef32f",
-        "name": "Continue Tray readings",
-        "func": "global.set('settingInProgress',false)\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 890,
-        "y": 600,
-        "wires": [
-            [
-                "df03212a7e41deb1"
-            ]
-        ]
-    },
-    {
-        "id": "04d132d87ffeb91a",
-        "type": "link in",
-        "z": "85e21fcb925ef32f",
-        "name": "Save Settings to file in",
-        "links": [
-            "501090a1fd5f88f5",
-            "dc7936fb55cf6c52",
-            "1e34df4b19ff22cc",
-            "86b6ab0c8b6dfb15"
-        ],
-        "x": 975,
-        "y": 500,
-        "wires": [
-            [
-                "89892a30.598e28"
-            ]
-        ]
-    },
-    {
-        "id": "df03212a7e41deb1",
-        "type": "link out",
-        "z": "85e21fcb925ef32f",
-        "name": "Continue Devie Readings out",
-        "links": [
-            "45a97566b65c65cc",
-            "05c0c7b4f59ca88d"
-        ],
-        "x": 1035,
-        "y": 600,
-        "wires": []
-    },
-    {
-        "id": "c2d22bcc1f4cf7b0",
-        "type": "inject",
-        "z": "85e21fcb925ef32f",
-        "name": "Archive clock",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "1",
-        "crontab": "",
-        "once": true,
-        "onceDelay": "20",
-        "topic": "archiveClock",
-        "payloadType": "date",
-        "x": 160,
-        "y": 860,
-        "wires": [
-            [
-                "6a9b2f2af2f7d084"
-            ]
-        ]
-    },
-    {
-        "id": "6a9b2f2af2f7d084",
-        "type": "function",
-        "z": "85e21fcb925ef32f",
-        "name": "Archive Pulse",
-        "func": "var tray = global.get('tray');\nvar lastArchive = context.get('lastArchive');\nvar now = new Date().getTime();\nif ((now - lastArchive) <= tray.arcPeriod) return null;\ncontext.set('lastArchive', now);\nreturn {topic:'archivePulse', payload:true};",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('lastArchive', new Date().getTime());",
-        "finalize": "",
-        "libs": [],
-        "x": 370,
-        "y": 860,
-        "wires": [
-            [
-                "d74e019a27b1a659"
-            ]
-        ]
-    },
-    {
-        "id": "72b5ca0e2043aba0",
-        "type": "link out",
-        "z": "85e21fcb925ef32f",
-        "name": "Reset Out",
-        "links": [
-            "6c366c9b4d8b8f19"
-        ],
-        "x": 775,
-        "y": 340,
-        "wires": []
-    },
-    {
-        "id": "6c366c9b4d8b8f19",
-        "type": "link in",
-        "z": "85e21fcb925ef32f",
-        "name": "Reset in",
-        "links": [
-            "72b5ca0e2043aba0"
-        ],
-        "x": 75,
-        "y": 1340,
-        "wires": [
-            [
-                "557e4f40.b904e"
-            ]
-        ]
-    },
-    {
-        "id": "6af76a294daa96eb",
-        "type": "function",
-        "z": "85e21fcb925ef32f",
-        "name": "Save flow env variables",
-        "func": "global.set(msg.topic,msg.payload);\nreturn null;",
-        "outputs": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 350,
-        "y": 1140,
-        "wires": []
-    },
-    {
-        "id": "93758a55568a2f76",
-        "type": "link out",
-        "z": "85e21fcb925ef32f",
-        "name": "Tray Setting In",
-        "mode": "link",
-        "links": [
-            "e9a01e5bc2f140ef",
-            "ae68c32974081996"
-        ],
-        "x": 665,
-        "y": 420,
-        "wires": []
-    },
-    {
-        "id": "ebb5481bd4277b24",
-        "type": "delay",
-        "z": "85e21fcb925ef32f",
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "3",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 1040,
-        "y": 60,
-        "wires": [
-            [
-                "8e84d8c955d1aeb1",
-                "622d8df42f67d006"
-            ]
-        ]
-    },
-    {
-        "id": "10e54acd6f4f5fb4",
-        "type": "inject",
-        "z": "85e21fcb925ef32f",
-        "name": "pm2Name",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": "1",
-        "topic": "pm2Name",
-        "payload": "PM2NAME",
-        "payloadType": "env",
-        "x": 150,
-        "y": 1200,
-        "wires": [
-            [
-                "6af76a294daa96eb"
-            ]
-        ]
-    },
-    {
-        "id": "985cd59b3e414efe",
-        "type": "function",
-        "z": "85e21fcb925ef32f",
-        "name": "Get pm2Name",
-        "func": "msg.payload = global.get(\"pm2Name\");\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 540,
-        "y": 1320,
-        "wires": [
-            [
-                "c0939e4a.6386f"
-            ]
-        ]
-    },
-    {
-        "id": "fd6a29d4dda908dd",
-        "type": "inject",
-        "z": "85e21fcb925ef32f",
-        "name": "Archive now",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "archiveNow",
-        "payloadType": "date",
-        "x": 150,
-        "y": 920,
-        "wires": [
-            [
-                "76d6712bed883108"
-            ]
-        ]
-    },
-    {
-        "id": "76d6712bed883108",
-        "type": "function",
-        "z": "85e21fcb925ef32f",
-        "name": "Single Archive Pulse",
-        "func": "return {topic:'archivePulse', payload:true};",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('lastArchive', new Date().getTime());",
-        "finalize": "",
-        "libs": [],
-        "x": 380,
-        "y": 920,
-        "wires": [
-            [
-                "d74e019a27b1a659"
-            ]
-        ]
-    },
-    {
-        "id": "501090a1fd5f88f5",
-        "type": "link out",
-        "z": "85e21fcb925ef32f",
-        "name": "Save config file out",
-        "links": [
-            "04d132d87ffeb91a"
-        ],
-        "x": 665,
-        "y": 560,
-        "wires": []
-    },
-    {
-        "id": "eec56d72bdbd1430",
-        "type": "delay",
-        "z": "85e21fcb925ef32f",
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "1",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 700,
-        "y": 600,
-        "wires": [
-            [
-                "2cd296fd87868cea"
-            ]
-        ]
-    },
-    {
-        "id": "95bf73e1f0d68181",
-        "type": "delay",
-        "z": "85e21fcb925ef32f",
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "2",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 360,
-        "y": 600,
-        "wires": [
-            [
-                "47de6287cc26419f"
-            ]
-        ]
-    },
-    {
-        "id": "b82f13a5e04e195a",
-        "type": "function",
-        "z": "85e21fcb925ef32f",
-        "name": "Pause Readings",
-        "func": "global.set('settingInProgress',true)\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 200,
-        "y": 600,
-        "wires": [
-            [
-                "95bf73e1f0d68181"
-            ]
-        ]
-    },
-    {
-        "id": "45409b1230e854cd",
-        "type": "mqtt out",
-        "z": "85e21fcb925ef32f",
-        "name": "Publish Archive",
-        "topic": "",
-        "qos": "0",
-        "retain": "false",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "79250bf3.365cc4",
-        "x": 760,
-        "y": 860,
-        "wires": []
-    },
-    {
-        "id": "d74e019a27b1a659",
-        "type": "function",
-        "z": "85e21fcb925ef32f",
-        "name": "Publish tray",
-        "func": "if (!msg.payload) return null;\nvar tray = global.get('tray');\nvar newMsg = \n{\n    topic: global.get('trayProps').box + '/' + global.get('trayProps').type + '/' + global.get('trayProps').name + '/archive',\n    payload: JSON.stringify(tray)\n};\nreturn  newMsg;  \n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 590,
-        "y": 860,
-        "wires": [
-            [
-                "45409b1230e854cd"
-            ]
-        ]
-    },
-    {
-        "id": "fcc98447c16c3949",
-        "type": "function",
-        "z": "85e21fcb925ef32f",
-        "name": "Create Setting",
-        "func": "let two31Minus1 = 2147483647;\nlet tray = global.get('tray');\nlet blinkyBusSettingMsg = \n{\n    topic : msg.topic, \n    payload : [] \n}\nlet blinkyBusMessage = false;\ntray[msg.payload.cube].value = msg.payload.value;\nlet setValue = msg.payload.value;\nswitch(msg.payload.cube)\n{\n    case 'reset':\n        setValue = msg.payload.value;\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":64});\n        blinkyBusMessage = true;\n        break;\n    case 'frontEndLpfShiftR':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":68});\n        blinkyBusMessage = true;\n        break;\n    case 'clkDivide':\n        setValue = Math.floor(msg.payload.value - 1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":72});\n        blinkyBusMessage = true;\n        break;\n    case 'thetaPhaseRot':\n        setValue = Math.floor(Math.cos(msg.payload.value * Math.PI / 180.0) * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":76});\n        setValue = Math.floor(Math.sin(msg.payload.value * Math.PI / 180.0) * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":80});\n        blinkyBusMessage = true;\n        break;\n    case 'notchFilterMemory':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":84});\n        blinkyBusMessage = true;\n        break;\n    case 'gmult':\n        setValue = Math.floor(msg.payload.value * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":88});\n        blinkyBusMessage = true;\n        break;\n    case 'gainShiftL':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":92});\n        blinkyBusMessage = true;\n        break;\n    case 'clipLvl':\n        setValue = Math.floor( msg.payload.value * 0.001 * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":96});\n        setValue = Math.floor(-msg.payload.value * 0.001 * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":100});\n        blinkyBusMessage = true;\n        break;\n    case 'dac01on':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":104});\n        setValue = setValue + 2 * Math.floor(tray.dac02on.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":120});\n        blinkyBusMessage = true;\n        break;\n    case 'dac02on':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":108});\n        setValue = Math.floor(tray.dac01on.value) + 2 * setValue;\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":120});\n        blinkyBusMessage = true;\n        break;\n    case 'readbackLpfShiftR':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":112});\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":116});\n        blinkyBusMessage = true;\n        break;\n    case 'waveformClkDivide':\n        setValue = Math.floor(msg.payload.value - 1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":124});\n        blinkyBusMessage = true;\n        global.set('restartFftPlot', true);\n        break;\n    case 'waveformSamplePower':\n        tray.waveformSamplePower.value  = msg.payload.value;\n        blinkyBusMessage = false;\n        global.set('restartFftPlot', true);\n        break;\n    case 'fftDisplayPts':\n        tray.fftDisplayPts.value  = msg.payload.value;\n        blinkyBusMessage = false;\n        global.set('restartFftPlot', true);\n        break;\n    case 'fftAverages':\n        tray.fftAverages.value  = msg.payload.value;\n        blinkyBusMessage = false;\n        global.set('restartFftPlot', true);\n        break;\n    case 'alias':\n        tray.alias.value  = msg.payload.value;\n        blinkyBusMessage = false;\n        break;\n    case 'nonblinkyBusSetting':\n        tray.nonblinkyBusSetting.value  = msg.payload.value;\n        blinkyBusMessage = false;\n        break;\n    default:\n        break;\n}\nlet msgArray = [null,null,null];\nif (blinkyBusMessage)\n{\n    global.set('settingInProgress',true);\n    var settingInProgressMsg = {topic:'settingInProgress', payload:true};\n    msgArray = [blinkyBusSettingMsg, settingInProgressMsg, null];\n    \n}\nelse\n{\n    global.set('settingInProgress',false);\n    msgArray = [null,null,{topic:'settingDone', payload:true}];\n}\nreturn msgArray;\n",
-        "outputs": 3,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 220,
-        "y": 460,
-        "wires": [
-            [
-                "b81b8b21eefe96a0"
-            ],
-            [
-                "a66ef2e5b482662a"
-            ],
-            [
-                "1e34df4b19ff22cc"
-            ]
-        ]
-    },
-    {
-        "id": "e9a01e5bc2f140ef",
-        "type": "link in",
-        "z": "85e21fcb925ef32f",
-        "name": "Canvas Settings In",
-        "links": [
-            "756ba0a6f071c881",
-            "56eb9898c37a8173",
-            "b018aa03d43d5655",
-            "93758a55568a2f76",
-            "b3390c7c1b743364",
-            "46579bc816c2e12c"
-        ],
-        "x": 75,
-        "y": 800,
-        "wires": [
-            [
-                "7b630952f0bca935"
-            ]
-        ]
-    },
-    {
-        "id": "dc7936fb55cf6c52",
-        "type": "link out",
-        "z": "85e21fcb925ef32f",
-        "name": "Setting Success Out",
-        "mode": "link",
-        "links": [
-            "04d132d87ffeb91a",
-            "45a97566b65c65cc"
-        ],
-        "x": 1385,
-        "y": 700,
-        "wires": []
-    },
-    {
-        "id": "340ca6cd6d6229e4",
-        "type": "function",
-        "z": "85e21fcb925ef32f",
-        "name": "Setting success",
-        "func": "let tray = global.get('tray');\nglobal.set('settingInProgress', false);\ncalcReadings();\nsettingSuccess = true;\nreturn {topic:\"settingSuccess\",payload:settingSuccess};\nfunction calcReadings()\n{\n    tray.frontEndLpf.value = Math.round(125e6 / (8 * twoToN(tray.frontEndLpfShiftR.value) ) ) / 1000;\n    tray.clkFreq.value = Math.round(125e3 / twoToN(tray.clkDivide.value)) / 1000;\n    tray.notchFreq.value = Math.round(125e6 / (tray.notchFilterMemory.value * twoToN(tray.clkDivide.value) ) ) / 1000;\n    tray.gainSign.value = 1;\n    if (tray.gmult.value < 0) tray.gainSign.value = -1;\n    tray.gain.value = Math.round(200.0 * Math.log10(tray.gainSign.value * tray.gmult.value * twoToN(tray.gainShiftL.value) ) ) / 10;\n    tray.readbackLpf.value = Math.round(125e8 / (8 * twoToN(tray.readbackLpfShiftR.value) * twoToN(tray.clkDivide.value))) / 100;\n}\nfunction twoToN(n)\n{\n    pow = 1;\n    for (let ii = 0; ii < n; ++ii) pow = pow * 2;\n    return pow;\n}\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1100,
-        "y": 700,
-        "wires": [
-            [
-                "a1bc2acb789b944b"
-            ]
-        ]
-    },
-    {
-        "id": "b018aa03d43d5655",
-        "type": "link out",
-        "z": "85e21fcb925ef32f",
-        "name": "Init tray",
-        "mode": "link",
-        "links": [
-            "e9a01e5bc2f140ef"
-        ],
-        "x": 1755,
-        "y": 60,
-        "wires": []
-    },
-    {
-        "id": "0d6b50982a8ca654",
-        "type": "inject",
-        "z": "85e21fcb925ef32f",
-        "name": "overlay",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": "1",
-        "topic": "overlay",
-        "payload": "OVERLAY",
-        "payloadType": "env",
-        "x": 140,
-        "y": 1140,
-        "wires": [
-            [
-                "6af76a294daa96eb"
-            ]
-        ]
-    },
-    {
-        "id": "2fd2771495cfbac9",
-        "type": "inject",
-        "z": "85e21fcb925ef32f",
-        "name": "project",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": "1",
-        "topic": "project",
-        "payload": "PROJECT",
-        "payloadType": "env",
-        "x": 140,
-        "y": 1080,
-        "wires": [
-            [
-                "6af76a294daa96eb"
-            ]
-        ]
-    },
-    {
-        "id": "7b630952f0bca935",
-        "type": "pythonshell in",
-        "z": "85e21fcb925ef32f",
-        "name": "PYNQ Interface",
-        "pyfile": "zynqInterface.py",
-        "virtualenv": "",
-        "continuous": true,
-        "stdInData": true,
-        "x": 220,
-        "y": 740,
-        "wires": [
-            [
-                "6dde505ab4e5a809"
-            ]
-        ]
-    },
-    {
-        "id": "8e84d8c955d1aeb1",
-        "type": "delay",
-        "z": "85e21fcb925ef32f",
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "10",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 1200,
-        "y": 80,
-        "wires": [
-            [
-                "e093d33288c6fb5f"
-            ]
-        ]
-    },
-    {
-        "id": "e093d33288c6fb5f",
-        "type": "function",
-        "z": "85e21fcb925ef32f",
-        "name": "initSettings",
-        "func": "let tray = global.get('tray');\nlet settingsArray = [];\nlet two31Minus1 = 2147483647;\n\ntray.reset.value = 1;\nlet setReg = [];\n\nsetReg.push(tray.reset.value);\nsetReg.push(Math.floor(tray.frontEndLpfShiftR.value));\nsetReg.push(Math.floor(tray.clkDivide.value - 1));\nsetReg.push(Math.floor(Math.cos((tray.thetaPhaseRot.value * Math.PI / 180.0)) * two31Minus1));\nsetReg.push(Math.floor(Math.sin((tray.thetaPhaseRot.value * Math.PI / 180.0)) * two31Minus1));\nsetReg.push(Math.floor(tray.notchFilterMemory.value));\nsetReg.push(Math.floor(tray.gmult.value * two31Minus1));\nsetReg.push(Math.floor(tray.gainShiftL.value));\nsetReg.push(Math.floor( tray.clipLvl.value * 0.001 * two31Minus1));\nsetReg.push(Math.floor(-tray.clipLvl.value * 0.001 * two31Minus1));\nsetReg.push(Math.floor(tray.dac01on.value));\nsetReg.push(Math.floor(tray.dac02on.value));\nsetReg.push(Math.floor(tray.readbackLpfShiftR.value));\nsetReg.push(Math.floor(tray.readbackLpfShiftR.value));\nlet switchValue = Math.floor(tray.dac01on.value) + 2 * Math.floor(tray.dac02on.value);\nsetReg.push(switchValue);\nsetReg.push(Math.floor(tray.waveformClkDivide.value - 1));\nfor (let ii = 0; ii < setReg.length; ++ii)\n{\n    settingsArray.push({\"command\":\"setting\",\"value\":setReg[ii],\"offset\":(64 + ii * 4)});\n}\ntray.reset.value = 0;\nsetReg[0] = tray.reset.value;\nsettingsArray.push({\"command\":\"setting\",\"value\":setReg[0],\"offset\":64});\n\nreturn {topic:\"initSettings\",payload:settingsArray};\n\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1350,
-        "y": 80,
-        "wires": [
-            [
-                "622d8df42f67d006"
-            ]
-        ]
-    },
-    {
-        "id": "502155af52e553e7",
-        "type": "switch",
-        "z": "85e21fcb925ef32f",
-        "name": "",
-        "property": "payload.command",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "setting",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "reading",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "trace",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 3,
-        "x": 890,
-        "y": 740,
-        "wires": [
-            [
-                "340ca6cd6d6229e4"
-            ],
-            [
-                "ed481b1d2110232a"
-            ],
-            [
-                "b1fea3d32f4d6399"
-            ]
-        ]
-    },
-    {
-        "id": "d582f26f468aefb9",
-        "type": "json",
-        "z": "85e21fcb925ef32f",
-        "name": "",
-        "property": "payload",
-        "action": "obj",
-        "pretty": false,
-        "x": 530,
-        "y": 740,
-        "wires": [
-            [
-                "502155af52e553e7"
-            ]
-        ]
-    },
-    {
-        "id": "a66ef2e5b482662a",
-        "type": "link out",
-        "z": "85e21fcb925ef32f",
-        "name": "Create Setting out",
-        "mode": "link",
-        "links": [
-            "45a97566b65c65cc"
-        ],
-        "x": 365,
-        "y": 460,
-        "wires": []
-    },
-    {
-        "id": "1e34df4b19ff22cc",
-        "type": "link out",
-        "z": "85e21fcb925ef32f",
-        "name": "nonBlinkybusSetting Out",
-        "mode": "link",
-        "links": [
-            "04d132d87ffeb91a",
-            "45a97566b65c65cc",
-            "05c0c7b4f59ca88d"
-        ],
-        "x": 365,
-        "y": 500,
-        "wires": []
-    },
-    {
-        "id": "a2279e1c2c4409d2",
-        "type": "inject",
-        "z": "85e21fcb925ef32f",
-        "name": "readWatchDog",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "2",
-        "crontab": "",
-        "once": true,
-        "onceDelay": "30",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 160,
-        "y": 680,
-        "wires": [
-            [
-                "12fb87d74b200e05"
-            ]
-        ]
-    },
-    {
-        "id": "12fb87d74b200e05",
-        "type": "function",
-        "z": "85e21fcb925ef32f",
-        "name": "Setup readings",
-        "func": "let tray = global.get('tray');\nif (global.get('settingInProgress')) return null;\nlet readingsArray = [];\nfor (let ii = 0; ii < 4; ++ii)\n{\n    readingsArray.push({\"command\":\"reading\",\"offset\":(ii * 4)});\n}\nreadingsArray.push({\"command\":\"trace\",\"samples\":raise2toN(tray.waveformSamplePower.value), \"fftDisplayPts\":tray.fftDisplayPts.value});\nreturn {topic: \"readWatchDog\", payload:readingsArray};\n\nfunction raise2toN(npower)\n{\n    let pow2 = 1;\n    if (npower == 0) return pow2;\n    for (ii = 0; ii < npower; ++ii)\n    {\n        pow2 = pow2 * 2;\n    }\n    return pow2;\n}\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 360,
-        "y": 680,
-        "wires": [
-            [
-                "b48cec48fcf68e01"
-            ]
-        ]
-    },
-    {
-        "id": "b3390c7c1b743364",
-        "type": "link out",
-        "z": "85e21fcb925ef32f",
-        "name": "WatchDog Read In",
-        "mode": "link",
-        "links": [
-            "e9a01e5bc2f140ef"
-        ],
-        "x": 935,
-        "y": 680,
-        "wires": []
-    },
-    {
-        "id": "ed481b1d2110232a",
-        "type": "function",
-        "z": "85e21fcb925ef32f",
-        "name": "Parse Reading",
-        "func": "let readingSuccess = true;\nlet tray = global.get('tray');\n\nswitch(msg.payload.offset)\n{\n    case 0:\n        tray.phaseShifterDrive.value = Math.round(normRead(msg.payload.value) * 10000) / 10;\n        break;\n    case 4:\n        context.set(\"ival\", normRead(msg.payload.value));\n        break;\n    case 8:\n        context.set(\"qval\", normRead(msg.payload.value));\n        break;\n    case 12:\n        tray.watchdog.value = msg.payload.value;\n        setBeamParam();\n        break;\n    default:\n        break;\n}\n\nreturn {topic:\"readingSuccess\",payload:readingSuccess};\nfunction normRead(pynqInt)\n{\n    let normVal = pynqInt;\n    let two31Minus1 = 2147483647;\n    let two31 = 2147483648;\n    let two32 = 4294967296;\n    normVal = pynqInt;\n    if (pynqInt >= two31) normVal = pynqInt - two32;\n    normVal = normVal / two31Minus1;   \n    return normVal;\n}\nfunction setBeamParam()\n{\n    ival = context.get(\"ival\");\n    qval = context.get(\"qval\");\n    tray.thetaBeam.value = Math.round(Math.atan2(qval, ival) * 180.0 * 100/ Math.PI) / 100;\n    tray.magBeam.value   = Math.round(Math.sqrt(ival * ival + qval * qval) * 10000)/ 10;\n    return;\n}\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set(\"ival\", 0.000001);\ncontext.set(\"qval\", 0.000001);",
-        "finalize": "",
-        "libs": [],
-        "x": 1100,
-        "y": 740,
-        "wires": [
-            [
-                "99fbe8135d0ce161"
-            ]
-        ]
-    },
-    {
-        "id": "993dd0030ffbf166",
-        "type": "link out",
-        "z": "85e21fcb925ef32f",
-        "name": "Reading Success Out",
-        "mode": "link",
-        "links": [
-            "45a97566b65c65cc"
-        ],
-        "x": 1445,
-        "y": 740,
-        "wires": []
-    },
-    {
-        "id": "ae68c32974081996",
-        "type": "link in",
-        "z": "85e21fcb925ef32f",
-        "name": "Archive Now In",
-        "links": [
-            "93758a55568a2f76",
-            "46579bc816c2e12c"
-        ],
-        "x": 75,
-        "y": 980,
-        "wires": [
-            [
-                "a3f60ecca605a6e4"
-            ]
-        ]
-    },
-    {
-        "id": "a3f60ecca605a6e4",
-        "type": "delay",
-        "z": "85e21fcb925ef32f",
-        "name": "",
-        "pauseType": "rate",
-        "timeout": "2",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": true,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 190,
-        "y": 980,
-        "wires": [
-            [
-                "76d6712bed883108"
-            ]
-        ]
-    },
-    {
-        "id": "99fbe8135d0ce161",
-        "type": "function",
-        "z": "85e21fcb925ef32f",
-        "name": "Readings Alarm Scan",
-        "func": "var tray = global.get('tray');\nvar alarmFlagReading = scalarAlarmScan(tray, 'reading');\nvar alarmFlagSetting = scalarAlarmScan(tray, 'setting');\nreturn msg;\n\nfunction getActionArray(tray, type, actionType)\n{\n    var actionArray = [];\n    var keys = Object.keys(tray);\n    for (var ii = 0; ii < keys.length; ++ii)\n    {\n        if (tray[keys[ii]].hasOwnProperty('type'))\n        {\n            if (tray[keys[ii]].type == type)\n            {\n                if (tray[keys[ii]].action == actionType)\n                {\n                    actionArray.push(tray[keys[ii]]);\n                }\n            }\n        }\n    }\n    return actionArray;\n}\nfunction scalarAlarmScan(tray, actionType)\n{\n    var alarmFlag = false;\n    var actionArray = getActionArray(tray, 'scalar', actionType);\n    if (actionArray.length > 0)\n    {\n        for (var ii = 0; ii < actionArray.length; ++ii)\n        {\n            let oldAlarmValue = actionArray[ii].alarm.value;\n            actionArray[ii].alarm.value = 0;\n            if (!isNaN(actionArray[ii].value))\n            {\n                if (actionArray[ii].value <= actionArray[ii].alarm.limits.low)  actionArray[ii].alarm.value = 1;\n                if (actionArray[ii].value <= actionArray[ii].alarm.limits.lolo) actionArray[ii].alarm.value = 3;\n                if (actionArray[ii].value >= actionArray[ii].alarm.limits.high) actionArray[ii].alarm.value = 2;\n                if (actionArray[ii].value >= actionArray[ii].alarm.limits.hihi) actionArray[ii].alarm.value = 4;\n                if (actionArray[ii].alarm.value != oldAlarmValue) alarmFlag = true;\n            }\n        }\n    }\n    return alarmFlag;\n}\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('lastAlarm', -1);",
-        "finalize": "",
-        "libs": [],
-        "x": 1310,
-        "y": 740,
-        "wires": [
-            [
-                "993dd0030ffbf166"
-            ]
-        ]
-    },
-    {
-        "id": "a1bc2acb789b944b",
-        "type": "delay",
-        "z": "85e21fcb925ef32f",
-        "name": "",
-        "pauseType": "rate",
-        "timeout": "2",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": true,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 1270,
-        "y": 700,
-        "wires": [
-            [
-                "dc7936fb55cf6c52"
-            ]
-        ]
-    },
-    {
-        "id": "1a589248d99eebbc",
-        "type": "inject",
-        "z": "85e21fcb925ef32f",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "setting",
-        "payload": "{\"cube\":\"clipLvl\",\"value\":100}",
-        "payloadType": "json",
-        "x": 130,
-        "y": 380,
-        "wires": [
-            [
-                "fcc98447c16c3949"
-            ]
-        ]
-    },
-    {
-        "id": "aef6c5b313d2bc87",
-        "type": "ui_chart",
-        "z": "85e21fcb925ef32f",
-        "name": "",
-        "group": "fd4f209029bad863",
-        "order": 0,
-        "width": 0,
-        "height": 0,
-        "label": "Spectrum",
-        "chartType": "line",
-        "legend": "false",
-        "xformat": "x",
-        "interpolate": "linear",
-        "nodata": "",
-        "dot": false,
-        "ymin": "",
-        "ymax": "",
-        "removeOlder": 1,
-        "removeOlderPoints": "",
-        "removeOlderUnit": "3600",
-        "cutout": 0,
-        "useOneColor": false,
-        "useUTC": false,
-        "colors": [
-            "#1f77b4",
-            "#aec7e8",
-            "#ff7f0e",
-            "#2ca02c",
-            "#98df8a",
-            "#d62728",
-            "#ff9896",
-            "#9467bd",
-            "#c5b0d5"
-        ],
-        "outputs": 1,
-        "useDifferentColor": false,
-        "className": "",
-        "x": 1230,
-        "y": 860,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "6dde505ab4e5a809",
-        "type": "function",
-        "z": "85e21fcb925ef32f",
-        "name": "Remove CR",
-        "func": "msg.payload = msg.payload.split(\"\\n\")[0];\nreturn msg;\n/*\nlet traceTest = msg.payload.substring(0,5);\nif (traceTest != 'trace')\n{\n    msg.payload = msg.payload.split(\"\\n\")[0];\n    return [msg,null];\n}\nvar dataView = new DataView(new ArrayBuffer(2));\nvar ndataPts = msg.payload.length - 7;\nlet charArray = [];\nfor (let ii = 0; ii < ndataPts; ++ii)\n{\n    charArray.push(msg.payload.charCodeAt(ii + 6));\n}\n\nndataPts = ndataPts / 2;\ntrace = [];\nfor (let ii = 0; ii < ndataPts; ++ii)\n{\n    dataView.setUint8(0, charArray[ii * 2]);\n    dataView.setUint8(1, charArray[ii * 2 + 1]);\n    trace.push(dataView.getInt16(0 , true));\n}\n\nreturn [null,{topic:'trace', payload:{value:trace}}];\n*/",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 390,
-        "y": 740,
-        "wires": [
-            [
-                "d582f26f468aefb9"
-            ]
-        ]
-    },
-    {
-        "id": "b1fea3d32f4d6399",
-        "type": "function",
-        "z": "85e21fcb925ef32f",
-        "name": "CalcFFT",
-        "func": "let tray = global.get('tray');\nlet fftTray = global.get('fftTray');\nmsg.payload.value[0] = msg.payload.value[1];\nlet npts = msg.payload.value.length;\nfor (let ii = 0; ii < npts; ++ii)\n{\n    msg.payload.value[ii] = Math.pow(10, msg.payload.value[ii] / 1000);\n}\nmagVecHistory = context.get('magVecHistory');\nif (global.get('restartFftPlot'))\n{\n    magVecHistory = [];\n    global.set('restartFftPlot', false);\n}\nmagVecHistory.push([...msg.payload.value]);\nwhile (magVecHistory.length > tray.fftAverages.value) magVecHistory.shift();\nfftTray.fftVec.value[0] = [];\nfftTray.fftVec.value[1] = [];\nfor (let ii = 0; ii < npts; ++ii)\n{\n    let avg = 0;\n    for (ivec = 0; ivec < magVecHistory.length; ++ivec)\n    {\n        avg = avg + magVecHistory[ivec][ii];\n    }\n    avg = avg / magVecHistory.length;\n    fftTray.fftVec.value[1].push(avg);\n}\ncontext.set('magVecHistory',magVecHistory);\n\nvar magChart = [\n    {\n        series : [\"Spectrum\"],\n        data   : [[]],\n        labels : [\"\"]\n    }\n];\nfor (let ii = 0; ii < npts; ++ii)\n{\n    fftTray.fftVec.value[0].push(Math.round(125e6 * ii / raise2toN(tray.waveformClkDivide.value + tray.waveformSamplePower.value)));\n    fftTray.fftVec.value[1][ii] = Math.round(1000 * Math.log10(fftTray.fftVec.value[1][ii])  +  100 * (15 - 90.308 - tray.gain.value)) / 100;\n    magChart[0].data[0].push({\"x\":fftTray.fftVec.value[0][ii],\"y\":fftTray.fftVec.value[1][ii]});\n}\n\nreturn [{topic:\"fftmag\",payload:true},{topic:'MagChart',payload: magChart}];\n\n\nfunction raise2toN(npower)\n{\n    let pow2 = 1;\n    if (npower == 0) return pow2;\n    for (ii = 0; ii < npower; ++ii)\n    {\n        pow2 = pow2 * 2;\n    }\n    return pow2;\n}\n",
-        "outputs": 2,
-        "noerr": 0,
-        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('magVecHistory',[]);",
-        "finalize": "",
-        "libs": [],
-        "x": 1080,
-        "y": 780,
-        "wires": [
-            [
-                "3a445bec11e0143b"
-            ],
-            [
-                "aef6c5b313d2bc87"
-            ]
-        ]
-    },
-    {
-        "id": "a1a9ea43fcc7c1f0",
-        "type": "function",
-        "z": "85e21fcb925ef32f",
-        "name": "Save fftTray config in Memory",
-        "func": "global.set('fftTray', msg.payload);\nreturn null;",
-        "outputs": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 850,
-        "y": 140,
-        "wires": []
-    },
-    {
-        "id": "4557da94a9d40a69",
-        "type": "file in",
-        "z": "85e21fcb925ef32f",
-        "name": "Read fftTray config",
-        "filename": "fftTray.json",
-        "filenameType": "str",
-        "format": "utf8",
-        "chunk": false,
-        "sendError": false,
-        "encoding": "none",
-        "allProps": false,
-        "x": 490,
-        "y": 140,
-        "wires": [
-            [
-                "d0224a6349bb8347"
-            ]
-        ]
-    },
-    {
-        "id": "d0224a6349bb8347",
-        "type": "json",
-        "z": "85e21fcb925ef32f",
-        "name": "",
-        "property": "payload",
-        "action": "obj",
-        "pretty": false,
-        "x": 650,
-        "y": 140,
-        "wires": [
-            [
-                "a1a9ea43fcc7c1f0"
-            ]
-        ]
-    },
-    {
-        "id": "3a445bec11e0143b",
-        "type": "function",
-        "z": "85e21fcb925ef32f",
-        "name": "Publish fftTray",
-        "func": "if (!msg.payload) return null;\nvar fftTray = global.get('fftTray');\nvar newMsg = \n{\n    topic: global.get('trayProps').box + '/' + fftTray.type + '/' + fftTray.name + '/reading',\n    payload: JSON.stringify(fftTray)\n};\nreturn  newMsg;  \n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1290,
-        "y": 800,
-        "wires": [
-            [
-                "6c180dc85b447443"
-            ]
-        ]
-    },
-    {
-        "id": "6c180dc85b447443",
-        "type": "mqtt out",
-        "z": "85e21fcb925ef32f",
-        "name": "Publish Readings",
-        "topic": "",
-        "qos": "0",
-        "retain": "false",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "79250bf3.365cc4",
-        "x": 1500,
-        "y": 800,
-        "wires": []
-    },
-    {
-        "id": "a8caadc0e6520a7d",
-        "type": "inject",
-        "z": "85e21fcb925ef32f",
-        "name": "Archive clock",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "1",
-        "crontab": "",
-        "once": true,
-        "onceDelay": "20",
-        "topic": "archiveClock",
-        "payloadType": "date",
-        "x": 1220,
-        "y": 940,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "555571bf52c7c2f2",
-        "type": "function",
-        "z": "85e21fcb925ef32f",
-        "name": "Archive Pulse",
-        "func": "var fftTray = global.get('fftTray');\nvar lastArchive = context.get('lastArchive');\nvar now = new Date().getTime();\nif ((now - lastArchive) <= fftTray.arcPeriod) return null;\ncontext.set('lastArchive', now);\nreturn {topic:'archivePulse', payload:true};",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('lastArchive', new Date().getTime());",
-        "finalize": "",
-        "libs": [],
-        "x": 1430,
-        "y": 940,
-        "wires": [
-            [
-                "3663d8f093ff3d23"
-            ]
-        ]
-    },
-    {
-        "id": "50a540776fef1149",
-        "type": "mqtt out",
-        "z": "85e21fcb925ef32f",
-        "name": "Publish Archive",
-        "topic": "",
-        "qos": "0",
-        "retain": "false",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "79250bf3.365cc4",
-        "x": 1860,
-        "y": 940,
-        "wires": []
-    },
-    {
-        "id": "3663d8f093ff3d23",
-        "type": "function",
-        "z": "85e21fcb925ef32f",
-        "name": "Publish fftTray",
-        "func": "if (!msg.payload) return null;\nvar fftTray = global.get('fftTray');\nvar newMsg = \n{\n    topic: global.get('trayProps').box + '/' + fftTray.type + '/' + fftTray.name + '/archive',\n    payload: JSON.stringify(fftTray)\n};\nreturn  newMsg;  \n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1660,
-        "y": 940,
-        "wires": [
-            [
-                "50a540776fef1149"
-            ]
-        ]
-    },
-    {
-        "id": "b48cec48fcf68e01",
-        "type": "split",
-        "z": "85e21fcb925ef32f",
-        "name": "",
-        "splt": "\\n",
-        "spltType": "str",
-        "arraySplt": 1,
-        "arraySpltType": "len",
-        "stream": false,
-        "addname": "",
-        "x": 510,
-        "y": 680,
-        "wires": [
-            [
-                "6738289574005425"
-            ]
-        ]
-    },
-    {
-        "id": "6738289574005425",
-        "type": "delay",
-        "z": "85e21fcb925ef32f",
-        "name": "",
-        "pauseType": "rate",
-        "timeout": "5",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "0.3",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 650,
-        "y": 680,
-        "wires": [
-            [
-                "1a174497e8c14f2f"
-            ]
-        ]
-    },
-    {
-        "id": "1a174497e8c14f2f",
-        "type": "function",
-        "z": "85e21fcb925ef32f",
-        "name": "Stop for settings",
-        "func": "if (global.get('settingInProgress')) return null;\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 820,
-        "y": 680,
-        "wires": [
-            [
-                "b3390c7c1b743364"
-            ]
-        ]
-    },
-    {
-        "id": "b81b8b21eefe96a0",
-        "type": "split",
-        "z": "85e21fcb925ef32f",
-        "name": "",
-        "splt": "\\n",
-        "spltType": "str",
-        "arraySplt": 1,
-        "arraySpltType": "len",
-        "stream": false,
-        "addname": "",
-        "x": 410,
-        "y": 420,
-        "wires": [
-            [
-                "eb4cf9c2ce006d0e"
-            ]
-        ]
-    },
-    {
-        "id": "eb4cf9c2ce006d0e",
-        "type": "delay",
-        "z": "85e21fcb925ef32f",
-        "name": "",
-        "pauseType": "rate",
-        "timeout": "5",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "0.3",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 550,
-        "y": 420,
-        "wires": [
-            [
-                "93758a55568a2f76"
-            ]
-        ]
-    },
-    {
-        "id": "622d8df42f67d006",
-        "type": "split",
-        "z": "85e21fcb925ef32f",
-        "name": "",
-        "splt": "\\n",
-        "spltType": "str",
-        "arraySplt": 1,
-        "arraySpltType": "len",
-        "stream": false,
-        "addname": "",
-        "x": 1500,
-        "y": 60,
-        "wires": [
-            [
-                "a4165f6f0fd10439"
-            ]
-        ]
-    },
-    {
-        "id": "a4165f6f0fd10439",
-        "type": "delay",
-        "z": "85e21fcb925ef32f",
-        "name": "",
-        "pauseType": "rate",
-        "timeout": "5",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "0.3",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 1640,
-        "y": 60,
-        "wires": [
-            [
-                "b018aa03d43d5655"
-            ]
-        ]
-    },
-    {
         "id": "a34e18170620e588",
         "type": "function",
         "z": "4a5a8ec8ddc999ab",
         "name": "Save tray config in Memory",
-        "func": "let tray = msg.payload;\nflow.set('tray', msg.payload);\nlet blinkybusCubes = [];\nlet blinkybusSettingCubes = [];\nlet keys = Object.keys(msg.payload)\nfor (let ikey  in keys)\n{\n    if (msg.payload[keys[ikey]].hasOwnProperty('type'))\n    {\n        if (msg.payload[keys[ikey]].hasOwnProperty('blinkybus')) \n        {\n            blinkybusCubes.push(keys[ikey]);\n            if (msg.payload[keys[ikey]].action == \"setting\") \n            {\n                blinkybusSettingCubes.push(keys[ikey]);\n            }\n        }\n    }\n}\nflow.set('blinkybusCubes', blinkybusCubes);\nflow.set('blinkybusSettingCubes', blinkybusSettingCubes);\ntray.trayControl.value = 0;\nnode.warn(\"Received tray from database\");\nlet newMsg1 = {topic: 'setting', payload:{'cube':'trayControl', value:tray.trayControl.value}};\nlet newMsg2 = {topic:'overlay',payload:[{\"command\":\"init\",\"overlay\":flow.get('overlay')}]};\ntray.watchdog.value = 0;\nflow.set('settingInProgress', true);\nreturn [newMsg1, newMsg2];\n",
-        "outputs": 2,
+        "func": "let tray = msg.payload;\nflow.set('tray', msg.payload);\nnode.warn(\"Received tray from database\");\ntray.watchdog.value = 0;\nlet newMsg2 = {topic:'overlay',payload:[{\"command\":\"init\",\"overlay\":flow.get('overlay')}]};\nnode.warn('Stopping readings');\nflow.set('settingInProgress', true);\n\nreturn newMsg2;\n",
+        "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -1970,10 +164,8 @@
         "y": 460,
         "wires": [
             [
-                "3cbcb621cb818ee0"
-            ],
-            [
-                "e0e078fb21bf41f0"
+                "e0e078fb21bf41f0",
+                "a452a2f3b9d521c0"
             ]
         ]
     },
@@ -2011,7 +203,7 @@
         "type": "function",
         "z": "4a5a8ec8ddc999ab",
         "name": "Init flow Variables",
-        "func": "var trayProps = {\n    box         :   env.get(\"BOX\"),\n    type        :   env.get(\"TRAYTYPE\"),\n    name        :   env.get(\"TRAYNAME\"),\n};\nflow.set('trayProps',trayProps);\nflow.set('settingInProgress', false);\nflow.set('deviceInit',false);\nflow.set('tray', null);\nflow.set('restartFftPlot', true);\nflow.set('overlay',env.get(\"OVERLAY\"));\nreturn {topic: \"getTrayProps\", payload: true};  \n",
+        "func": "var trayProps = {\n    box         :   env.get(\"BOX\"),\n    type        :   env.get(\"TRAYTYPE\"),\n    name        :   env.get(\"TRAYNAME\"),\n};\nflow.set('trayProps',trayProps);\nnode.warn('Stopping readings');\nflow.set('settingInProgress', true);\nflow.set('settingMessageCount', 0);\nflow.set('deviceInit',true);\nflow.set('tray', null);\nflow.set('restartFftPlot', true);\nflow.set('overlay',env.get(\"OVERLAY\"));\nreturn {topic: \"getTrayProps\", payload: true};  \n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2153,7 +345,7 @@
         "type": "function",
         "z": "4a5a8ec8ddc999ab",
         "name": "Create Setting",
-        "func": "let two31Minus1 = 2147483647;\nlet blinkyBusSettingMsg = \n{\n    topic : msg.topic, \n    payload : [] \n}\nlet blinkyBusMessage = false;\nlet normalSettingMsg = null;\nlet trayControlMessage = null;\nlet tray = flow.get('tray');\nif (tray == null) return [blinkyBusSettingMsg,normalSettingMsg,trayControlMessage];\ntray[msg.payload.cube].value = msg.payload.value;\nlet setValue = msg.payload.value;\n\nswitch (msg.payload.cube) \n{\n    case 'reset':\n        setValue = msg.payload.value;\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":64});\n        blinkyBusMessage = true;\n        break;\n    case 'frontEndLpfShiftR':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":68});\n        blinkyBusMessage = true;\n        break;\n    case 'clkDivide':\n        setValue = Math.floor(msg.payload.value - 1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":72});\n        blinkyBusMessage = true;\n        break;\n    case 'thetaPhaseRot':\n        setValue = Math.floor(Math.cos(msg.payload.value * Math.PI / 180.0) * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":76});\n        setValue = Math.floor(Math.sin(msg.payload.value * Math.PI / 180.0) * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":80});\n        blinkyBusMessage = true;\n        break;\n    case 'notchFilterMemory':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":84});\n        blinkyBusMessage = true;\n        break;\n    case 'gmult':\n        setValue = Math.floor(msg.payload.value * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":88});\n        blinkyBusMessage = true;\n        break;\n    case 'gainShiftL':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":92});\n        blinkyBusMessage = true;\n        break;\n    case 'clipLvl':\n        setValue = Math.floor( msg.payload.value * 0.001 * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":96});\n        setValue = Math.floor(-msg.payload.value * 0.001 * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":100});\n        blinkyBusMessage = true;\n        break;\n    case 'dac01on':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":104});\n        setValue = setValue + 2 * Math.floor(tray.dac02on.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":120});\n        blinkyBusMessage = true;\n        break;\n    case 'dac02on':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":108});\n        setValue = Math.floor(tray.dac01on.value) + 2 * setValue;\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":120});\n        blinkyBusMessage = true;\n        break;\n    case 'readbackLpfShiftR':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":112});\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":116});\n        blinkyBusMessage = true;\n        break;\n    case 'waveformClkDivide':\n        setValue = Math.floor(msg.payload.value - 1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":124});\n        blinkyBusMessage = true;\n        flow.set('restartFftPlot', true);\n        break;\n    case 'waveformSamplePower':\n        tray.waveformSamplePower.value  = msg.payload.value;\n        blinkyBusMessage = false;\n        flow.set('restartFftPlot', true);\n        normalSettingMsg = { topic: 'newData', payload: true };\n        break;\n    case 'fftDisplayPts':\n        tray.fftDisplayPts.value  = msg.payload.value;\n        blinkyBusMessage = false;\n        flow.set('restartFftPlot', true);\n        normalSettingMsg = { topic: 'newData', payload: true };\n        break;\n    case 'fftAverages':\n        tray.fftAverages.value  = msg.payload.value;\n        blinkyBusMessage = false;\n        flow.set('restartFftPlot', true);\n        normalSettingMsg = { topic: 'newData', payload: true };\n        break;\n    case 'alias':\n        tray.alias.value = msg.payload.value;\n        blinkyBusMessage = false;\n        normalSettingMsg = { topic: 'newData', payload: true };\n       break;\n    case 'trayControl':\n        blinkyBusMessage = false;\n        switch(msg.payload.value)\n        {\n            case 0:\n                tray.trayControl.value = 0;\n                break;\n            case 1:\n                tray.trayControl.value = -1;\n                break;\n            case 2:\n                if (tray.trayControl.value > 0)\n                {\n                    tray.trayControl.value = 2;\n                    let trayProps  = flow.get('trayProps');\n                    node.warn(\"Asking for tray from database\");\n                    trayControlMessage =\n                    {\n                        topic: trayProps.box + '/tray/' + trayProps.type + '/' + trayProps.name + '/echo',\n                        payload: JSON.stringify({ topic: trayProps.box + '/tray/' + trayProps.type + '/' + trayProps.name + '/setting/echo' })\n                    };\n                }\n                break;\n            default:\n                tray.trayControl.value = 0;\n                break;\n        }\n        normalSettingMsg = { topic: 'newData', payload: true };\n       break;\n    default:\n        break;\n}\nflow.set('settingInProgress', false);\nreturn [blinkyBusSettingMsg,normalSettingMsg,trayControlMessage];\n\n",
+        "func": "let two31Minus1 = 2147483647;\nlet blinkyBusSettingMsg = \n{\n    topic : msg.topic, \n    payload : [] \n}\nlet blinkyBusMessage = false;\nlet normalSettingMsg = null;\nlet trayControlMessage = null;\nlet tray = flow.get('tray');\nif (tray == null) return [blinkyBusSettingMsg,normalSettingMsg,trayControlMessage];\nlet setValue = 0;\n\nswitch (msg.payload.cube) \n{\n    case 'reset':\n        setValue = msg.payload.value;\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":64});\n        blinkyBusMessage = true;\n        flow.set('restartFftPlot', true);\n        break;\n    case 'frontEndLpfShiftR':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":68});\n        blinkyBusMessage = true;\n        flow.set('restartFftPlot', true);\n        break;\n    case 'clkDivide':\n        setValue = Math.floor(msg.payload.value - 1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":72});\n        blinkyBusMessage = true;\n        flow.set('restartFftPlot', true);\n        break;\n    case 'thetaPhaseRot':\n        setValue = Math.floor(Math.cos(msg.payload.value * Math.PI / 180.0) * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":76});\n        setValue = Math.floor(Math.sin(msg.payload.value * Math.PI / 180.0) * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":80});\n        blinkyBusMessage = true;\n        flow.set('restartFftPlot', true);\n        break;\n    case 'notchFilterMemory':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":84});\n        blinkyBusMessage = true;\n        flow.set('restartFftPlot', true);\n        break;\n    case 'gmult':\n        setValue = Math.floor(msg.payload.value * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":88});\n        blinkyBusMessage = true;\n        flow.set('restartFftPlot', true);\n        break;\n    case 'gainShiftL':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":92});\n        blinkyBusMessage = true;\n        flow.set('restartFftPlot', true);\n        break;\n    case 'clipLvl':\n        setValue = Math.floor( msg.payload.value * 0.001 * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":96});\n        setValue = Math.floor(-msg.payload.value * 0.001 * two31Minus1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":100});\n        blinkyBusMessage = true;\n        break;\n    case 'dac01on':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":104});\n        setValue = setValue + 2 * Math.floor(tray.dac02on.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":120});\n        blinkyBusMessage = true;\n        flow.set('restartFftPlot', true);\n        break;\n    case 'dac02on':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":108});\n        setValue = Math.floor(tray.dac01on.value) + 2 * setValue;\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":120});\n        blinkyBusMessage = true;\n         flow.set('restartFftPlot', true);\n       break;\n    case 'readbackLpfShiftR':\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":112});\n        setValue = Math.floor(msg.payload.value);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":116});\n        blinkyBusMessage = true;\n        break;\n    case 'waveformClkDivide':\n        setValue = Math.floor(msg.payload.value - 1);\n        blinkyBusSettingMsg.payload.push({\"command\":\"setting\",\"value\":setValue,\"offset\":124});\n        blinkyBusMessage = true;\n        flow.set('restartFftPlot', true);\n        break;\n    case 'waveformSamplePower':\n        tray.waveformSamplePower.value  = msg.payload.value;\n        blinkyBusMessage = false;\n        flow.set('restartFftPlot', true);\n        normalSettingMsg = { topic: 'newData', payload: true };\n        break;\n    case 'fftDisplayPts':\n        tray.fftDisplayPts.value  = msg.payload.value;\n        blinkyBusMessage = false;\n        flow.set('restartFftPlot', true);\n        normalSettingMsg = { topic: 'newData', payload: true };\n        break;\n    case 'fftAverages':\n        tray.fftAverages.value  = msg.payload.value;\n        blinkyBusMessage = false;\n        flow.set('restartFftPlot', true);\n        normalSettingMsg = { topic: 'newData', payload: true };\n        break;\n    case 'alias':\n        tray.alias.value = msg.payload.value;\n        blinkyBusMessage = false;\n        normalSettingMsg = { topic: 'newData', payload: true };\n       break;\n    case 'trayControl':\n        blinkyBusMessage = false;\n        switch(msg.payload.value)\n        {\n            case 0:\n                tray.trayControl.value = 0;\n                node.warn('Starting readings');\n                flow.set('settingInProgress', false);\n                break;\n            case 1:\n                tray.trayControl.value = -1;\n                node.warn('Stopping readings');\n                flow.set('settingInProgress', true);\n                break;\n            case 2:\n                if (tray.trayControl.value > 0)\n                {\n                    tray.trayControl.value = 2;\n                    node.warn('Stopping readings');\n                    flow.set('settingInProgress', true);\n                    let trayProps  = flow.get('trayProps');\n                    node.warn(\"Asking for tray from database\");\n                    trayControlMessage =\n                    {\n                        topic: trayProps.box + '/tray/' + trayProps.type + '/' + trayProps.name + '/echo',\n                        payload: JSON.stringify({ topic: trayProps.box + '/tray/' + trayProps.type + '/' + trayProps.name + '/setting/echo' })\n                    };\n                }\n                break;\n            default:\n                tray.trayControl.value = 0;\n                break;\n        }\n        normalSettingMsg = { topic: 'newData', payload: true };\n       break;\n    default:\n        break;\n}\nif (blinkyBusMessage)\n{\n    tray[msg.payload.cube].value  = msg.payload.value;\n    node.warn('Stopping readings');\n    flow.set('settingInProgress', true);\n    flow.set('settingMessageCount', blinkyBusSettingMsg.payload.length);\n}\nreturn [blinkyBusSettingMsg,normalSettingMsg,trayControlMessage];\n\n",
         "outputs": 3,
         "noerr": 0,
         "initialize": "",
@@ -2163,7 +355,7 @@
         "y": 300,
         "wires": [
             [
-                "dc24ae9c20720ca9"
+                "9557f4148465dc19"
             ],
             [
                 "dd6bd003f8621dc3"
@@ -2403,14 +595,13 @@
         "id": "3cbcb621cb818ee0",
         "type": "link out",
         "z": "4a5a8ec8ddc999ab",
-        "name": "save tray config out",
+        "name": "load tray config out",
         "mode": "link",
         "links": [
-            "667c2c5d7f705954",
-            "2f895b2de68c4ada"
+            "667c2c5d7f705954"
         ],
-        "x": 1115,
-        "y": 460,
+        "x": 2505,
+        "y": 600,
         "wires": []
     },
     {
@@ -2508,7 +699,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 200,
-        "y": 1200,
+        "y": 1020,
         "wires": [
             [
                 "7a2ba09675f33687"
@@ -2527,7 +718,7 @@
         "finalize": "",
         "libs": [],
         "x": 410,
-        "y": 1200,
+        "y": 1020,
         "wires": [
             [
                 "548139d24e399cb6"
@@ -2546,7 +737,7 @@
         "finalize": "",
         "libs": [],
         "x": 420,
-        "y": 1260,
+        "y": 1080,
         "wires": [
             [
                 "548139d24e399cb6"
@@ -2568,7 +759,7 @@
         "expiry": "",
         "broker": "79250bf3.365cc4",
         "x": 800,
-        "y": 1200,
+        "y": 1020,
         "wires": []
     },
     {
@@ -2576,14 +767,14 @@
         "type": "function",
         "z": "4a5a8ec8ddc999ab",
         "name": "Publish tray",
-        "func": "if (!msg.payload) return null;\nvar tray = flow.get('tray');\nvar newMsg = \n{\n    topic: flow.get('trayProps').box + '/tray/' + flow.get('trayProps').type + '/' + flow.get('trayProps').name + '/archive',\n    payload: JSON.stringify(tray)\n};\nreturn  newMsg;  \n",
+        "func": "if (!msg.payload) return null;\nvar tray = flow.get('tray');\nvar newMsg = \n{\n    topic: flow.get('trayProps').box + '/tray/' + flow.get('trayProps').type + '/' + flow.get('trayProps').name + '/archive',\n    payload: JSON.stringify(tray)\n};\nif( tray.trayControl.value > 0) newMsg = null;\nreturn  newMsg;  \n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 630,
-        "y": 1200,
+        "y": 1020,
         "wires": [
             [
                 "fd29a0b325275e3d"
@@ -2601,7 +792,7 @@
             "64378c7bbd67ece6"
         ],
         "x": 115,
-        "y": 1080,
+        "y": 900,
         "wires": [
             [
                 "48adaa828fec20b3"
@@ -2617,8 +808,8 @@
         "links": [
             "35592760638b8bfa"
         ],
-        "x": 1425,
-        "y": 1040,
+        "x": 1495,
+        "y": 860,
         "wires": []
     },
     {
@@ -2626,14 +817,14 @@
         "type": "function",
         "z": "4a5a8ec8ddc999ab",
         "name": "Setting success",
-        "func": "let tray = flow.get('tray');\nflow.set('settingInProgress', false);\ncalcReadings();\nlet settingSuccess = true;\nreturn {topic:\"settingSuccess\",payload:settingSuccess};\nfunction calcReadings()\n{\n    tray.frontEndLpf.value = Math.round(125e6 / (8 * twoToN(tray.frontEndLpfShiftR.value) ) ) / 1000;\n    tray.clkFreq.value = Math.round(125e3 / twoToN(tray.clkDivide.value)) / 1000;\n    tray.notchFreq.value = Math.round(125e6 / (tray.notchFilterMemory.value * twoToN(tray.clkDivide.value) ) ) / 1000;\n    tray.gainSign.value = 1;\n    if (tray.gmult.value < 0) tray.gainSign.value = -1;\n    tray.gain.value = Math.round(200.0 * Math.log10(tray.gainSign.value * tray.gmult.value * twoToN(tray.gainShiftL.value) ) ) / 10;\n    tray.readbackLpf.value = Math.round(125e8 / (8 * twoToN(tray.readbackLpfShiftR.value) * twoToN(tray.clkDivide.value))) / 100;\n}\nfunction twoToN(n)\n{\n    let pow = 1;\n    for (let ii = 0; ii < n; ++ii) pow = pow * 2;\n    return pow;\n}\n",
+        "func": "let tray = flow.get('tray');\ncalcReadings();\nlet settingSuccess = true;\nreturn {topic:\"settingSuccess\",payload:settingSuccess};\nfunction calcReadings()\n{\n    tray.frontEndLpf.value = Math.round(125e6 / (8 * twoToN(tray.frontEndLpfShiftR.value) ) ) / 1000;\n    tray.clkFreq.value = Math.round(125e3 / twoToN(tray.clkDivide.value)) / 1000;\n    tray.notchFreq.value = Math.round(125e6 / (tray.notchFilterMemory.value * twoToN(tray.clkDivide.value) ) ) / 1000;\n    tray.gainSign.value = 1;\n    if (tray.gmult.value < 0) tray.gainSign.value = -1;\n    tray.gain.value = Math.round(200.0 * Math.log10(tray.gainSign.value * tray.gmult.value * twoToN(tray.gainShiftL.value) ) ) / 10;\n    tray.readbackLpf.value = Math.round(125e8 / (8 * twoToN(tray.readbackLpfShiftR.value) * twoToN(tray.clkDivide.value))) / 100;\n}\nfunction twoToN(n)\n{\n    let pow = 1;\n    for (let ii = 0; ii < n; ++ii) pow = pow * 2;\n    return pow;\n}\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 1140,
-        "y": 1040,
+        "y": 860,
         "wires": [
             [
                 "39085206d9973fea"
@@ -2650,7 +841,7 @@
         "continuous": true,
         "stdInData": true,
         "x": 260,
-        "y": 1080,
+        "y": 900,
         "wires": [
             [
                 "607354d81a21483d"
@@ -2685,7 +876,7 @@
         "repair": false,
         "outputs": 3,
         "x": 930,
-        "y": 1080,
+        "y": 900,
         "wires": [
             [
                 "bb94231d824cab70"
@@ -2707,7 +898,7 @@
         "action": "obj",
         "pretty": false,
         "x": 570,
-        "y": 1080,
+        "y": 900,
         "wires": [
             [
                 "0823b1b2f706201d"
@@ -2731,12 +922,12 @@
         "repeat": "$(POLLINTERVAL)",
         "crontab": "",
         "once": true,
-        "onceDelay": "30",
+        "onceDelay": "5",
         "topic": "",
         "payload": "",
         "payloadType": "date",
         "x": 200,
-        "y": 1020,
+        "y": 840,
         "wires": [
             [
                 "63eb4712a4cb5128"
@@ -2755,7 +946,7 @@
         "finalize": "",
         "libs": [],
         "x": 400,
-        "y": 1020,
+        "y": 840,
         "wires": [
             [
                 "709acbe3ae3c82d9"
@@ -2771,8 +962,8 @@
         "links": [
             "fe87f8d4f4d7e0b1"
         ],
-        "x": 975,
-        "y": 1020,
+        "x": 845,
+        "y": 840,
         "wires": []
     },
     {
@@ -2787,7 +978,7 @@
         "finalize": "",
         "libs": [],
         "x": 1140,
-        "y": 1080,
+        "y": 900,
         "wires": [
             [
                 "a64d31f1f50e0f29"
@@ -2803,8 +994,8 @@
         "links": [
             "35592760638b8bfa"
         ],
-        "x": 1485,
-        "y": 1080,
+        "x": 1495,
+        "y": 900,
         "wires": []
     },
     {
@@ -2816,7 +1007,7 @@
             "46579bc816c2e12c"
         ],
         "x": 115,
-        "y": 1260,
+        "y": 1080,
         "wires": [
             [
                 "70408babd151d134"
@@ -2841,7 +1032,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 230,
-        "y": 1260,
+        "y": 1080,
         "wires": [
             [
                 "6f4cf8163e17e475"
@@ -2859,8 +1050,8 @@
         "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('lastAlarm', -1);",
         "finalize": "",
         "libs": [],
-        "x": 1350,
-        "y": 1080,
+        "x": 1360,
+        "y": 900,
         "wires": [
             [
                 "825424632004f63e"
@@ -2884,8 +1075,8 @@
         "drop": true,
         "allowrate": false,
         "outputs": 1,
-        "x": 1310,
-        "y": 1040,
+        "x": 1330,
+        "y": 860,
         "wires": [
             [
                 "d937dba7c2f7cfba"
@@ -2930,8 +1121,8 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 1270,
-        "y": 1200,
+        "x": 1320,
+        "y": 980,
         "wires": [
             []
         ]
@@ -2948,7 +1139,7 @@
         "finalize": "",
         "libs": [],
         "x": 430,
-        "y": 1080,
+        "y": 900,
         "wires": [
             [
                 "917e929089a40143"
@@ -2967,7 +1158,7 @@
         "finalize": "",
         "libs": [],
         "x": 1120,
-        "y": 1120,
+        "y": 940,
         "wires": [
             [
                 "03af048ef7d34039"
@@ -2982,14 +1173,14 @@
         "type": "function",
         "z": "4a5a8ec8ddc999ab",
         "name": "Publish fftTray",
-        "func": "if (!msg.payload) return null;\nvar fftTray = flow.get('fftTray');\nvar newMsg = \n{\n    topic: flow.get('trayProps').box + '/tray/' + fftTray.type + '/' + fftTray.name + '/reading',\n    payload: JSON.stringify(fftTray)\n};\nreturn  newMsg;  \n",
+        "func": "if (!msg.payload) return null;\nvar fftTray = flow.get('fftTray');\nvar newMsg = \n{\n    topic: flow.get('trayProps').box + '/tray/' + fftTray.type + '/' + fftTray.name + '/reading',\n    payload: JSON.stringify(fftTray)\n};\nif( flow.get('tray').trayControl.value > 0) newMsg = null;\nreturn  newMsg;  \n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1330,
-        "y": 1140,
+        "x": 1340,
+        "y": 940,
         "wires": [
             [
                 "36f27e06449f60aa"
@@ -3008,7 +1199,7 @@
         "stream": false,
         "addname": "",
         "x": 550,
-        "y": 1020,
+        "y": 840,
         "wires": [
             [
                 "177235eb42188efc"
@@ -3033,26 +1224,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 690,
-        "y": 1020,
-        "wires": [
-            [
-                "af1fb2269e01820d"
-            ]
-        ]
-    },
-    {
-        "id": "af1fb2269e01820d",
-        "type": "function",
-        "z": "4a5a8ec8ddc999ab",
-        "name": "Stop for settings",
-        "func": "if (flow.get('settingInProgress')) return null;\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 860,
-        "y": 1020,
+        "y": 840,
         "wires": [
             [
                 "97d1bf83713d277e"
@@ -3071,8 +1243,8 @@
             "fe87f8d4f4d7e0b1",
             "8bf3047428f12691"
         ],
-        "x": 1405,
-        "y": 260,
+        "x": 1815,
+        "y": 240,
         "wires": []
     },
     {
@@ -3086,7 +1258,7 @@
         "arraySpltType": "len",
         "stream": false,
         "addname": "",
-        "x": 1150,
+        "x": 1350,
         "y": 260,
         "wires": [
             [
@@ -3111,11 +1283,11 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 1290,
+        "x": 1510,
         "y": 260,
         "wires": [
             [
-                "46579bc816c2e12c"
+                "512a55973417c5fc"
             ]
         ]
     },
@@ -3253,7 +1425,7 @@
         "z": "4a5a8ec8ddc999ab",
         "name": "Get FFT Tray In",
         "links": [
-            "3cbcb621cb818ee0"
+            "a452a2f3b9d521c0"
         ],
         "x": 115,
         "y": 640,
@@ -3267,9 +1439,9 @@
         "id": "e0e078fb21bf41f0",
         "type": "delay",
         "z": "4a5a8ec8ddc999ab",
-        "name": "",
+        "name": "Delay Poll Interval",
         "pauseType": "delay",
-        "timeout": "3",
+        "timeout": "$(POLLINTERVAL)",
         "timeoutUnits": "seconds",
         "rate": "1",
         "nbRateUnits": "1",
@@ -3280,12 +1452,12 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 1140,
+        "x": 1170,
         "y": 540,
         "wires": [
             [
-                "9c389318e2c2e80b",
-                "877e9ecebbd3a3ad"
+                "877e9ecebbd3a3ad",
+                "b3b088e79f81e17d"
             ]
         ]
     },
@@ -3298,8 +1470,8 @@
         "links": [
             "fe87f8d4f4d7e0b1"
         ],
-        "x": 1855,
-        "y": 540,
+        "x": 2075,
+        "y": 520,
         "wires": []
     },
     {
@@ -3320,7 +1492,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 1300,
-        "y": 560,
+        "y": 600,
         "wires": [
             [
                 "335d71f2571c9da2"
@@ -3332,14 +1504,14 @@
         "type": "function",
         "z": "4a5a8ec8ddc999ab",
         "name": "initSettings",
-        "func": "let tray = flow.get('tray');\nlet settingsArray = [];\nlet two31Minus1 = 2147483647;\n\ntray.reset.value = 1;\nlet setReg = [];\n\nsetReg.push(tray.reset.value);\nsetReg.push(Math.floor(tray.frontEndLpfShiftR.value));\nsetReg.push(Math.floor(tray.clkDivide.value - 1));\nsetReg.push(Math.floor(Math.cos((tray.thetaPhaseRot.value * Math.PI / 180.0)) * two31Minus1));\nsetReg.push(Math.floor(Math.sin((tray.thetaPhaseRot.value * Math.PI / 180.0)) * two31Minus1));\nsetReg.push(Math.floor(tray.notchFilterMemory.value));\nsetReg.push(Math.floor(tray.gmult.value * two31Minus1));\nsetReg.push(Math.floor(tray.gainShiftL.value));\nsetReg.push(Math.floor( tray.clipLvl.value * 0.001 * two31Minus1));\nsetReg.push(Math.floor(-tray.clipLvl.value * 0.001 * two31Minus1));\nsetReg.push(Math.floor(tray.dac01on.value));\nsetReg.push(Math.floor(tray.dac02on.value));\nsetReg.push(Math.floor(tray.readbackLpfShiftR.value));\nsetReg.push(Math.floor(tray.readbackLpfShiftR.value));\nlet switchValue = Math.floor(tray.dac01on.value) + 2 * Math.floor(tray.dac02on.value);\nsetReg.push(switchValue);\nsetReg.push(Math.floor(tray.waveformClkDivide.value - 1));\nfor (let ii = 0; ii < setReg.length; ++ii)\n{\n    settingsArray.push({\"command\":\"setting\",\"value\":setReg[ii],\"offset\":(64 + ii * 4)});\n}\ntray.reset.value = 0;\nsetReg[0] = tray.reset.value;\nsettingsArray.push({\"command\":\"setting\",\"value\":setReg[0],\"offset\":64});\n\nreturn {topic:\"initSettings\",payload:settingsArray};\n\n",
+        "func": "let tray = flow.get('tray');\nlet settingsArray = [];\nlet two31Minus1 = 2147483647;\n\ntray.reset.value = 1;\nlet setReg = [];\n\nsetReg.push(tray.reset.value);\nsetReg.push(Math.floor(tray.frontEndLpfShiftR.value));\nsetReg.push(Math.floor(tray.clkDivide.value - 1));\nsetReg.push(Math.floor(Math.cos((tray.thetaPhaseRot.value * Math.PI / 180.0)) * two31Minus1));\nsetReg.push(Math.floor(Math.sin((tray.thetaPhaseRot.value * Math.PI / 180.0)) * two31Minus1));\nsetReg.push(Math.floor(tray.notchFilterMemory.value));\nsetReg.push(Math.floor(tray.gmult.value * two31Minus1));\nsetReg.push(Math.floor(tray.gainShiftL.value));\nsetReg.push(Math.floor( tray.clipLvl.value * 0.001 * two31Minus1));\nsetReg.push(Math.floor(-tray.clipLvl.value * 0.001 * two31Minus1));\nsetReg.push(Math.floor(tray.dac01on.value));\nsetReg.push(Math.floor(tray.dac02on.value));\nsetReg.push(Math.floor(tray.readbackLpfShiftR.value));\nsetReg.push(Math.floor(tray.readbackLpfShiftR.value));\nlet switchValue = Math.floor(tray.dac01on.value) + 2 * Math.floor(tray.dac02on.value);\nsetReg.push(switchValue);\nsetReg.push(Math.floor(tray.waveformClkDivide.value - 1));\nfor (let ii = 0; ii < setReg.length; ++ii)\n{\n    settingsArray.push({\"command\":\"setting\",\"value\":setReg[ii],\"offset\":(64 + ii * 4)});\n}\ntray.reset.value = 0;\nsetReg[0] = tray.reset.value;\nsettingsArray.push({\"command\":\"setting\",\"value\":setReg[0],\"offset\":64});\nflow.set('settingMessageCount', settingsArray.length);\n\nreturn {topic:\"initSettings\",payload:settingsArray};\n\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 1450,
-        "y": 560,
+        "y": 600,
         "wires": [
             [
                 "9c389318e2c2e80b"
@@ -3386,7 +1558,7 @@
         "y": 540,
         "wires": [
             [
-                "64378c7bbd67ece6"
+                "727d4270b96e9f62"
             ]
         ]
     },
@@ -3400,7 +1572,192 @@
             "255ddcb2152de7f5"
         ],
         "x": 1495,
-        "y": 1140,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "727d4270b96e9f62",
+        "type": "function",
+        "z": "4a5a8ec8ddc999ab",
+        "name": "Dec Setting Count",
+        "func": "flow.set('settingMessageCount', flow.get('settingMessageCount') - 1);\nnode.warn( flow.get('settingMessageCount'));\nlet endMsg = null;\nif (flow.get('settingMessageCount') < 1) endMsg = {topic:'lastSetting', payload:true};\nreturn [msg,endMsg];",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1930,
+        "y": 540,
+        "wires": [
+            [
+                "64378c7bbd67ece6"
+            ],
+            [
+                "5344c5c19a1e1c85"
+            ]
+        ]
+    },
+    {
+        "id": "5344c5c19a1e1c85",
+        "type": "delay",
+        "z": "4a5a8ec8ddc999ab",
+        "name": "Delay Poll Interval",
+        "pauseType": "delay",
+        "timeout": "$(POLLINTERVAL)",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2150,
+        "y": 600,
+        "wires": [
+            [
+                "fefa50cae29305a5"
+            ]
+        ]
+    },
+    {
+        "id": "fefa50cae29305a5",
+        "type": "function",
+        "z": "4a5a8ec8ddc999ab",
+        "name": "Resume Readings",
+        "func": "let tray = flow.get('tray');\nnode.warn('Starting readings');\nflow.set('settingInProgress', false);\ntray.trayControl.value = 0;\nlet newMsg1 = {topic: 'setting', payload:{'cube':'trayControl', value:tray.trayControl.value}};\nreturn newMsg1;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2370,
+        "y": 600,
+        "wires": [
+            [
+                "3cbcb621cb818ee0"
+            ]
+        ]
+    },
+    {
+        "id": "9557f4148465dc19",
+        "type": "delay",
+        "z": "4a5a8ec8ddc999ab",
+        "name": "Delay Poll Interval",
+        "pauseType": "delay",
+        "timeout": "$(POLLINTERVAL)",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1190,
+        "y": 260,
+        "wires": [
+            [
+                "dc24ae9c20720ca9"
+            ]
+        ]
+    },
+    {
+        "id": "512a55973417c5fc",
+        "type": "function",
+        "z": "4a5a8ec8ddc999ab",
+        "name": "Dec Setting Count",
+        "func": "flow.set('settingMessageCount', flow.get('settingMessageCount') - 1);\nnode.warn( flow.get('settingMessageCount'));\nlet endMsg = null;\nif (flow.get('settingMessageCount') < 1) endMsg = {topic:'lastSetting', payload:true};\nreturn [msg,endMsg];",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1690,
+        "y": 260,
+        "wires": [
+            [
+                "46579bc816c2e12c"
+            ],
+            [
+                "c7b462855c5d0b27"
+            ]
+        ]
+    },
+    {
+        "id": "c7b462855c5d0b27",
+        "type": "delay",
+        "z": "4a5a8ec8ddc999ab",
+        "name": "Delay Poll Interval",
+        "pauseType": "delay",
+        "timeout": "$(POLLINTERVAL)",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1890,
+        "y": 280,
+        "wires": [
+            [
+                "fd4d8647219a8a78"
+            ]
+        ]
+    },
+    {
+        "id": "fd4d8647219a8a78",
+        "type": "function",
+        "z": "4a5a8ec8ddc999ab",
+        "name": "Resume Readings",
+        "func": "node.warn('Starting readings');\nflow.set('settingInProgress', false);\nreturn null;",
+        "outputs": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2110,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "b3b088e79f81e17d",
+        "type": "function",
+        "z": "4a5a8ec8ddc999ab",
+        "name": "Load Overlay at init",
+        "func": "if (!flow.get('deviceInit'))\n{\n    return null;\n}\nflow.set('settingMessageCount', 2);\nflow.set('deviceInit',false);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1410,
+        "y": 540,
+        "wires": [
+            [
+                "9c389318e2c2e80b"
+            ]
+        ]
+    },
+    {
+        "id": "a452a2f3b9d521c0",
+        "type": "link out",
+        "z": "4a5a8ec8ddc999ab",
+        "name": "Save tray done",
+        "mode": "link",
+        "links": [
+            "2f895b2de68c4ada"
+        ],
+        "x": 1115,
+        "y": 460,
         "wires": []
     }
 ]
